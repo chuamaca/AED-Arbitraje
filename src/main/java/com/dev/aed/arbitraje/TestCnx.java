@@ -66,7 +66,7 @@ public class TestCnx extends javax.swing.JFrame {
         
          String bases="";
         try {
-            Statement sql = utils.ConexionJDBC.getConexion().createStatement();
+            Statement sql = com.dev.aed.arbitraje.Utils.ConexionJDBC.getConexion().createStatement();
             System.out.println("SQL:" + sql);
             String consulta = "select * from poldat";
             
