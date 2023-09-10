@@ -1,0 +1,29 @@
+[33mcommit 73501ad194a0168fe490cf7248b7200884cdcbb1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: chuamaca <cesarhuamanicastro@gmail.com>
+Date:   Sun Sep 10 02:26:36 2023 -0500
+
+    package structure
+
+[33mcommit 794995b97c94d5a1f099cc83a53573c862f62158[m
+Author: chuamaca <cesarhuamanicastro@gmail.com>
+Date:   Sun Sep 10 02:19:09 2023 -0500
+
+    Add forms Jpanel
+
+[33mcommit 6225c9ee4de92d9d4237f89884bdc06ffc1fb7eb[m
+Author: chuamaca <cesarhuamanicastro@gmail.com>
+Date:   Fri Sep 8 00:38:53 2023 -0500
+
+    Add connet database ok
+
+[33mcommit fc2a26465c113573fa044c097c4acf043e7c3523[m
+Author: chuamaca <cesarhuamanicastro@gmail.com>
+Date:   Thu Sep 7 23:46:41 2023 -0500
+
+    Create README.md
+
+[33mcommit c386d20cd5abbd3b3c504c692cb9821f34919f06[m
+Author: chuamaca <cesarhuamanicastro@gmail.com>
+Date:   Thu Sep 7 23:45:02 2023 -0500
+
+    initial proyect
