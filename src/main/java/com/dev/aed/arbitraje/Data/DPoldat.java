@@ -1,0 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.dev.aed.arbitraje.Data;
+
+/**
+ *
+ * @author Cesar
+ */
+public class DPoldat {
+    // Clase para la conexiones, Metodos de busqueda, Ordenamiento
+}
