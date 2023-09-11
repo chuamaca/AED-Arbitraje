@@ -45,6 +45,10 @@ select * from usuario
 go
 
 
+
+
+
+
 /*
 Tabla de Creacion de ROLES
 */
