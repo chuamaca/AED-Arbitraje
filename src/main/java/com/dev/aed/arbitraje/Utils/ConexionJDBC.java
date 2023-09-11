@@ -24,7 +24,7 @@ public class ConexionJDBC {
         String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
-                +"password=1234;"
+                +"password=sa;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";
@@ -45,20 +45,40 @@ public class ConexionJDBC {
         }
     }
     
-    public static void close(ResultSet rs) throws SQLException {
+    public static void close(ResultSet rs) {
         
-        rs.close();
+        try {
+             rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+       
         
     }
-    public static void close(Statement smtn) throws SQLException {
-        smtn.close();
+    public static void close(Statement smtn)  {
+        try {
+             smtn.close();
+        } catch (SQLException e) {
+             e.printStackTrace(System.out);
+        }
+       
     }
     
-    public static void close(PreparedStatement smtn) throws SQLException {
-        smtn.close();
+    public static void close(PreparedStatement smtn)  {
+        try {
+            smtn.close();
+        } catch (SQLException e) {
+              e.printStackTrace(System.out);
+        }
+        
     }
     
-    public static void close(Connection conn) throws SQLException {
-        conn.close();
+    public static void close(Connection conn)  {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+              e.printStackTrace(System.out);
+        }
+        
     }
 }
