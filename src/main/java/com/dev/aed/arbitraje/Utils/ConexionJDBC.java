@@ -24,7 +24,7 @@ public class ConexionJDBC {
         String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
-                +"password=sa;"
+                +"password=1234;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";
