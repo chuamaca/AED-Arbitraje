@@ -4,6 +4,8 @@
  */
 package com.dev.aed.arbitraje;
 
+import com.dev.aed.arbitraje.Data.DUsuario;
+import com.dev.aed.arbitraje.Model.MUsuario;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.sql.Statement;
 import java.util.List;
@@ -208,24 +210,61 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        
-           Dashboard dashWin= new Dashboard();
-                dashWin.setVisible(true);
-                this.dispose();
-      
 
-//        String usuario = txtusuario.getText();
-//        String password = txtpassword.getText();
-//
-//        System.out.println(usuario + " " + password);
-//
-//        UsuarioJDBC obj = new UsuarioJDBC();
-//
-//        Usuario user = new Usuario();
-//        user.setUsername(usuario);
-//        user.setPassword(password);
-//
-//        boolean estado = obj.validarUsuario(user);
+        String usuario = txtusuario.getText();
+        String password = txtpassword.getText();
+
+        System.out.println(usuario + " " + password);
+
+        DUsuario obj = new DUsuario();
+
+        MUsuario user = new MUsuario();
+        user.setUsername(usuario);
+        user.setPassword(password);
+
+        boolean estado = obj.validarUsuario(user);
+        System.out.println("Validar usuario: " + estado);
+        if (estado != false) {
+
+            Dashboard dashWin = new Dashboard();
+            dashWin.setVisible(true);
+            this.dispose();
+        } else {
+
+            MUsuario userError = new MUsuario();
+            userError.setUsername(usuario);
+            userError.setPassword(password);
+            //Captura datos de usuario y DATO PRINCIPAL NRO_INTENTO
+            List<MUsuario> listaObjUsuario = obj.selectPorUsuario(userError);
+            MUsuario usern = new MUsuario();
+
+            for (MUsuario items : listaObjUsuario) {
+
+                System.out.println("Items: " + items);
+                usern.setId_usuario(items.getId_usuario());
+                usern.setUsername(items.getUsername());
+                usern.setPassword(items.getPassword());
+                usern.setNro_intentos(items.getNro_intentos());
+                usern.setFlag_estado(items.isFlag_estado());
+
+                System.out.println("userError: " + usern);
+            }
+            
+            // Pasar el numero de intentos a una configuracion (MEJORA)
+            if (usern.getNro_intentos() >= 3) {
+                //Bloqueo de usuario
+                int bloqueo = obj.bloqueoUsuario(usern);
+                //variable bloqueo 
+
+                JOptionPane.showMessageDialog(null, "El Usuario ha sido BLOQUEADO " +user.getUsername());
+            } else {
+                //Actualizar nro de intentos
+                int actualizarintento = obj.LoginInvalido(usern);
+                System.out.println("Nro_inte: " + actualizarintento);
+                JOptionPane.showMessageDialog(null, "Usuario/password Incorecto");
+            }
+
+        }
 //
 //        if (estado == false) {
 //
@@ -311,8 +350,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
-         FlatMaterialLighterIJTheme.setup();
+
+        FlatMaterialLighterIJTheme.setup();
         System.out.println("Holaa Login");
 
         /* Create and display the form */

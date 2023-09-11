@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Login.java
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Utils\Generico.java
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Data\DPoldat.java
@@ -9,3 +10,22 @@ C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Re
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Dashboard.java
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Utils\ConexionJDBC.java
 C:\Users\CJesusAc\Downloads\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Principal.java
+=======
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Dashboard.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Principal.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Model\MUsuario.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\NewClass.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Prueba.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\TestCnx.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\RegistrarPartes.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Utils\Generico.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Model\MRol.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\RegRegistrarPartes.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Model\MPoldat.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\AEDArbitraje.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Data\DUsuario.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Login.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Utils\ConexionJDBC.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Envio2.java
+E:\AED-Arbitraje\src\main\java\com\dev\aed\arbitraje\Data\DPoldat.java
+>>>>>>> DEV
