@@ -5,6 +5,7 @@
 package com.dev.aed.arbitraje;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -208,9 +209,10 @@ public class Login extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         
-        Dashboard dashWin= new Dashboard();
+           Dashboard dashWin= new Dashboard();
                 dashWin.setVisible(true);
                 this.dispose();
+      
 
 //        String usuario = txtusuario.getText();
 //        String password = txtpassword.getText();

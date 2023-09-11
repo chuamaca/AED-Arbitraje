@@ -1,0 +1,35 @@
+create database dbRegPartes
+use dbRegPartes
+
+--Crear tabla RegPartes
+create table RegPartes(
+idPartes char(8) PRIMARY KEY,
+Nombres varchar(50),
+Apellidos varchar(50),
+NombreEmp varchar(50),
+DNI char(10),
+RUC int,
+Correo varchar (80),
+Fecha_Nacimiento char(8),
+Fecha_Creacion char(8),
+Nacionalidad varchar(50),
+OrigenEmp varchar(50),
+Telefono int,
+Direccion varchar(50),
+)
+
+--REGISTRO DE PARTES
+
+--INSERTAR
+insert into RegPartes (idPartes, NombreEmp, RUC) values ('1','AnguloSAC','987654321')
+insert into RegPartes (idPartes, Nombres, DNI) values ('2','Jesus','71528502')
+
+--MOSTRAR
+select * from RegPartes
+
+--ACTUALIZAR
+update RegPartes set Fecha_Creacion = '27/05/03' 
+where idPartes = '1'
+
+--ELIMINAR
+delete from RegPartes where idPartes = '2'

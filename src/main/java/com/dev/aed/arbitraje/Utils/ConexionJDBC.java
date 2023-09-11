@@ -21,10 +21,10 @@ public class ConexionJDBC {
     
      public static Connection getConexion(){
         
-        String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
-                + "database=AEDArbitraje;"
+        String conexionServer = "jdbc:sqlserver://localhost:1433;"
+                + "database=dbRegPartes;"
                 +"user=sa;"
-                +"password=1234;"
+                +"password=123;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";
@@ -39,7 +39,7 @@ public class ConexionJDBC {
             
         } catch(SQLException ex){
             
-             JOptionPane.showMessageDialog(null, ex.toString());
+             System.out.println(ex.toString());
             return null;
         
         }
