@@ -22,7 +22,7 @@ public class ConexionJDBC {
      public static Connection getConexion(){
         
         String conexionServer = "jdbc:sqlserver://localhost:1433;"
-                + "database=dbRegPartes;"
+                + "database=AEDArbitraje;"
                 +"user=sa;"
                 +"password=sa;"
                 +"loginTimeout=30;"
