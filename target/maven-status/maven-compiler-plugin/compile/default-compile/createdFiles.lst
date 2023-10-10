@@ -1,21 +1,7 @@
 com\dev\aed\arbitraje\Dashboard$7.class
-<<<<<<< HEAD
-com\dev\aed\arbitraje\RegistrarPartes$3.class
-com\dev\aed\arbitraje\AEDArbitraje.class
-com\dev\aed\arbitraje\Dashboard$5.class
-com\dev\aed\arbitraje\Login$2.class
-com\dev\aed\arbitraje\Login$1.class
-com\dev\aed\arbitraje\confirmarConexionSERVER$2.class
-com\dev\aed\arbitraje\Dashboard.class
-com\dev\aed\arbitraje\confirmarConexionSERVER.class
-com\dev\aed\arbitraje\RegistrarPartes$1.class
-com\dev\aed\arbitraje\RegistrarPartes.class
-com\dev\aed\arbitraje\RegPartes.class
-com\dev\aed\arbitraje\Dashboard$3.class
-com\dev\aed\arbitraje\Utils\Generico.class
-com\dev\aed\arbitraje\RegistrarPartes$2.class
-=======
+com\dev\aed\arbitraje\Data\DRol.class
 com\dev\aed\arbitraje\NewClass.class
+com\dev\aed\arbitraje\RegistrarPartes$3.class
 com\dev\aed\arbitraje\AEDArbitraje.class
 com\dev\aed\arbitraje\Model\MUsuario.class
 com\dev\aed\arbitraje\Prueba$1.class
@@ -26,27 +12,22 @@ com\dev\aed\arbitraje\Prueba.class
 com\dev\aed\arbitraje\Login$1.class
 com\dev\aed\arbitraje\Data\DUsuario.class
 com\dev\aed\arbitraje\TestCnx$2.class
+com\dev\aed\arbitraje\confirmarConexionSERVER$2.class
 com\dev\aed\arbitraje\Dashboard.class
+com\dev\aed\arbitraje\confirmarConexionSERVER.class
 com\dev\aed\arbitraje\RegistrarPartes$1.class
 com\dev\aed\arbitraje\RegistrarPartes.class
+com\dev\aed\arbitraje\RegPartes.class
 com\dev\aed\arbitraje\Dashboard$3.class
 com\dev\aed\arbitraje\Utils\Generico.class
->>>>>>> DEV
+com\dev\aed\arbitraje\RegistrarPartes$2.class
 com\dev\aed\arbitraje\Data\DPoldat.class
 com\dev\aed\arbitraje\Dashboard$6.class
 com\dev\aed\arbitraje\Login$3.class
 com\dev\aed\arbitraje\Login.class
 com\dev\aed\arbitraje\Utils\ConexionJDBC.class
-<<<<<<< HEAD
-com\dev\aed\arbitraje\RegistrarPartes$4.class
-com\dev\aed\arbitraje\Dashboard$1.class
-com\dev\aed\arbitraje\Principal.class
-com\dev\aed\arbitraje\Dashboard$4.class
-com\dev\aed\arbitraje\Dashboard$2.class
-com\dev\aed\arbitraje\Model\MPoldat.class
-com\dev\aed\arbitraje\confirmarConexionSERVER$1.class
-=======
 com\dev\aed\arbitraje\Envio2.class
+com\dev\aed\arbitraje\RegistrarPartes$4.class
 com\dev\aed\arbitraje\Dashboard$1.class
 com\dev\aed\arbitraje\Principal.class
 com\dev\aed\arbitraje\RegRegistrarPartes.class
@@ -55,4 +36,4 @@ com\dev\aed\arbitraje\Dashboard$2.class
 com\dev\aed\arbitraje\Model\MRol.class
 com\dev\aed\arbitraje\Model\MPoldat.class
 com\dev\aed\arbitraje\TestCnx$1.class
->>>>>>> DEV
+com\dev\aed\arbitraje\confirmarConexionSERVER$1.class
