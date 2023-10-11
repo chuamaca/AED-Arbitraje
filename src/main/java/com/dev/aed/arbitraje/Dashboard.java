@@ -141,15 +141,16 @@ public class Dashboard extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(13, 71, 161));
         menu.setPreferredSize(new java.awt.Dimension(270, 640));
 
+        appName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        appName.setText("Cuentas Por Cobrar");
+        appName.setText("Sistema de Arbitraje");
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
 
         btn_prin.setBackground(new java.awt.Color(21, 101, 192));
         btn_prin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_prin.setForeground(new java.awt.Color(255, 255, 255));
-        btn_prin.setText("Registro Partes");
+        btn_prin.setText("Opcion 1");
         btn_prin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_prin.setBorderPainted(false);
         btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -165,7 +166,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_lends.setBackground(new java.awt.Color(21, 101, 192));
         btn_lends.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_lends.setForeground(new java.awt.Color(255, 255, 255));
-        btn_lends.setText("Lineas De Credito");
+        btn_lends.setText("Opcion 2");
         btn_lends.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_lends.setBorderPainted(false);
         btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -181,7 +182,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_CobrarCuenta.setBackground(new java.awt.Color(21, 101, 192));
         btn_CobrarCuenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_CobrarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        btn_CobrarCuenta.setText("Cuentas Por Cobrar");
+        btn_CobrarCuenta.setText("Opcion 3");
         btn_CobrarCuenta.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_CobrarCuenta.setBorderPainted(false);
         btn_CobrarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -197,7 +198,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnMovientoBnaco.setBackground(new java.awt.Color(21, 101, 192));
         btnMovientoBnaco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMovientoBnaco.setForeground(new java.awt.Color(255, 255, 255));
-        btnMovientoBnaco.setText("Movimiento Bancos");
+        btnMovientoBnaco.setText("Opcion 3");
         btnMovientoBnaco.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnMovientoBnaco.setBorderPainted(false);
         btnMovientoBnaco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -213,7 +214,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reportes.setBackground(new java.awt.Color(21, 101, 192));
         btn_reportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reportes.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reportes.setText("Reportes");
+        btn_reportes.setText("Opcion 4");
         btn_reportes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reportes.setBorderPainted(false);
         btn_reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -229,7 +230,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reports.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reports.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reports.setText("Accesos");
+        btn_reports.setText("Opcion 5");
         btn_reports.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports.setBorderPainted(false);
         btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

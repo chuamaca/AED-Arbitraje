@@ -21,7 +21,7 @@ public class ConexionJDBC {
     
      public static Connection getConexion(){
         
-        String conexionServer = "jdbc:sqlserver://localhost:1433;"
+        String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
                 +"password=sa;"

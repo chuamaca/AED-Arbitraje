@@ -126,32 +126,32 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Modulo para Cuentas Por cobrar"/>
+            <Property name="text" type="java.lang.String" value="Modulo para Arbitraje"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="forma &#xf3;ptima Para realizar cobros"/>
+            <Property name="text" type="java.lang.String" value="Modulo abc"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Esta herramienta le permitir&#xe1; llevar un control completo y detallado de los clientes por Cobrar"/>
+            <Property name="text" type="java.lang.String" value="----1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="tendr&#xe1; acceso a herramientas especiales para tareas espec&#xed;ficas, como lo son:"/>
+            <Property name="text" type="java.lang.String" value="----2"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x2022; Evaluar Linea de Credito"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; Notificar Audiencia"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x2022; Devoluciones"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; Generar Demanda"/>
           </Properties>
         </Component>
       </SubComponents>
