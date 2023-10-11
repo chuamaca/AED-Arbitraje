@@ -125,7 +125,7 @@ public class Dashboard extends javax.swing.JFrame {
         appName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btn_prin = new javax.swing.JButton();
-        btn_lends = new javax.swing.JButton();
+        btn_Notificaciones = new javax.swing.JButton();
         btn_CobrarCuenta = new javax.swing.JButton();
         btnMovientoBnaco = new javax.swing.JButton();
         btn_reportes = new javax.swing.JButton();
@@ -163,19 +163,19 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btn_lends.setBackground(new java.awt.Color(21, 101, 192));
-        btn_lends.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_lends.setForeground(new java.awt.Color(255, 255, 255));
-        btn_lends.setText("Opcion 2");
-        btn_lends.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_lends.setBorderPainted(false);
-        btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_lends.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_lends.setIconTextGap(13);
-        btn_lends.setInheritsPopupMenu(true);
-        btn_lends.addActionListener(new java.awt.event.ActionListener() {
+        btn_Notificaciones.setBackground(new java.awt.Color(21, 101, 192));
+        btn_Notificaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Notificaciones.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Notificaciones.setText("Notificaciones");
+        btn_Notificaciones.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Notificaciones.setBorderPainted(false);
+        btn_Notificaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Notificaciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Notificaciones.setIconTextGap(13);
+        btn_Notificaciones.setInheritsPopupMenu(true);
+        btn_Notificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_lendsActionPerformed(evt);
+                btn_NotificacionesActionPerformed(evt);
             }
         });
 
@@ -249,7 +249,7 @@ public class Dashboard extends javax.swing.JFrame {
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_lends, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Notificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_prin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_CobrarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,7 +282,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(btn_lends, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -315,8 +315,8 @@ public class Dashboard extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -340,9 +340,9 @@ public class Dashboard extends javax.swing.JFrame {
                 reg.setVisible(true);
     }//GEN-LAST:event_btn_prinActionPerformed
 
-    private void btn_lendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lendsActionPerformed
-       
-    }//GEN-LAST:event_btn_lendsActionPerformed
+    private void btn_NotificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NotificacionesActionPerformed
+        ShowJPanel(new VerNotificaciones());
+    }//GEN-LAST:event_btn_NotificacionesActionPerformed
 
     private void btn_CobrarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCuentaActionPerformed
         //ShowJPanel(new Returns());
@@ -390,7 +390,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JButton btnMovientoBnaco;
     private javax.swing.JButton btn_CobrarCuenta;
-    private javax.swing.JButton btn_lends;
+    private javax.swing.JButton btn_Notificaciones;
     private javax.swing.JButton btn_prin;
     private javax.swing.JButton btn_reportes;
     private javax.swing.JButton btn_reports;
