@@ -22,9 +22,28 @@ public class MNotificacion {
     public int Leida;
     public String idUsuario;
     
+    
+    
+    public String SustentoAnulacion_DTO;
+    
 
     public MNotificacion() {
     }
+
+    public MNotificacion(int IdNotificacion, String NroExpediente, String EstadoNotificacion, Date FechaNotificacion, Date FechaVisualizacion, String ColorEstado, String Observaciones, int Leida, String idUsuario, String SustentoAnulacion_DTO) {
+        this.IdNotificacion = IdNotificacion;
+        this.NroExpediente = NroExpediente;
+        this.EstadoNotificacion = EstadoNotificacion;
+        this.FechaNotificacion = FechaNotificacion;
+        this.FechaVisualizacion = FechaVisualizacion;
+        this.ColorEstado = ColorEstado;
+        this.Observaciones = Observaciones;
+        this.Leida = Leida;
+        this.idUsuario = idUsuario;
+        this.SustentoAnulacion_DTO = SustentoAnulacion_DTO;
+    }
+    
+    
 
     public MNotificacion(int IdNotificacion, String NroExpediente, String EstadoNotificacion, Date FechaNotificacion, Date FechaVisualizacion, String ColorEstado, String Observaciones, int Leida, String idUsuario) {
         this.IdNotificacion = IdNotificacion;
@@ -37,6 +56,16 @@ public class MNotificacion {
         this.Leida = Leida;
         this.idUsuario = idUsuario;
     }
+
+    public String getSustentoAnulacion_DTO() {
+        return SustentoAnulacion_DTO;
+    }
+
+    public void setSustentoAnulacion_DTO(String SustentoAnulacion_DTO) {
+        this.SustentoAnulacion_DTO = SustentoAnulacion_DTO;
+    }
+    
+    
     
     
 

@@ -8,15 +8,24 @@ package com.dev.aed.arbitraje;
 import com.dev.aed.arbitraje.Data.DNotificacion;
 import com.dev.aed.arbitraje.Model.MNotificacion;
 import com.dev.aed.arbitraje.Utils.EstadoNotificacionRenderer;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.api.tree.CaseTree;
 
@@ -65,22 +74,16 @@ public class VerNotificaciones extends javax.swing.JPanel {
 //            LNotificacionForTable[4] = item.getFechaVisualizacion().toString(); // Suponiendo que el quinto elemento es la fecha de visualización
 //            LNotificacionForTable[5] = item.getColorEstado(); // Suponiendo que el sexto elemento es el color de estado
 //            
-            String valor= item.getEstadoNotificacion();
-            
-           lblEstado.setText(valor);
-
+            String valor = item.getEstadoNotificacion();
 
             modelo.addRow(LNotificacionForTable);
         }
         jTableHeaderNotificacion.setModel(modelo);
 
         jTableHeaderNotificacion.getColumnModel().getColumn(2).setCellRenderer(new EstadoNotificacionRenderer());
-        
-        
+
     }
-  
-    
-        
+
 //        JFrame frame = new JFrame("Stepper Example");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.setSize(300, 100);
@@ -118,7 +121,6 @@ public class VerNotificaciones extends javax.swing.JPanel {
 //        frame.setVisible(true);
 //
 //    }
-    
 //    private static void showStep(Map<String, JLabel> stepLabels, String estado) {
 //        for (String key : stepLabels.keySet()) {
 //            stepLabels.get(key).setVisible(key.equals(estado));
@@ -143,7 +145,6 @@ public class VerNotificaciones extends javax.swing.JPanel {
 //            return null;
 //        }
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,8 +162,12 @@ public class VerNotificaciones extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtBuscarDocumento = new javax.swing.JTextField();
         btnVerReporte = new javax.swing.JButton();
+        header1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableDetalleNotificacion = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -178,6 +183,11 @@ public class VerNotificaciones extends javax.swing.JPanel {
         ));
         jTableHeaderNotificacion.setGridColor(new java.awt.Color(255, 255, 255));
         jTableHeaderNotificacion.setRowSorter(jTableHeaderNotificacion.getRowSorter());
+        jTableHeaderNotificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHeaderNotificacionMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableHeaderNotificacion);
 
         header.setBackground(new java.awt.Color(25, 118, 210));
@@ -195,7 +205,7 @@ public class VerNotificaciones extends javax.swing.JPanel {
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(260, 260, 260)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,18 +227,64 @@ public class VerNotificaciones extends javax.swing.JPanel {
             }
         });
 
-        lblEstado.setText("jLabel1");
+        header1.setBackground(new java.awt.Color(25, 118, 210));
+        header1.setPreferredSize(new java.awt.Dimension(744, 150));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("xxx");
+
+        lblEstado.setBackground(new java.awt.Color(255, 255, 255));
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado.setText("xxx");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("xxx");
+
+        javax.swing.GroupLayout header1Layout = new javax.swing.GroupLayout(header1);
+        header1.setLayout(header1Layout);
+        header1Layout.setHorizontalGroup(
+            header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(header1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        header1Layout.setVerticalGroup(
+            header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, header1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(lblEstado))
+                .addContainerGap())
         );
+
+        jTableDetalleNotificacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableDetalleNotificacion.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableDetalleNotificacion.setRowSorter(jTableHeaderNotificacion.getRowSorter());
+        jTableDetalleNotificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDetalleNotificacionMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableDetalleNotificacion);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -237,21 +293,17 @@ public class VerNotificaciones extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(header1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                             .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(txtBuscarDocumento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnVerReporte))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(lblEstado))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jScrollPane3))))
                 .addContainerGap())
         );
         bgLayout.setVerticalGroup(
@@ -264,12 +316,14 @@ public class VerNotificaciones extends javax.swing.JPanel {
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBuscarDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnVerReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(74, 74, 74)
-                        .addComponent(lblEstado)
-                        .addGap(47, 47, 47)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(164, 164, 164))
-                    .addComponent(jScrollPane2)))
+                        .addGap(8, 8, 8)
+                        .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -284,7 +338,7 @@ public class VerNotificaciones extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -294,15 +348,83 @@ public class VerNotificaciones extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnVerReporteActionPerformed
 
+    private void jTableHeaderNotificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHeaderNotificacionMouseClicked
+        // TODO add your handling code here:
+        if (jTableHeaderNotificacion.getSelectedRow() > -1) {
+
+            String id_notificacion = (String) jTableHeaderNotificacion.getValueAt(jTableHeaderNotificacion.getSelectedRow(), 1);
+            String estado = (String) jTableHeaderNotificacion.getValueAt(jTableHeaderNotificacion.getSelectedRow(), 2);
+            System.out.println("Id Notificacion " + id_notificacion);
+
+            lblEstado.setText(estado);
+
+            MostrarNotificacionDetalle(id_notificacion);
+
+            //DefaultListModel<String> modeloLista = new DefaultListModel<>();
+            //            // Agregar elementos al modelo de lista
+            //            modeloLista.addElement("Elemento 1 Elemento 1 Elemento 1 ");
+            //            modeloLista.addElement("Elemento 2");
+            //
+            //            System.out.println("Modelo Lista " + modeloLista);
+            //
+            //            jListNotificacion.setModel(modeloLista);
+        }
+
+    }//GEN-LAST:event_jTableHeaderNotificacionMouseClicked
+
+    public void MostrarNotificacionDetalle(String NroExpediente) {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("NroExpediente");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Sustento");
+        modelo.addColumn("Observaciones");
+        //  modelo.addColumn("Fecha Visualizacion");
+        // modelo.addColumn("Estado");
+        jTableDetalleNotificacion.setModel(modelo);
+
+        // AccesoJDBC accesoJDBC= new AccesoJDBC();
+        DNotificacion notificacion = new DNotificacion();
+        MNotificacion dNotificacion = new MNotificacion();
+        dNotificacion.setSustentoAnulacion_DTO(NroExpediente);
+
+        List<MNotificacion> listNotificacion = notificacion.SelectNotificacionDetalle(dNotificacion);
+
+        String LNotificacionForTable[] = new String[6];
+        for (MNotificacion item : listNotificacion) {
+            LNotificacionForTable[0] = "" + item.getNroExpediente();
+            LNotificacionForTable[1] = item.getEstadoNotificacion();
+            LNotificacionForTable[2] = item.getSustentoAnulacion_DTO();
+            LNotificacionForTable[3] = item.getObservaciones();
+
+            String valor = item.getEstadoNotificacion();
+          
+            modelo.addRow(LNotificacionForTable);
+        }
+
+        jTableDetalleNotificacion.setModel(modelo);
+
+        //   jTableDetalleNotificacion.getColumnModel().getColumn(2).setCellRenderer(new EstadoNotificacionRenderer());
+    }
+
+
+    private void jTableDetalleNotificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDetalleNotificacionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableDetalleNotificacionMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnVerReporte;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel header;
+    private javax.swing.JPanel header1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableDetalleNotificacion;
     private javax.swing.JTable jTableHeaderNotificacion;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JTextField txtBuscarDocumento;
