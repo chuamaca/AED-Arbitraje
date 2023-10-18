@@ -71,6 +71,29 @@ public class DNotificacion {
             rs = stmt.executeQuery();
             while (rs.next()) {
 
+                /*
+                 public int NroExpediente;
+    public java.sql.Date FechaDemanda;
+    public int DemandanteID;
+    public int DemandadoID;
+    public String Ubigeo;
+    public String Especialidad;
+    public Double Cuantia;
+    public int IdAnexo;
+    public String ResumenControversia;
+    public String ResumenPeticiones;
+    public String DesignacionArbitro;
+    public String DeclaracionesCompromiso;
+    public String Estado;
+    public String Decision_Final;
+    public String MotivoAnulacion;
+    public String SustentoAnulacion;
+    public java.sql.Date FechaAprobacion;
+    public int UsuarioAprobador;
+    public String usuario;
+                
+                
+                 */
                 int idNotificacion = rs.getInt("IdNotificacion");
                 String NroExpediente = rs.getString("NroExpediente");
                 String estadoNotificacion = rs.getString("EstadoNotificacion");

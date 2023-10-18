@@ -1,0 +1,217 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.dev.aed.arbitraje.Model;
+
+import java.sql.Date;
+
+/**
+ *
+ * @author Cesar
+ */
+public class MDemanda {
+
+    public int NroExpediente;
+    public java.sql.Date FechaDemanda;
+    public String DemandanteID;
+    public String DemandadoID;
+    public String Ubigeo;
+    public String Especialidad;
+    public Double Cuantia;
+    public int IdAnexo;
+    public String ResumenControversia;
+    public String ResumenPeticiones;
+    public String DesignacionArbitro;
+    public String DeclaracionesCompromiso;
+    public String Estado;
+    public String Decision_Final;
+    public String MotivoAnulacion;
+    public String SustentoAnulacion;
+    public java.sql.Date FechaAprobacion;
+    public int UsuarioAprobador;
+    public String usuario;
+
+    public MDemanda(int NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String Decision_Final, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
+        this.NroExpediente = NroExpediente;
+        this.FechaDemanda = FechaDemanda;
+        this.DemandanteID = DemandanteID;
+        this.DemandadoID = DemandadoID;
+        this.Ubigeo = Ubigeo;
+        this.Especialidad = Especialidad;
+        this.Cuantia = Cuantia;
+        this.IdAnexo = IdAnexo;
+        this.ResumenControversia = ResumenControversia;
+        this.ResumenPeticiones = ResumenPeticiones;
+        this.DesignacionArbitro = DesignacionArbitro;
+        this.DeclaracionesCompromiso = DeclaracionesCompromiso;
+        this.Estado = Estado;
+        this.Decision_Final = Decision_Final;
+        this.MotivoAnulacion = MotivoAnulacion;
+        this.SustentoAnulacion = SustentoAnulacion;
+        this.FechaAprobacion = FechaAprobacion;
+        this.UsuarioAprobador = UsuarioAprobador;
+        this.usuario = usuario;
+    }
+
+    public MDemanda() {
+    }
+    
+    
+
+    public int getNroExpediente() {
+        return NroExpediente;
+    }
+
+    public void setNroExpediente(int NroExpediente) {
+        this.NroExpediente = NroExpediente;
+    }
+
+    public Date getFechaDemanda() {
+        return FechaDemanda;
+    }
+
+    public void setFechaDemanda(Date FechaDemanda) {
+        this.FechaDemanda = FechaDemanda;
+    }
+
+    public String getDemandanteID() {
+        return DemandanteID;
+    }
+
+    public void setDemandanteID(String DemandanteID) {
+        this.DemandanteID = DemandanteID;
+    }
+
+    public String getDemandadoID() {
+        return DemandadoID;
+    }
+
+    public void setDemandadoID(String DemandadoID) {
+        this.DemandadoID = DemandadoID;
+    }
+
+    public String getUbigeo() {
+        return Ubigeo;
+    }
+
+    public void setUbigeo(String Ubigeo) {
+        this.Ubigeo = Ubigeo;
+    }
+
+    public String getEspecialidad() {
+        return Especialidad;
+    }
+
+    public void setEspecialidad(String Especialidad) {
+        this.Especialidad = Especialidad;
+    }
+
+    public Double getCuantia() {
+        return Cuantia;
+    }
+
+    public void setCuantia(Double Cuantia) {
+        this.Cuantia = Cuantia;
+    }
+
+    public int getIdAnexo() {
+        return IdAnexo;
+    }
+
+    public void setIdAnexo(int IdAnexo) {
+        this.IdAnexo = IdAnexo;
+    }
+
+    public String getResumenControversia() {
+        return ResumenControversia;
+    }
+
+    public void setResumenControversia(String ResumenControversia) {
+        this.ResumenControversia = ResumenControversia;
+    }
+
+    public String getResumenPeticiones() {
+        return ResumenPeticiones;
+    }
+
+    public void setResumenPeticiones(String ResumenPeticiones) {
+        this.ResumenPeticiones = ResumenPeticiones;
+    }
+
+    public String getDesignacionArbitro() {
+        return DesignacionArbitro;
+    }
+
+    public void setDesignacionArbitro(String DesignacionArbitro) {
+        this.DesignacionArbitro = DesignacionArbitro;
+    }
+
+    public String getDeclaracionesCompromiso() {
+        return DeclaracionesCompromiso;
+    }
+
+    public void setDeclaracionesCompromiso(String DeclaracionesCompromiso) {
+        this.DeclaracionesCompromiso = DeclaracionesCompromiso;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
+    }
+
+    public String getDecision_Final() {
+        return Decision_Final;
+    }
+
+    public void setDecision_Final(String Decision_Final) {
+        this.Decision_Final = Decision_Final;
+    }
+
+    public String getMotivoAnulacion() {
+        return MotivoAnulacion;
+    }
+
+    public void setMotivoAnulacion(String MotivoAnulacion) {
+        this.MotivoAnulacion = MotivoAnulacion;
+    }
+
+    public String getSustentoAnulacion() {
+        return SustentoAnulacion;
+    }
+
+    public void setSustentoAnulacion(String SustentoAnulacion) {
+        this.SustentoAnulacion = SustentoAnulacion;
+    }
+
+    public Date getFechaAprobacion() {
+        return FechaAprobacion;
+    }
+
+    public void setFechaAprobacion(Date FechaAprobacion) {
+        this.FechaAprobacion = FechaAprobacion;
+    }
+
+    public int getUsuarioAprobador() {
+        return UsuarioAprobador;
+    }
+
+    public void setUsuarioAprobador(int UsuarioAprobador) {
+        this.UsuarioAprobador = UsuarioAprobador;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+   
+    
+    
+}

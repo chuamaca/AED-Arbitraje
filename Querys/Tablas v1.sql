@@ -85,25 +85,27 @@ CREATE TABLE [dbo].[Notificacion](
 	);
 
 /*CHUAMANIC 20231710 Tabla para Demanda*/
-CREATE TABLE Demanda (
-    NroExpediente INT PRIMARY KEY IDENTITY,
-    FechaDemanda DATE,
-    DemandanteID INT,
-    DemandadoID INT,
-    Ubigeo VARCHAR(50) NOT NULL,
-    Especialidad VARCHAR(50) NOT NULL,
-    Cuantia DECIMAL(10, 2),
-    IdAnexo int,
-    ResumenControversia TEXT,
-    ResumenPeticiones TEXT,
-    DesignacionArbitro VARCHAR(100),
-    DeclaracionesCompromiso TEXT,
-    Estado VARCHAR(20) NOT NULL,
-    Decision_Final TEXT,
-    MotivoAnulacion TEXT,
-    SustentoAnulacion TEXT,
-    FechaAprobacion DATE,
-    UsuarioAprobador INT
+CREATE TABLE AEDArbitraje.dbo.Demanda (
+	NroExpediente int IDENTITY(1,1) NOT NULL,
+	FechaDemanda date NULL,
+	DemandanteID int NULL,
+	DemandadoID int NULL,
+	Ubigeo varchar(50) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	Especialidad varchar(50) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	Cuantia decimal(10,2) NULL,
+	IdAnexo int NULL,
+	ResumenControversia text COLLATE Modern_Spanish_CI_AS NULL,
+	ResumenPeticiones text COLLATE Modern_Spanish_CI_AS NULL,
+	DesignacionArbitro varchar(100) COLLATE Modern_Spanish_CI_AS NULL,
+	DeclaracionesCompromiso text COLLATE Modern_Spanish_CI_AS NULL,
+	Estado varchar(20) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	Decision_Final text COLLATE Modern_Spanish_CI_AS NULL,
+	MotivoAnulacion text COLLATE Modern_Spanish_CI_AS NULL,
+	SustentoAnulacion text COLLATE Modern_Spanish_CI_AS NULL,
+	FechaAprobacion date NULL,
+	UsuarioAprobador int NULL,
+	usuario varchar(20) COLLATE Modern_Spanish_CI_AS NULL,
+	CONSTRAINT PK__Demanda__4343075D12F73B21 PRIMARY KEY (NroExpediente)
 );
 
 
