@@ -65,15 +65,15 @@ public class Dashboard extends javax.swing.JFrame {
         InitContent();
 
     }
-    
+
     private void confirmarCierreVentana() {
-       int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas cerrar la ventana?",
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas cerrar la ventana?",
                 "Confirmar Cierre", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma el cierre, se cierra la ventana
             dispose();
-        }else{
+        } else {
             ShowJPanel(new Principal());
         }
     }
@@ -125,8 +125,8 @@ public class Dashboard extends javax.swing.JFrame {
         appName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btn_prin = new javax.swing.JButton();
-        btn_lends = new javax.swing.JButton();
-        btn_CobrarCuenta = new javax.swing.JButton();
+        btn_Notificaciones = new javax.swing.JButton();
+        btn_Demanda = new javax.swing.JButton();
         btnMovientoBnaco = new javax.swing.JButton();
         btn_reportes = new javax.swing.JButton();
         btn_reports = new javax.swing.JButton();
@@ -141,15 +141,16 @@ public class Dashboard extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(13, 71, 161));
         menu.setPreferredSize(new java.awt.Dimension(270, 640));
 
+        appName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        appName.setText("Cuentas Por Cobrar");
+        appName.setText("Sistema de Arbitraje");
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
 
         btn_prin.setBackground(new java.awt.Color(21, 101, 192));
         btn_prin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_prin.setForeground(new java.awt.Color(255, 255, 255));
-        btn_prin.setText("Registro Partes");
+        btn_prin.setText("Opcion 1");
         btn_prin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_prin.setBorderPainted(false);
         btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -162,42 +163,42 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btn_lends.setBackground(new java.awt.Color(21, 101, 192));
-        btn_lends.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_lends.setForeground(new java.awt.Color(255, 255, 255));
-        btn_lends.setText("Lineas De Credito");
-        btn_lends.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_lends.setBorderPainted(false);
-        btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_lends.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_lends.setIconTextGap(13);
-        btn_lends.setInheritsPopupMenu(true);
-        btn_lends.addActionListener(new java.awt.event.ActionListener() {
+        btn_Notificaciones.setBackground(new java.awt.Color(21, 101, 192));
+        btn_Notificaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Notificaciones.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Notificaciones.setText("Notificaciones");
+        btn_Notificaciones.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Notificaciones.setBorderPainted(false);
+        btn_Notificaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Notificaciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Notificaciones.setIconTextGap(13);
+        btn_Notificaciones.setInheritsPopupMenu(true);
+        btn_Notificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_lendsActionPerformed(evt);
+                btn_NotificacionesActionPerformed(evt);
             }
         });
 
-        btn_CobrarCuenta.setBackground(new java.awt.Color(21, 101, 192));
-        btn_CobrarCuenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_CobrarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        btn_CobrarCuenta.setText("Cuentas Por Cobrar");
-        btn_CobrarCuenta.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_CobrarCuenta.setBorderPainted(false);
-        btn_CobrarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_CobrarCuenta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_CobrarCuenta.setIconTextGap(13);
-        btn_CobrarCuenta.setInheritsPopupMenu(true);
-        btn_CobrarCuenta.addActionListener(new java.awt.event.ActionListener() {
+        btn_Demanda.setBackground(new java.awt.Color(21, 101, 192));
+        btn_Demanda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Demanda.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Demanda.setText("Demanda");
+        btn_Demanda.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Demanda.setBorderPainted(false);
+        btn_Demanda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Demanda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Demanda.setIconTextGap(13);
+        btn_Demanda.setInheritsPopupMenu(true);
+        btn_Demanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CobrarCuentaActionPerformed(evt);
+                btn_DemandaActionPerformed(evt);
             }
         });
 
         btnMovientoBnaco.setBackground(new java.awt.Color(21, 101, 192));
         btnMovientoBnaco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMovientoBnaco.setForeground(new java.awt.Color(255, 255, 255));
-        btnMovientoBnaco.setText("Movimiento Bancos");
+        btnMovientoBnaco.setText("Opcion 3");
         btnMovientoBnaco.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnMovientoBnaco.setBorderPainted(false);
         btnMovientoBnaco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -213,7 +214,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reportes.setBackground(new java.awt.Color(21, 101, 192));
         btn_reportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reportes.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reportes.setText("Reportes");
+        btn_reportes.setText("Opcion 4");
         btn_reportes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reportes.setBorderPainted(false);
         btn_reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -229,7 +230,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reports.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reports.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reports.setText("Accesos");
+        btn_reports.setText("Opcion 5");
         btn_reports.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports.setBorderPainted(false);
         btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -248,10 +249,10 @@ public class Dashboard extends javax.swing.JFrame {
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_lends, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Notificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_prin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_CobrarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Demanda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuLayout.createSequentialGroup()
@@ -281,14 +282,14 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(btn_lends, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_prin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(btn_CobrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Demanda, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(200, 200, 200)
                         .addComponent(btn_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,8 +315,8 @@ public class Dashboard extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -335,22 +336,21 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_prinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prinActionPerformed
-        RegistrarPartes reg= new RegistrarPartes();
-                reg.setVisible(true);
+        RegistrarPartes reg = new RegistrarPartes();
+        reg.setVisible(true);
     }//GEN-LAST:event_btn_prinActionPerformed
 
-    private void btn_lendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lendsActionPerformed
-       
-    }//GEN-LAST:event_btn_lendsActionPerformed
+    private void btn_NotificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NotificacionesActionPerformed
+        ShowJPanel(new VerNotificaciones());
+    }//GEN-LAST:event_btn_NotificacionesActionPerformed
 
-    private void btn_CobrarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCuentaActionPerformed
+    private void btn_DemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DemandaActionPerformed
         //ShowJPanel(new Returns());
 
-        // ShowJPanel(new CobrarCuenta());
-     
+        ShowJPanel(new VerDemanda());
 
 
-    }//GEN-LAST:event_btn_CobrarCuentaActionPerformed
+    }//GEN-LAST:event_btn_DemandaActionPerformed
 
     private void btnMovientoBnacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovientoBnacoActionPerformed
         //ShowJPanel(new Users());
@@ -359,11 +359,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
 
-        
+
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportsActionPerformed
-       
+
 
     }//GEN-LAST:event_btn_reportsActionPerformed
 
@@ -388,8 +388,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel appName;
     private javax.swing.JPanel background;
     private javax.swing.JButton btnMovientoBnaco;
-    private javax.swing.JButton btn_CobrarCuenta;
-    private javax.swing.JButton btn_lends;
+    private javax.swing.JButton btn_Demanda;
+    private javax.swing.JButton btn_Notificaciones;
     private javax.swing.JButton btn_prin;
     private javax.swing.JButton btn_reportes;
     private javax.swing.JButton btn_reports;

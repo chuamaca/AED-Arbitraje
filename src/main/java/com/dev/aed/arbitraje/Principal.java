@@ -67,17 +67,17 @@ public class Principal extends javax.swing.JPanel {
 
         title.setText("Bienvenido");
 
-        jLabel2.setText("Modulo para Cuentas Por cobrar");
+        jLabel2.setText("Modulo para Arbitraje");
 
-        jLabel3.setText("forma óptima Para realizar cobros");
+        jLabel3.setText("Modulo abc");
 
-        jLabel4.setText("Esta herramienta le permitirá llevar un control completo y detallado de los clientes por Cobrar");
+        jLabel4.setText("----1");
 
-        jLabel5.setText("tendrá acceso a herramientas especiales para tareas específicas, como lo son:");
+        jLabel5.setText("----2");
 
-        jLabel6.setText("• Evaluar Linea de Credito");
+        jLabel6.setText("• Notificar Audiencia");
 
-        jLabel7.setText("• Devoluciones");
+        jLabel7.setText("• Generar Demanda");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
