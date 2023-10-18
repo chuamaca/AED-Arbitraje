@@ -347,7 +347,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void btn_DemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DemandaActionPerformed
         //ShowJPanel(new Returns());
 
-        ShowJPanel(new Demanda());
+        ShowJPanel(new VerDemanda());
 
 
     }//GEN-LAST:event_btn_DemandaActionPerformed

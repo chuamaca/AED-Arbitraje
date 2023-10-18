@@ -25,14 +25,14 @@ public class MDemanda {
     public String DesignacionArbitro;
     public String DeclaracionesCompromiso;
     public String Estado;
-    public String Decision_Final;
+    public String DecisionFinal;
     public String MotivoAnulacion;
     public String SustentoAnulacion;
     public java.sql.Date FechaAprobacion;
     public int UsuarioAprobador;
     public String usuario;
 
-    public MDemanda(int NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String Decision_Final, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
+    public MDemanda(int NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String DecisionFinal, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
         this.NroExpediente = NroExpediente;
         this.FechaDemanda = FechaDemanda;
         this.DemandanteID = DemandanteID;
@@ -46,7 +46,7 @@ public class MDemanda {
         this.DesignacionArbitro = DesignacionArbitro;
         this.DeclaracionesCompromiso = DeclaracionesCompromiso;
         this.Estado = Estado;
-        this.Decision_Final = Decision_Final;
+        this.DecisionFinal = DecisionFinal;
         this.MotivoAnulacion = MotivoAnulacion;
         this.SustentoAnulacion = SustentoAnulacion;
         this.FechaAprobacion = FechaAprobacion;
@@ -163,12 +163,12 @@ public class MDemanda {
         this.Estado = Estado;
     }
 
-    public String getDecision_Final() {
-        return Decision_Final;
+    public String getDecisionFinal() {
+        return DecisionFinal;
     }
 
-    public void setDecision_Final(String Decision_Final) {
-        this.Decision_Final = Decision_Final;
+    public void setDecisionFinal(String DecisionFinal) {
+        this.DecisionFinal = DecisionFinal;
     }
 
     public String getMotivoAnulacion() {
