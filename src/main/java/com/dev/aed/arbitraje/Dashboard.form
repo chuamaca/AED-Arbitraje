@@ -80,7 +80,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btn_Notificaciones" max="32767" attributes="0"/>
-                  <Component id="btnMovientoBnaco" max="32767" attributes="0"/>
+                  <Component id="btnCriterios" max="32767" attributes="0"/>
                   <Component id="btn_prin" max="32767" attributes="0"/>
                   <Component id="btn_Demanda" max="32767" attributes="0"/>
                   <Component id="btn_reportes" max="32767" attributes="0"/>
@@ -122,7 +122,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
-                              <Component id="btnMovientoBnaco" min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="btnCriterios" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btn_prin" min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -170,7 +170,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Opcion 1"/>
+                <Property name="text" type="java.lang.String" value="Registrar Partes"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder bottom="1" left="13" right="1" top="1"/>
@@ -246,7 +246,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DemandaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMovientoBnaco">
+            <Component class="javax.swing.JButton" name="btnCriterios">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c0" green="65" red="15" type="rgb"/>
@@ -257,7 +257,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Opcion 3"/>
+                <Property name="text" type="java.lang.String" value="Configuracion De Criterios"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder bottom="1" left="13" right="1" top="1"/>
@@ -272,7 +272,7 @@
                 <Property name="inheritsPopupMenu" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMovientoBnacoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCriteriosActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_reportes">

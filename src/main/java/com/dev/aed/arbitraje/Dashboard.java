@@ -58,6 +58,9 @@ public class Dashboard extends javax.swing.JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        
+        
 
         initComponents();
         InitStyles();
@@ -127,7 +130,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_prin = new javax.swing.JButton();
         btn_Notificaciones = new javax.swing.JButton();
         btn_Demanda = new javax.swing.JButton();
-        btnMovientoBnaco = new javax.swing.JButton();
+        btnCriterios = new javax.swing.JButton();
         btn_reportes = new javax.swing.JButton();
         btn_reports = new javax.swing.JButton();
         mensaje = new javax.swing.JLabel();
@@ -150,7 +153,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_prin.setBackground(new java.awt.Color(21, 101, 192));
         btn_prin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_prin.setForeground(new java.awt.Color(255, 255, 255));
-        btn_prin.setText("Opcion 1");
+        btn_prin.setText("Registrar Partes");
         btn_prin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_prin.setBorderPainted(false);
         btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -195,19 +198,19 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnMovientoBnaco.setBackground(new java.awt.Color(21, 101, 192));
-        btnMovientoBnaco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnMovientoBnaco.setForeground(new java.awt.Color(255, 255, 255));
-        btnMovientoBnaco.setText("Opcion 3");
-        btnMovientoBnaco.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btnMovientoBnaco.setBorderPainted(false);
-        btnMovientoBnaco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnMovientoBnaco.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMovientoBnaco.setIconTextGap(13);
-        btnMovientoBnaco.setInheritsPopupMenu(true);
-        btnMovientoBnaco.addActionListener(new java.awt.event.ActionListener() {
+        btnCriterios.setBackground(new java.awt.Color(21, 101, 192));
+        btnCriterios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCriterios.setForeground(new java.awt.Color(255, 255, 255));
+        btnCriterios.setText("Configuracion De Criterios");
+        btnCriterios.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btnCriterios.setBorderPainted(false);
+        btnCriterios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCriterios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCriterios.setIconTextGap(13);
+        btnCriterios.setInheritsPopupMenu(true);
+        btnCriterios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovientoBnacoActionPerformed(evt);
+                btnCriteriosActionPerformed(evt);
             }
         });
 
@@ -250,7 +253,7 @@ public class Dashboard extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_Notificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCriterios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_prin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Demanda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -285,7 +288,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(btn_Notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(btnMovientoBnaco, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCriterios, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_prin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
@@ -352,10 +355,12 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_DemandaActionPerformed
 
-    private void btnMovientoBnacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovientoBnacoActionPerformed
+    private void btnCriteriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriteriosActionPerformed
         //ShowJPanel(new Users());
 //        ShowJPanel(new MovimientoBancoList());
-    }//GEN-LAST:event_btnMovientoBnacoActionPerformed
+
+        ShowJPanel(new CriterioAceptacion());
+    }//GEN-LAST:event_btnCriteriosActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
 
@@ -363,7 +368,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportsActionPerformed
-
+        ShowJPanel(new CargarArchivo());
 
     }//GEN-LAST:event_btn_reportsActionPerformed
 
@@ -387,7 +392,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appName;
     private javax.swing.JPanel background;
-    private javax.swing.JButton btnMovientoBnaco;
+    private javax.swing.JButton btnCriterios;
     private javax.swing.JButton btn_Demanda;
     private javax.swing.JButton btn_Notificaciones;
     private javax.swing.JButton btn_prin;
