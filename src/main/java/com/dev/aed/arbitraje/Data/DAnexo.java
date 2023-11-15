@@ -61,7 +61,7 @@ public class DAnexo {
         int rows = 0;
 
         java.util.Date fechaActual = new java.util.Date();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String fechaCarga = formato.format(fechaActual);
 
         try {

@@ -33,11 +33,12 @@ public class Tabla_PdfVO extends javax.swing.JFrame {
         dt.addColumn("Id");
         dt.addColumn("codigopdf");
         dt.addColumn("nombrepdf");
-        dt.addColumn("archivopdf");
+        dt.addColumn("Ver Pdf");
 
         ImageIcon icono = null;
         if (get_Image("/Imagen/32pdf.png") != null) {
             icono = new ImageIcon(get_Image("/Imagen/32pdf.png"));
+            System.out.println("Icono: " + icono);
         }
 
         dao = new DAnexo();
