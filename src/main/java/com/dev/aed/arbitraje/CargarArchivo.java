@@ -371,6 +371,7 @@ public class CargarArchivo extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "No hay archivo");
                 } else {
                     DAnexo pd = new DAnexo();
+                    System.out.println("ejecutar_archivoPDF: " + id);
                     pd.ejecutar_archivoPDF(id);
                     try {
                         Desktop.getDesktop().open(new File("new.pdf"));

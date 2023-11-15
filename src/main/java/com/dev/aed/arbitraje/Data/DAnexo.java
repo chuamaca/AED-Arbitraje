@@ -52,30 +52,7 @@ public class DAnexo {
 "	where IdAnexo =?";
      
     
-//    
-//     public void Agregar_PdfVO(PdfVO vo) {
-//        Conectar conec = new Conectar();
-//        String sql = "INSERT INTO pdf (codigopdf, nombrepdf, archivopdf) VALUES(?, ?, ?);";
-//        PreparedStatement ps = null;
-//        try {
-//            ps = conec.getConnection().prepareStatement(sql);
-//            ps.setInt(1, vo.getCodigopdf());
-//            ps.setString(2, vo.getNombrepdf());
-//            ps.setBytes(3, vo.getArchivopdf());
-//            ps.executeUpdate();
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        } finally {
-//            try {
-//                ps.close();
-//                conec.desconectar();
-//            } catch (Exception ex) {
-//            }
-//        }
-//    }
-//     
+ 
       public int insertAnexo(MAnexo anexo) {
         System.out.println("InserDemanda");
 
@@ -113,9 +90,6 @@ public class DAnexo {
         return rows;
     }
       
-    
-      
-  
     
      public List<MAnexo> Select() {
         Connection conn = null;
@@ -179,6 +153,8 @@ public class DAnexo {
             
              conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_SELECT_ID);
+            stmt.setInt(1, id);
+            System.out.println("ejecutar_archivoPDF: "+ id);
             rs = stmt.executeQuery();
             
 

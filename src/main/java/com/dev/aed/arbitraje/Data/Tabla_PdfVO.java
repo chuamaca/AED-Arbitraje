@@ -46,7 +46,7 @@ public class Tabla_PdfVO extends javax.swing.JFrame {
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                Object fila[] = new Object[3];
+                Object fila[] = new Object[4];
                 vo = list.get(i);
                 fila[0] = vo.getIdAnexo();
                 fila[1] = vo.getNroExpediente();
