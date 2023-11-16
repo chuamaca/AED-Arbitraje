@@ -90,11 +90,7 @@ public class Demanda extends javax.swing.JPanel {
         comboBoxModelEspecialidad.addElement("Otros");
         
         cmbEspecialidad.setModel(comboBoxModelEspecialidad);
-        
-        
-        
-        
-        
+         
     }
     
     
@@ -327,7 +323,7 @@ public class Demanda extends javax.swing.JPanel {
             }
         });
 
-        btnGuardarAdjunto.setBackground(new java.awt.Color(204, 204, 255));
+        btnGuardarAdjunto.setBackground(new java.awt.Color(0, 51, 255));
         btnGuardarAdjunto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGuardarAdjunto.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarAdjunto.setText("Adjuntar");
@@ -383,8 +379,8 @@ public class Demanda extends javax.swing.JPanel {
                             .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(domLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -492,10 +488,23 @@ public class Demanda extends javax.swing.JPanel {
 
     }
 
+    public static boolean validarNumeroEntero(String numero) {
+        // Verificar si el número no está vacío y contiene solo dígitos
+        return numero != null && !numero.isEmpty() && numero.matches("^\\d+$");
+    }
+    
+     public static boolean validarNumeroDecimalMayorQueCero(String numero) {
+        // Verificar si el número no está vacío, contiene un formato decimal válido y es mayor que 0
+        return numero != null && !numero.isEmpty() && numero.matches("^\\d+(\\.\\d+)?$") && Double.parseDouble(numero) > 0;
+    }
+          
     private void btnGuardarDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDemandaActionPerformed
         // TODO add your handling code here:
 
        // int NroExpediente = demandaEditar.getNroExpediente();
+        System.out.println("validarNumeroDecimalMayorQueCero(txtCuantia.getText()) :" + validarNumeroDecimalMayorQueCero(txtCuantia.getText()));
+      validarNumeroDecimalMayorQueCero(txtCuantia.getText());
+      
 
         System.out.println("Documento Guardar Demanda: " + cmbDemandante.getSelectedItem() );
 
@@ -543,6 +552,11 @@ public class Demanda extends javax.swing.JPanel {
         if (se == 0) {
             this.btnSeleccionarArchivo.setText("" + j.getSelectedFile().getName());
             ruta_archivo = j.getSelectedFile().getAbsolutePath();
+            
+            if (ruta_archivo.length()>0) {
+                this.btnSeleccionarArchivo.enable(true);
+                System.out.println("this.btnSeleccionarArchivo.enable(true): ");
+            }
 
         } else {
         }
@@ -550,7 +564,6 @@ public class Demanda extends javax.swing.JPanel {
     
     
     private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
-        // TODO add your handling code here:
         seleccionar_pdf();
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
 
@@ -561,9 +574,10 @@ public class Demanda extends javax.swing.JPanel {
         File ruta = new File(ruta_archivo);
         if (nroExpediente.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
             guardar_pdf(nroExpediente, ruta_archivo.trim(), ruta);
-            tpdf.visualizar_PdfVO(jTablePDF);
+            tpdf.visualizar_PdfVO(jTablePDF, nroExpediente);
             ruta_archivo = "";
-
+            this.btnSeleccionarArchivo.setText("");
+            
         } else {
             JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
         }
@@ -618,6 +632,8 @@ public class Demanda extends javax.swing.JPanel {
         }
         danexo.insertAnexo(po);
     }
+    
+     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

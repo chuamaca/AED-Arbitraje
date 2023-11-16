@@ -259,7 +259,7 @@ public class CargarArchivo extends javax.swing.JPanel {
         File ruta = new File(ruta_archivo);
         if (nroExpediente.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
             guardar_pdf(nroExpediente, ruta_archivo.trim(), ruta);
-            tpdf.visualizar_PdfVO(jTablePDF);
+            tpdf.visualizar_PdfVO(jTablePDF, nroExpediente);
             ruta_archivo = "";
            
         } else {

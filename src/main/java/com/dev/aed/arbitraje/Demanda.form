@@ -80,8 +80,8 @@
                               <Component id="phoneLbl3" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                               <Component id="domLbl1" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jSeparator2" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jSeparator2" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSeleccionarArchivo" min="-2" pref="355" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnGuardarAdjunto" min="-2" pref="180" max="-2" attributes="0"/>
@@ -343,7 +343,7 @@
         <Component class="javax.swing.JButton" name="btnGuardarAdjunto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+              <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>

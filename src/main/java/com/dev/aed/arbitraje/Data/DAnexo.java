@@ -42,7 +42,7 @@ public class DAnexo {
 "	Usuario,\n" +
 "	archivopdf \n" +
 "FROM\n" +
-"	Anexo";
+"	Anexo where NroExpediente=?";
      
      
       private static final String SQL_SELECT_ID = "SELECT\n" +
@@ -91,7 +91,7 @@ public class DAnexo {
     }
       
     
-     public List<MAnexo> Select() {
+     public List<MAnexo> SelectAnexoPorExpediente(String nro_expediente) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -101,6 +101,8 @@ public class DAnexo {
         try {
             conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_SELECT);
+            stmt.setString(1, ""+nro_expediente);
+            //stmt.setInt(1, id);
             rs = stmt.executeQuery();
             while (rs.next()) {
 
@@ -167,7 +169,7 @@ public class DAnexo {
             byte[] datosPDF = new byte[tamanoInput];
             bos.read(datosPDF, 0, tamanoInput);
 
-            OutputStream out = new FileOutputStream("new" + id+".pdf");
+            OutputStream out = new FileOutputStream("new.pdf");
             out.write(datosPDF);
 
             //abrir archivo

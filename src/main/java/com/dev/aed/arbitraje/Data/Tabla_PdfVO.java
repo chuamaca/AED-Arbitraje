@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class Tabla_PdfVO extends javax.swing.JFrame {
     DAnexo dao=null;
     
-      public void visualizar_PdfVO(JTable tabla) {
+      public void visualizar_PdfVO(JTable tabla, String nro_expediente) {
         tabla.setDefaultRenderer(Object.class, new imgTabla());
         DefaultTableModel dt = new DefaultTableModel() {
             @Override
@@ -31,8 +31,8 @@ public class Tabla_PdfVO extends javax.swing.JFrame {
             }
         };
         dt.addColumn("Id");
-        dt.addColumn("codigopdf");
-        dt.addColumn("nombrepdf");
+        dt.addColumn("Codigo pdf");
+        dt.addColumn("Nombre pdf");
         dt.addColumn("Ver Pdf");
 
         ImageIcon icono = null;
@@ -43,7 +43,7 @@ public class Tabla_PdfVO extends javax.swing.JFrame {
 
         dao = new DAnexo();
         MAnexo vo = new MAnexo();
-        List<MAnexo> list = dao.Select();
+        List<MAnexo> list = dao.SelectAnexoPorExpediente(nro_expediente);
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {

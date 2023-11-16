@@ -144,3 +144,23 @@ CREATE TABLE AEDArbitraje.dbo.usuario (
 	nro_intentos int NOT NULL,
 	CONSTRAINT PK__usuario__4E3E04AD0D05ECD6 PRIMARY KEY (id_usuario)
 );
+
+
+USE [AEDArbitraje]
+GO
+
+USE [AEDArbitraje]
+GO
+
+/****** Object:  Sequence [dbo].[SEC_EXPEDIENTE]    Script Date: 16/11/2023 03:18:38 ******/
+CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE] 
+ AS [bigint]
+ START WITH 10000
+ INCREMENT BY 1
+ MINVALUE 10000
+ MAXVALUE 9223372036854775807
+ CYCLE 
+ CACHE 
+GO
+
+
