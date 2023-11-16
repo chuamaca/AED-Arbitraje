@@ -1,24 +1,49 @@
 package com.dev.aed.arbitraje;
 
+import com.dev.aed.arbitraje.Data.DAnexo;
 import com.dev.aed.arbitraje.Data.DDemanda;
+import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
+import com.dev.aed.arbitraje.Model.MAnexo;
 import com.dev.aed.arbitraje.Model.MDemanda;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class Demanda extends javax.swing.JPanel {
 
     boolean editar = false;
     MDemanda demandaEditar;
+    
+     String ruta_archivo = "";
+     Tabla_PdfVO tpdf = new Tabla_PdfVO();
+     int id = -1;
 
     public Demanda() {
         initComponents();
         InitStyles();
-        
         CargarCombos();
-        
-        // CargarCuentaBancoCMB();
+        generarCorrelativoExpediente();
     }
+    
+    
+    private void generarCorrelativoExpediente(){
+        
+        MDemanda objDemanda= new MDemanda();
+        DDemanda dDemanda= new DDemanda();
+        int nro_expediente=dDemanda.GenerarNroExpediente();
+        txtNroExpediente.setText(""+nro_expediente);
+    }
+    
+    
+    
     
     public void CargarCombos(){
         
@@ -211,10 +236,9 @@ public class Demanda extends javax.swing.JPanel {
         bgGround = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         txtCuantia = new javax.swing.JTextField();
-        btnGuardarDemanda = new javax.swing.JButton();
         phoneLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableCuentaDetalle = new javax.swing.JTable();
+        jTablePDF = new javax.swing.JTable();
         txtPeticion = new javax.swing.JTextField();
         header1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -229,6 +253,11 @@ public class Demanda extends javax.swing.JPanel {
         phoneLbl5 = new javax.swing.JLabel();
         txtResumenControversia = new javax.swing.JTextField();
         domLbl1 = new javax.swing.JLabel();
+        btnSeleccionarArchivo = new javax.swing.JButton();
+        btnGuardarAdjunto = new javax.swing.JButton();
+        btnGuardarDemanda = new javax.swing.JButton();
+        txtNroExpediente = new javax.swing.JTextField();
+        phoneLbl6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -236,21 +265,9 @@ public class Demanda extends javax.swing.JPanel {
 
         txtCuantia.setToolTipText("");
 
-        btnGuardarDemanda.setBackground(new java.awt.Color(18, 90, 173));
-        btnGuardarDemanda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnGuardarDemanda.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarDemanda.setText("Registrar");
-        btnGuardarDemanda.setBorderPainted(false);
-        btnGuardarDemanda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGuardarDemanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarDemandaActionPerformed(evt);
-            }
-        });
+        phoneLbl.setText("Nro Expediente");
 
-        phoneLbl.setText("Demandante");
-
-        jTableCuentaDetalle.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePDF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -258,8 +275,13 @@ public class Demanda extends javax.swing.JPanel {
 
             }
         ));
-        jTableCuentaDetalle.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(jTableCuentaDetalle);
+        jTablePDF.setGridColor(new java.awt.Color(255, 255, 255));
+        jTablePDF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePDFMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTablePDF);
 
         header1.setBackground(new java.awt.Color(25, 118, 210));
         header1.setPreferredSize(new java.awt.Dimension(744, 150));
@@ -298,57 +320,102 @@ public class Demanda extends javax.swing.JPanel {
 
         domLbl1.setText("Peticion De Demanda");
 
+        btnSeleccionarArchivo.setText("Cargar Archivo");
+        btnSeleccionarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarArchivoActionPerformed(evt);
+            }
+        });
+
+        btnGuardarAdjunto.setBackground(new java.awt.Color(204, 204, 255));
+        btnGuardarAdjunto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnGuardarAdjunto.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarAdjunto.setText("Adjuntar");
+        btnGuardarAdjunto.setBorderPainted(false);
+        btnGuardarAdjunto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGuardarAdjunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAdjuntoActionPerformed(evt);
+            }
+        });
+
+        btnGuardarDemanda.setBackground(new java.awt.Color(18, 90, 173));
+        btnGuardarDemanda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGuardarDemanda.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarDemanda.setText("Registrar");
+        btnGuardarDemanda.setBorderPainted(false);
+        btnGuardarDemanda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGuardarDemanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarDemandaActionPerformed(evt);
+            }
+        });
+
+        phoneLbl6.setText("Demandado");
+
         javax.swing.GroupLayout bgGroundLayout = new javax.swing.GroupLayout(bgGround);
         bgGround.setLayout(bgGroundLayout);
         bgGroundLayout.setHorizontalGroup(
             bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgGroundLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
-                    .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgGroundLayout.createSequentialGroup()
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneLbl5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(phoneLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(163, 163, 163))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgGroundLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(phoneLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addComponent(phoneLbl5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(phoneLbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
-                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(97, 97, 97))
+                                .addComponent(phoneLbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(276, 276, 276))
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(202, 202, 202))))
                     .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgGroundLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
-            .addGroup(bgGroundLayout.createSequentialGroup()
-                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(domLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtResumenControversia, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(bgGroundLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(phoneLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(133, 133, 133))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgGroundLayout.createSequentialGroup()
+                                        .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(phoneLbl6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(phoneLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         bgGroundLayout.setVerticalGroup(
             bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -357,36 +424,48 @@ public class Demanda extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(phoneLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(phoneLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(17, 17, 17)
+                    .addComponent(phoneLbl6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(phoneLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(phoneLbl5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(phoneLbl5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(phoneLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(phoneLbl3)
                 .addGap(18, 18, 18)
                 .addComponent(txtResumenControversia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(domLbl1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardarDemanda)
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgGroundLayout.createSequentialGroup()
+                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(bgGroundLayout.createSequentialGroup()
+                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(23, 23, 23)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -395,14 +474,14 @@ public class Demanda extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -438,7 +517,7 @@ public class Demanda extends javax.swing.JPanel {
             int rta = dDemanda.insertDemanda(objDemanda);
 
             if (rta == 1) {
-                Dashboard.ShowJPanel(new Demanda());
+               // Dashboard.ShowJPanel(new Demanda());
                 JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
             }
         }
@@ -456,10 +535,96 @@ public class Demanda extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnGuardarDemandaActionPerformed
 
+    public void seleccionar_pdf() {
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter fi = new FileNameExtensionFilter("pdf", "pdf");
+        j.setFileFilter(fi);
+        int se = j.showOpenDialog(this);
+        if (se == 0) {
+            this.btnSeleccionarArchivo.setText("" + j.getSelectedFile().getName());
+            ruta_archivo = j.getSelectedFile().getAbsolutePath();
+
+        } else {
+        }
+    }
+    
+    
+    private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
+        // TODO add your handling code here:
+        seleccionar_pdf();
+    }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
+
+    private void btnGuardarAdjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAdjuntoActionPerformed
+
+        String nroExpediente = txtNroExpediente.getText();
+
+        File ruta = new File(ruta_archivo);
+        if (nroExpediente.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
+            guardar_pdf(nroExpediente, ruta_archivo.trim(), ruta);
+            tpdf.visualizar_PdfVO(jTablePDF);
+            ruta_archivo = "";
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
+        }
+
+    }//GEN-LAST:event_btnGuardarAdjuntoActionPerformed
+
+    private void jTablePDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePDFMouseClicked
+        // TODO add your handling code here:
+        int column = jTablePDF.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jTablePDF.getRowHeight();
+       
+        if (row < jTablePDF.getRowCount() && row >= 0 && column < jTablePDF.getColumnCount() && column >= 0) {
+            id = (int) jTablePDF.getValueAt(row, 0);
+            Object value = jTablePDF.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getText().equals("Vacio")) {
+                    JOptionPane.showMessageDialog(null, "No hay archivo");
+                } else {
+                    DAnexo pd = new DAnexo();
+                    System.out.println("ejecutar_archivoPDF: " + id);
+                    pd.ejecutar_archivoPDF(id);
+                    try {
+                        Desktop.getDesktop().open(new File("new.pdf"));
+                    } catch (Exception ex) {
+                    }
+                }
+
+            } else {
+                String name = "" + jTablePDF.getValueAt(row, 1);
+//                txtname.setText(name);
+            }
+        }
+    }//GEN-LAST:event_jTablePDFMouseClicked
+
+     public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
+          
+        MAnexo po = new MAnexo();
+           DAnexo danexo= new DAnexo();
+        po.setNroExpediente(NroExpediente);
+        po.setNombreDocumento(nombredocumento);
+        try {
+            byte[] pdf = new byte[(int) ruta.length()];
+            InputStream input = new FileInputStream(ruta);
+            input.read(pdf);
+            po.setArchivopdf(pdf);
+        } catch (IOException ex) {
+            po.setArchivopdf(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        danexo.insertAnexo(po);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgGround;
+    private javax.swing.JButton btnGuardarAdjunto;
     private javax.swing.JButton btnGuardarDemanda;
+    private javax.swing.JButton btnSeleccionarArchivo;
     private javax.swing.JComboBox<String> cmbDemandado;
     private javax.swing.JComboBox<String> cmbDemandante;
     private javax.swing.JComboBox<String> cmbEspecialidad;
@@ -469,14 +634,16 @@ public class Demanda extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTableCuentaDetalle;
+    private javax.swing.JTable jTablePDF;
     private javax.swing.JLabel phoneLbl;
     private javax.swing.JLabel phoneLbl1;
     private javax.swing.JLabel phoneLbl2;
     private javax.swing.JLabel phoneLbl3;
     private javax.swing.JLabel phoneLbl4;
     private javax.swing.JLabel phoneLbl5;
+    private javax.swing.JLabel phoneLbl6;
     private javax.swing.JTextField txtCuantia;
+    private javax.swing.JTextField txtNroExpediente;
     private javax.swing.JTextField txtPeticion;
     private javax.swing.JTextField txtResumenControversia;
     // End of variables declaration//GEN-END:variables

@@ -7,6 +7,7 @@ package com.dev.aed.arbitraje.Data;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Utils.ConexionJDBC;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,9 @@ public class DDemanda {
     private static final String SQL_INSERT = "INSERT INTO Demanda\n"
             + "( FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario)\n"
             + "VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_SELECT_BY_ID = "SELECT idlc, nombre_cliente, ruc_cliente, fecha_registro, dias_credito, monto_maximo, moneda, usuario_registro, riesgo_crediticio FROM lineacreditomst where idlc=?";
+    
+    private static final String SQL_GENERATE_NRO_EXPEDIENTE = "SELECT NEXT VALUE FOR sec_expediente";
+    
     private static final String SQL_UPDATE = "UPDATE lineacreditomst SET nombre_cliente = ?, ruc_cliente = ?, fecha_registro = ?, dias_credito = ?,  monto_maximo= ?, moneda= ?, usuario_registro= ?, riesgo_crediticio= ? WHERE idlc = ?";
 
     public List<MDemanda> Select() {
@@ -239,5 +242,37 @@ public class DDemanda {
 //
 //        return rows;
 //    }
-//    
+//   
+    
+    
+     public int GenerarNroExpediente() {
+        System.out.println("Ingresa a SelectById");
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MDemanda mDemanda = null;
+        
+        
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_GENERATE_NRO_EXPEDIENTE);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                int valor_query = rs.getInt(1);
+                mDemanda = new MDemanda();
+                mDemanda.setNroExpediente(valor_query);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            //ConexionJDBC.close(conn);
+        }
+
+        return mDemanda.NroExpediente;
+    }
 }

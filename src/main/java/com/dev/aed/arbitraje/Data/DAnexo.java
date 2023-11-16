@@ -167,7 +167,7 @@ public class DAnexo {
             byte[] datosPDF = new byte[tamanoInput];
             bos.read(datosPDF, 0, tamanoInput);
 
-            OutputStream out = new FileOutputStream("new.pdf");
+            OutputStream out = new FileOutputStream("new" + id+".pdf");
             out.write(datosPDF);
 
             //abrir archivo
