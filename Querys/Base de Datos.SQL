@@ -164,6 +164,12 @@ CREATE TABLE AEDArbitraje.dbo.Audiencia (
     InformacionAdicional VARCHAR(255)
 );
 
+CREATE TABLE AEDArbitraje.dbo.Anular (
+  NroExpediente VARCHAR(20),
+  Fecha VARCHAR(20),
+  Motivo VARCHAR(255),
+  Justificacion VARCHAR(255)
+);
 
 
 USE [AEDArbitraje]
