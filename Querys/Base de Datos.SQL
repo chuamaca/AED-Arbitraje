@@ -145,6 +145,26 @@ CREATE TABLE AEDArbitraje.dbo.usuario (
 	CONSTRAINT PK__usuario__4E3E04AD0D05ECD6 PRIMARY KEY (id_usuario)
 );
 
+SET IDENTITY_INSERT dbo.usuario ON;
+
+INSERT INTO dbo.usuario (id_usuario,nombre_usuario,contrasena,id_rol,estado,nro_intentos,fecha_caducidad) VALUES (1,'CAtanacio','d71024479',1,1,0,'2023-11-25')
+
+SET IDENTITY_INSERT dbo.usuario OFF;
+
+-----------------------------------------
+
+CREATE TABLE AEDArbitraje.dbo.Audiencia (
+    IdAudiencia INT,
+    NumerodeExpediente VARCHAR(10),
+    FechadeRegistro VARCHAR(20),
+    LugardeAudiencia VARCHAR(70),
+    Arbitro VARCHAR(70),
+    EstadoExpediente VARCHAR(20),
+    Fechadeprogramacion VARCHAR(20),
+    InformacionAdicional VARCHAR(255)
+);
+
+
 
 USE [AEDArbitraje]
 GO
