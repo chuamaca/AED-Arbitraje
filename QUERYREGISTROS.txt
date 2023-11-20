@@ -23,6 +23,11 @@ Direccion varchar(50),
 --INSERTAR
 insert into RegPartes (idPartes, NombreEmp, RUC) values ('1','AnguloSAC','987654321')
 insert into RegPartes (idPartes, Nombres, DNI) values ('2','Jesus','71528502')
+INSERT INTO dbo.Registros VALUES ('1','Carlos','Atanacio Velasquez','PepitosSac','71024479','20552103','carlosdaniel_2003@hotmail.com','03-11-74','23-10-10','Peruano','Lima','997236461','Jr Magnolias 274' ) 
+INSERT INTO dbo.Registros VALUES ('2','Juan','Chavez Puma','AGROLIGHT PERU S.A.C.','743535335','20538856','jpuma96@gmail.com','13-08-66','10-07-09','Peruano','Lima','991233921','Jr Camana 144' )
+INSERT INTO dbo.Registros VALUES ('3','Maria','Olivera Jimenez','BI GRAND CONFECCIONES S.A.C.','726784432','20553856','mariao10@gmail.com','20-04-89','14-05-11','Peruano','Lima','996238174','Av Arenales 581' )
+INSERT INTO dbo.Registros VALUES ('4','Leonardo','Rios Cuba','D AROMAS E.I.R.L..','06228184','20480316','lrios23@gmail.com','03-09-88','09-01-14','Peruano','Lima','987657887','Av Peru 1500' )
+INSERT INTO dbo.Registros VALUES ('5','Abraham','Salazar Aguirre','DMG DRILLING E.I.R.L.','07633287','20547825','asalazar@gmail.com','10-12-01','11-07-09','Peruano','Lima','944823657','Av Peru 1500' )
 
 --MOSTRAR
 select * from RegPartes
@@ -32,4 +37,4 @@ update RegPartes set Fecha_Creacion = '27/05/03'
 where idPartes = '1'
 
 --ELIMINAR
-delete from RegPartes where idPartes = '2'
+delete from RegPartes whereÂ idPartesÂ =Â '2'
