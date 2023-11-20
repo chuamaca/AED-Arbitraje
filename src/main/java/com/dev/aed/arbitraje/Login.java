@@ -4,12 +4,17 @@
  */
 package com.dev.aed.arbitraje;
 
+import com.dev.aed.arbitraje.Data.DDemanda;
 import com.dev.aed.arbitraje.Data.DUsuario;
+import com.dev.aed.arbitraje.Data.DVerExpediente;
+import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MUsuario;
+import com.dev.aed.arbitraje.Model.MVerExpediente;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +28,41 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public void VerDemanda() {
+        String numeroExpedienteStr = txtexp1.getText();
+        if (numeroExpedienteStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número de expediente válido");
+            return;
+        }
+        int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("NroExpediente");
+        modelo.addColumn("Demandante");
+        modelo.addColumn("Demandado");
+        modelo.addColumn("Arbitro");
+        modelo.addColumn("Estado");
+
+        jTableVerDemandas.setModel(modelo);
+
+        DVerExpediente dDemanda = new DVerExpediente();
+        List<MVerExpediente> mDemandaList = dDemanda.Select(numeroExpediente);
+
+        // double total = 0;
+        //   jLabelDeudaTotal.setText("");
+        String cuentasForTable[] = new String[19];
+        for (MVerExpediente item : mDemandaList) {
+            cuentasForTable[0] = "" + item.getNroExpediente();
+            cuentasForTable[1] = item.getDemandanteID();
+            cuentasForTable[2] = item.getDemandadoID();
+            cuentasForTable[3] = "" + item.getDesignacionArbitro();
+            cuentasForTable[4] = "" + item.getEstado();
+            modelo.addRow(cuentasForTable);
+
+        }
+        jTableVerDemandas.setModel(modelo);
+
     }
 
     /**
@@ -42,10 +82,12 @@ public class Login extends javax.swing.JFrame {
         txtpassword = new javax.swing.JPasswordField();
         btn_prin = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        txtusuario1 = new javax.swing.JTextField();
+        txtexp1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnIngresar1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableVerDemandas = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,12 +173,11 @@ public class Login extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
-        txtusuario1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtusuario1.setText("XXXX-XXXX-XXXX");
+        txtexp1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Ingrese Codigo de Expediente");
+        jLabel3.setText("Consultar Rápida de Expediente");
 
         btnIngresar1.setBackground(new java.awt.Color(13, 71, 161));
         btnIngresar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -148,21 +189,45 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jCheckBox1.setText("Detalle");
+        jTableVerDemandas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableVerDemandas.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableVerDemandas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVerDemandasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableVerDemandas);
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Nro Expediente:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtusuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtexp1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -172,11 +237,12 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtusuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addGap(27, 27, 27)
-                .addComponent(btnIngresar1)
-                .addContainerGap(532, Short.MAX_VALUE))
+                    .addComponent(txtexp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(btnIngresar1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(467, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,14 +315,14 @@ public class Login extends javax.swing.JFrame {
 
                 System.out.println("userError: " + usern);
             }
-            
+
             // Pasar el numero de intentos a una configuracion (MEJORA)
             if (usern.getNro_intentos() >= 3) {
                 //Bloqueo de usuario
                 int bloqueo = obj.bloqueoUsuario(usern);
                 //variable bloqueo 
 
-                JOptionPane.showMessageDialog(null, "El Usuario ha sido BLOQUEADO " +user.getUsername());
+                JOptionPane.showMessageDialog(null, "El Usuario ha sido BLOQUEADO " + user.getUsername());
             } else {
                 //Actualizar nro de intentos
                 int actualizarintento = obj.LoginInvalido(usern);
@@ -315,7 +381,12 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresar1ActionPerformed
         // TODO add your handling code here:
+        VerDemanda();
     }//GEN-LAST:event_btnIngresar1ActionPerformed
+
+    private void jTableVerDemandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerDemandasMouseClicked
+
+    }//GEN-LAST:event_jTableVerDemandasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -366,15 +437,17 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnIngresar1;
     private javax.swing.JButton btn_prin;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableVerDemandas;
+    private javax.swing.JTextField txtexp1;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusuario;
-    private javax.swing.JTextField txtusuario1;
     // End of variables declaration//GEN-END:variables
 
 }

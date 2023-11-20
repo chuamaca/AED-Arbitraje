@@ -217,7 +217,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reportes.setBackground(new java.awt.Color(21, 101, 192));
         btn_reportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reportes.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reportes.setText("Opcion 4");
+        btn_reportes.setText("Consultar Expediente");
         btn_reportes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reportes.setBorderPainted(false);
         btn_reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -233,7 +233,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reports.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reports.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reports.setText("Opcion 5");
+        btn_reports.setText("Usuarios del Sistema");
         btn_reports.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports.setBorderPainted(false);
         btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -362,15 +362,14 @@ public class Dashboard extends javax.swing.JFrame {
         ShowJPanel(new CriterioAceptacion());
     }//GEN-LAST:event_btnCriteriosActionPerformed
 
-    private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-
-
-    }//GEN-LAST:event_btn_reportesActionPerformed
-
     private void btn_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportsActionPerformed
-        ShowJPanel(new CargarArchivo());
+        ShowJPanel(new UsuariosSistema());
 
     }//GEN-LAST:event_btn_reportsActionPerformed
+
+    private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
+ShowJPanel(new ConsultarExpediente());
+    }//GEN-LAST:event_btn_reportesActionPerformed
 
     /**
      * @param args the command line arguments

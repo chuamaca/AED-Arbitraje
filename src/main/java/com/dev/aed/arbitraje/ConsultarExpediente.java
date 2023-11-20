@@ -7,102 +7,93 @@ package com.dev.aed.arbitraje;
 
 import static com.dev.aed.arbitraje.Dashboard.ShowJPanel;
 import com.dev.aed.arbitraje.Data.DDemanda;
+import com.dev.aed.arbitraje.Data.DVerExpediente;
 import com.dev.aed.arbitraje.Model.MDemanda;
+import com.dev.aed.arbitraje.Model.MExpediente;
+import com.dev.aed.arbitraje.Model.MVerExpediente;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.api.tree.CaseTree;
 
-/**
- *
- * @author Cesar
- */
-public class VerDemanda extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Principal
-     */
-    public VerDemanda() {
+public class ConsultarExpediente extends javax.swing.JPanel {
+
+    public ConsultarExpediente() {
         initComponents();
         InitStyles();
-        MostrarDemanda();
+        llenarComboDemandante();
+        CargarEstado();
+    }
+
+    public void CargarEstado() {
+        DefaultComboBoxModel<String> comboBoxModelEstado = new DefaultComboBoxModel<>();
+
+        // Agregar elementos al modelo del ComboBox
+        comboBoxModelEstado.addElement("activo");
+        comboBoxModelEstado.addElement("inactivo");
+
+        ddlEstado.setModel(comboBoxModelEstado);
 
     }
 
-    public void MostrarDemanda() {
+    private void llenarComboDemandante() {
+        DVerExpediente dVerExpediente = new DVerExpediente();
+        List<String> nrodoc = dVerExpediente.obtenerDNI();
 
-        /*
-                	 cliente	
-                numerodocumento	 fechaventa	
-                diascredito	 numerocuotas	 total
-                totalpagado	 saldoAFavor	
-                siguiente_fecha_pago	
-                numero_cuota_pendiente	 monto_cuota
+        for (String cod : nrodoc) {
+            cmbDemandante.addItem(cod);
+        }
+    }
 
-         */
+    public void MostrarExpediente() {
+
+        String numeroExpedienteStr = txt_NroExp.getText();
+        String demandanteSeleccionado = (String) cmbDemandante.getSelectedItem();
+         String estadoSeleccionado = (String) ddlEstado.getSelectedItem();
+
+        // Validar si el campo no está vacío
+        if (numeroExpedienteStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número de expediente válido");
+            return;
+        }
+        int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
+
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Expediente");
-        modelo.addColumn("Fecha");
+        modelo.addColumn("Fecha_Registro");
         modelo.addColumn("Demandante");
         modelo.addColumn("Demandado");
-        modelo.addColumn("Ubigeo");
         modelo.addColumn("Especialidad");
         modelo.addColumn("Cuantia");
-        modelo.addColumn("Anexos");
         modelo.addColumn("Resumen");
         modelo.addColumn("Peticion");
         modelo.addColumn("Arbitro");
         modelo.addColumn("Compromiso");
         modelo.addColumn("Estado");
         modelo.addColumn("Desicion Final");
-        modelo.addColumn("MotivoAnulacion");
-        modelo.addColumn("Sustento Anulacion");
-        modelo.addColumn("Fecha Aprobacion");
-        modelo.addColumn("Usuario Aprobador");
-        modelo.addColumn("Usuario");
 
         jTableVerDemandas.setModel(modelo);
+        DVerExpediente vexpediente = new DVerExpediente();
+        List<MExpediente> mExpedienteList = vexpediente.ListaExpediente(numeroExpediente, demandanteSeleccionado, estadoSeleccionado);
 
-        DDemanda dDemanda = new DDemanda();
-        List<MDemanda> mDemandaList = dDemanda.Select();
-
-        // double total = 0;
-        //   jLabelDeudaTotal.setText("");
         String cuentasForTable[] = new String[19];
-        for (MDemanda item : mDemandaList) {
+        for (MExpediente item : mExpedienteList) {
             cuentasForTable[0] = "" + item.getNroExpediente();
             cuentasForTable[1] = "" + item.getFechaDemanda();
             cuentasForTable[2] = item.getDemandanteID();
             cuentasForTable[3] = item.getDemandadoID();
-            cuentasForTable[4] = "" + item.getUbigeo();
             cuentasForTable[5] = "" + item.getEspecialidad();
             cuentasForTable[6] = "" + item.getCuantia();
-            cuentasForTable[7] = "" + item.getIdAnexo();
             cuentasForTable[8] = "" + item.getResumenControversia();
             cuentasForTable[9] = "" + item.getResumenPeticiones();
             cuentasForTable[10] = "" + item.getDesignacionArbitro();
             cuentasForTable[11] = "" + item.getDeclaracionesCompromiso();
             cuentasForTable[12] = "" + item.getEstado();
             cuentasForTable[13] = "" + item.getDecisionFinal();
-            cuentasForTable[14] = "" + item.getMotivoAnulacion();
-            cuentasForTable[15] = "" + item.getSustentoAnulacion();
-            cuentasForTable[16] = "" + item.getFechaAprobacion();
-            cuentasForTable[17] = "" + item.getUsuarioAprobador();
-            cuentasForTable[18] = "" + item.getUsuario();
 
-            // total+=item.getSaldo_favor();
-            //   jLabelDeudaTotal.setText("" +total );
-
-            /*
-                	 cliente	
-                numerodocumento	 fechaventa	
-                diascredito	 numerocuotas	 total
-                totalpagado	 saldoAFavor	
-                siguiente_fecha_pago	
-                numero_cuota_pendiente	 monto_cuota
-
-             */
             modelo.addRow(cuentasForTable);
 
         }
@@ -130,13 +121,16 @@ public class VerDemanda extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableVerDemandas = new javax.swing.JTable();
         btnBuscarPorDocumento = new javax.swing.JButton();
-        txtBuscarDocumento = new javax.swing.JTextField();
-        btnDemandar = new javax.swing.JButton();
-        jRadioButtonRuc = new javax.swing.JRadioButton();
-        jRadioButtonComprobante = new javax.swing.JRadioButton();
+        txt_NroExp = new javax.swing.JTextField();
         header = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        btnRechazar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        ddlEstado = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        cmbDemandante = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -171,32 +165,13 @@ public class VerDemanda extends javax.swing.JPanel {
             }
         });
 
-        btnDemandar.setBackground(new java.awt.Color(255, 51, 0));
-        btnDemandar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDemandar.setForeground(new java.awt.Color(255, 255, 255));
-        btnDemandar.setText("Demandar");
-        btnDemandar.setBorderPainted(false);
-        btnDemandar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnDemandar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDemandarActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButtonRuc);
-        jRadioButtonRuc.setText("DOCUMENTO");
-
-        buttonGroup1.add(jRadioButtonComprobante);
-        jRadioButtonComprobante.setSelected(true);
-        jRadioButtonComprobante.setText("NRO EXPEDIENTE");
-
         header.setBackground(new java.awt.Color(25, 118, 210));
         header.setPreferredSize(new java.awt.Dimension(744, 150));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ver Demandas");
+        jLabel2.setText("Consultar Expediente");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
@@ -215,57 +190,90 @@ public class VerDemanda extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnRechazar.setText("Rechazar");
-        btnRechazar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Nro Experiencia");
+
+        jLabel3.setText("Estado");
+
+        ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ddlEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRechazarActionPerformed(evt);
+                ddlEstadoActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Demandante");
+
+        cmbDemandante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDemandanteActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Fecha");
+
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(txtBuscarDocumento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButtonComprobante)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonRuc))
-                    .addComponent(header, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap(536, Short.MAX_VALUE)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(btnRechazar)
+                        .addContainerGap()
+                        .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(60, 60, 60)))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_NroExp, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(ddlEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnDemandar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(18, 18, 18)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonComprobante)
-                    .addComponent(jRadioButtonRuc))
-                .addGap(12, 12, 12)
+                    .addComponent(txt_NroExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(btnBuscarPorDocumento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDemandar)
-                    .addComponent(btnRechazar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(92, 92, 92))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -284,54 +292,40 @@ public class VerDemanda extends javax.swing.JPanel {
 
     private void btnBuscarPorDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPorDocumentoActionPerformed
 
+        MostrarExpediente();
 
     }//GEN-LAST:event_btnBuscarPorDocumentoActionPerformed
 
-
-    private void btnDemandarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDemandarActionPerformed
-        // TODO add your handling code here:
-        ShowJPanel(new Demanda());
-
-    }//GEN-LAST:event_btnDemandarActionPerformed
 
     private void jTableVerDemandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerDemandasMouseClicked
 
 
     }//GEN-LAST:event_jTableVerDemandasMouseClicked
 
-    private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
-        // Obtiene el modelo de la tabla
+    private void cmbDemandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDemandanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDemandanteActionPerformed
 
-        //        DefaultTableModel modelo = (DefaultTableModel) jTableVerDemandas.getModel();
-        //        // Obtiene la fila seleccionada
-        //        int filaSeleccionada = jTableVerDemandas.getSelectedRow();
-        //        // Verifica si se ha seleccionado alguna fila
-        //        if (filaSeleccionada != -1) {
-            //            // Obtiene el valor del número de expediente en la columna 0 (ajusta según la posición de la columna)
-            //            String numeroExpedienteSeleccionado = modelo.getValueAt(filaSeleccionada, 0).toString();
-            //            // Muestra el número de expediente en un JTextField (ajusta el nombre de tu JTextField)
-            //            txtNroExpediente.setText(numeroExpedienteSeleccionado);
-            //            // Abre la ventana RechazarDemanda y pasa el número de expediente
-            //            RechazarDemanda rechazarDemanda = new RechazarDemanda(numeroExpedienteSeleccionado);
-            //            ShowJPanel(rechazarDemanda);
-
-            ShowJPanel(new RechazarDemanda());
-
-    }//GEN-LAST:event_btnRechazarActionPerformed
+    private void ddlEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddlEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscarPorDocumento;
-    private javax.swing.JButton btnDemandar;
-    private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmbDemandante;
+    private javax.swing.JComboBox<String> ddlEstado;
     private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButtonComprobante;
-    private javax.swing.JRadioButton jRadioButtonRuc;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableVerDemandas;
-    private javax.swing.JTextField txtBuscarDocumento;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_NroExp;
     // End of variables declaration//GEN-END:variables
 }
