@@ -8,14 +8,14 @@ CREATE TABLE AEDArbitraje.dbo.Anexo (
 	IdAnexo int IDENTITY(1,1) NOT NULL,
 	NroExpediente varchar(10) COLLATE Modern_Spanish_CI_AS NULL,
 	TipoDocumento varchar(10) COLLATE Modern_Spanish_CI_AS NULL,
-	NombreDocumento varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
+	NombreDocumento varchar(max) COLLATE Modern_Spanish_CI_AS NULL,
 	Formato varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
 	FechaCarga date NULL,
 	EstadoCarga int NULL,
 	Usuario varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
+	archivopdf varbinary(MAX) NULL,
 	CONSTRAINT PK__Anexo__8C1FE271260D7C57 PRIMARY KEY (IdAnexo)
 );
-
 
 -- AEDArbitraje.dbo.Arbitros definition
 
@@ -147,10 +147,10 @@ CREATE TABLE AEDArbitraje.dbo.usuario (
 
 
 USE [AEDArbitraje]
-GO
+;
 
 USE [AEDArbitraje]
-GO
+;
 
 /****** Object:  Sequence [dbo].[SEC_EXPEDIENTE]    Script Date: 16/11/2023 03:18:38 ******/
 CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE] 
@@ -161,6 +161,29 @@ CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE]
  MAXVALUE 9223372036854775807
  CYCLE 
  CACHE 
-GO
+;
 
+		INSERT INTO usuario
+           ([nombre_usuario]
+           ,[contrasena]
+           ,id_rol,
+		   estado,
+		   nro_intentos)
+     VALUES
+			('admin', 'admin', '1',1,0),
+           ('usuario2', 'Iass2', '2',1,0),
+           ('usuario3', 'pass3', '3',1,0),
+		    ('usuario3', 'pass3', '4', 1,0);
+;
 
+	/*Tabla Logs */
+CREATE TABLE Logs (
+    log_id INT  PRIMARY KEY Identity,
+    fecha datetime,
+    username VARCHAR(255),
+    accion VARCHAR(50),
+    ref1 VARCHAR(50),
+    ref2 VARCHAR(50),
+    detalle TEXT
+)
+;

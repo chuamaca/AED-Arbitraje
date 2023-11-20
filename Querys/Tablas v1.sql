@@ -17,11 +17,11 @@ CREATE TABLE usuario (
 		   estado,
 		   nro_intentos)
      VALUES
-			('usuario1', 'Bass1', '1',1,0),
+			('admin', 'admin', '1',1,0),
            ('usuario2', 'Iass2', '2',1,0),
            ('usuario3', 'pass3', '3',1,0),
 		    ('usuario3', 'pass3', '4', 1,0);
-GO
+;
 
 	/*Tabla Logs */
 CREATE TABLE Logs (
@@ -33,7 +33,7 @@ CREATE TABLE Logs (
     ref2 VARCHAR(50),
     detalle TEXT
 )
-go
+;
 
 
 

@@ -21,10 +21,10 @@ public class ConexionJDBC {
     
      public static Connection getConexion(){
         
-        String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
+        String conexionServer = "jdbc:sqlserver://RLPT1177\\SQLEXPRESS;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
-                +"password=sa;"
+                +"password=BANKpower9719;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";
