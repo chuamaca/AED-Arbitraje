@@ -241,3 +241,13 @@ VALUES('040516', 'PER', 'AREQUIPA', 'CAYLLOMA', '040516', 'TAPAY');
 INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
 (ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
 VALUES('040517', 'PER', 'AREQUIPA', 'CAYLLOMA', '040517', 'TISCO');
+
+Create table RechazarDemanda(
+	idRechazo int IDENTITY(1,1) NOT NULL,
+	NroExpediente varchar(10),
+	Motivo varchar(50),
+	Fecha varchar(16),
+	Arbitro varchar(50) ,
+	instancia varchar(50) ,
+	CONSTRAINT idRechazo PRIMARY KEY (idRechazo)
+);
