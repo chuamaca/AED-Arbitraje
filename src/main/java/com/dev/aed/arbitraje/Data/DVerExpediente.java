@@ -131,7 +131,7 @@ public class DVerExpediente {
         try {
             conn = ConexionJDBC.getConexion();
             // Asumiendo que la tabla se llama Persona y el campo con los nombres es "Nombre"
-            String sql = "select DNI from [dbo].[RegPartes1]";
+            String sql = "select DNI from [dbo].[RegPartes]";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 

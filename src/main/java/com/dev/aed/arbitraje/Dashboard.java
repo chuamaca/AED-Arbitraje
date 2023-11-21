@@ -368,7 +368,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportsActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-ShowJPanel(new ConsultarExpediente());
+        ShowJPanel(new ConsultarExpediente());
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     /**
