@@ -2,7 +2,10 @@
 package com.dev.aed.arbitraje;
 
 import com.dev.aed.arbitraje.Data.DRegistros;
-import com.dev.aed.arbitraje.Data.Usuarios;
+import com.dev.aed.arbitraje.Data.DUsuario;
+
+import com.dev.aed.arbitraje.Model.MUsuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -246,7 +249,7 @@ public class UsuariosSistema extends javax.swing.JPanel {
                             .addComponent(nameLbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,8 +279,24 @@ public class UsuariosSistema extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Usuarios  objetoUsuarios = new Usuarios();
-        objetoUsuarios.InsertarUsuario(txtUsuario,txtContraseña,txtEstado,txtCaducidad);
+        
+        DUsuario dusuario= new DUsuario();
+        MUsuario objUsuario= new MUsuario();
+        
+        objUsuario.setUsername(txtUsuario.getText());
+        objUsuario.setPassword(txtContraseña.getText());
+        objUsuario.setFlag_estado(true);
+        objUsuario.setFechaCaducidad(txtCaducidad.getText());
+        //Los otros datos
+        
+        int guardar= dusuario.CrearUsuario(objUsuario);
+        if (guardar>0) {
+            JOptionPane.showMessageDialog(null, "Se guardo usuario con exito");
+        }else{
+        JOptionPane.showMessageDialog(null, "No se guardo usuario");
+    }
+        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

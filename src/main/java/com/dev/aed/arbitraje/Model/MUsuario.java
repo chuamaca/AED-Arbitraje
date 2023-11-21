@@ -15,7 +15,9 @@ public class MUsuario extends MRol {
     private String password;
     private int nro_intentos;
     private boolean flag_estado;
-
+    private String fechaCaducidad;
+    
+    
     public MUsuario() {
     }
 
@@ -27,6 +29,36 @@ public class MUsuario extends MRol {
         this.nro_intentos = nro_intentos;
         this.flag_estado = flag_estado;
     }
+
+    public MUsuario(int id_usuario, String username, String password, int nro_intentos, boolean flag_estado, String fechaCaducidad, String idrol, String nombrerol, boolean estadorol) {
+        super(idrol, nombrerol, estadorol);
+        this.id_usuario = id_usuario;
+        this.username = username;
+        this.password = password;
+        this.nro_intentos = nro_intentos;
+        this.flag_estado = flag_estado;
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public MUsuario(int id_usuario, String username, String password, int nro_intentos, boolean flag_estado, String fechaCaducidad) {
+        this.id_usuario = id_usuario;
+        this.username = username;
+        this.password = password;
+        this.nro_intentos = nro_intentos;
+        this.flag_estado = flag_estado;
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public String getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(String fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+    
+    
+    
 
     public int getId_usuario() {
         return id_usuario;

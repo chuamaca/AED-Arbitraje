@@ -130,7 +130,7 @@ public class VerDemanda extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableVerDemandas = new javax.swing.JTable();
         btnBuscarPorDocumento = new javax.swing.JButton();
-        txtBuscarDocumento = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         btnDemandar = new javax.swing.JButton();
         jRadioButtonRuc = new javax.swing.JRadioButton();
         jRadioButtonComprobante = new javax.swing.JRadioButton();
@@ -271,7 +271,7 @@ public class VerDemanda extends javax.swing.JPanel {
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(txtBuscarDocumento)
+                                .addComponent(txtBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jRadioButtonComprobante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -288,7 +288,7 @@ public class VerDemanda extends javax.swing.JPanel {
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonComprobante)
                     .addComponent(jRadioButtonRuc))
                 .addGap(12, 12, 12)
@@ -335,6 +335,27 @@ public class VerDemanda extends javax.swing.JPanel {
 
     private void jTableVerDemandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerDemandasMouseClicked
 
+        
+         if (jTableVerDemandas.getSelectedRow() > -1) {
+
+            String valor_NroExpediente = (String) jTableVerDemandas
+                    .getValueAt(jTableVerDemandas.getSelectedRow(), 0);
+            
+            System.out.println("String IdDocumento >>< " + valor_NroExpediente);
+            
+            txtBuscar.setText(valor_NroExpediente);
+//            CuentaJDBC cuentaJdbc = new CuentaJDBC();
+//            Cuenta cuenta = new Cuenta();
+//            cuenta.setDocumento(idDocumento);
+
+
+
+           // Dashboard.ShowJPanel(new AnularDemanda(valor_NroExpediente));
+
+            //JOptionPane.showMessageDialog(null, "Documento A Cobrar: " + cuenta.getDocumento());
+        }
+        
+        
 
     }//GEN-LAST:event_jTableVerDemandasMouseClicked
 
@@ -365,7 +386,10 @@ public class VerDemanda extends javax.swing.JPanel {
 
     private void btnAnularDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularDemandaActionPerformed
         // TODO add your handling code here:
-        ShowJPanel(new AnularDemanda());
+        
+        
+        
+        ShowJPanel(new AnularDemanda(txtBuscar.getText()));
     }//GEN-LAST:event_btnAnularDemandaActionPerformed
 
 
@@ -383,6 +407,6 @@ public class VerDemanda extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButtonRuc;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableVerDemandas;
-    private javax.swing.JTextField txtBuscarDocumento;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

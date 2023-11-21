@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 public class DRegistros {
 
     public void BuscarPorNombre(JTextField Busqueda, JTextField NombresRES, JTextField ApellidosRES, JTextField NumeroDocRES, JTextField CorreoRES, JTextField TelefonoRES) {
-        String consulta = "select Nombres,Apellidos,DNI,Correo,Telefono from dbo.Registros where dbo.Registros.Nombres=(?);";
+        String consulta = "select Nombres,Apellidos,DNI,Correo,Telefono from dbo.RegPartes where dbo.RegPartes.Nombres=(?);";
 
         ConexionJDBC objetoConexion = new ConexionJDBC();
         try {

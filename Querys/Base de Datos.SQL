@@ -143,14 +143,11 @@ CREATE TABLE AEDArbitraje.dbo.usuario (
 	id_rol varchar(15) COLLATE Modern_Spanish_CI_AS NOT NULL,
 	estado int NOT NULL,
 	nro_intentos int NOT NULL,
+	fecha_caducidad varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
 	CONSTRAINT PK__usuario__4E3E04AD0D05ECD6 PRIMARY KEY (id_usuario)
 );
 
-SET IDENTITY_INSERT dbo.usuario ON;
 
-INSERT INTO dbo.usuario (id_usuario,nombre_usuario,contrasena,id_rol,estado,nro_intentos,fecha_caducidad) VALUES (1,'CAtanacio','d71024479',1,1,0,'2023-11-25')
-
-SET IDENTITY_INSERT dbo.usuario OFF;
 
 -----------------------------------------
 
@@ -197,10 +194,10 @@ CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE]
 		   estado,
 		   nro_intentos)
      VALUES
-			('admin', 'admin', '1',1,0),
-           ('usuario2', 'Iass2', '2',1,0),
-           ('usuario3', 'pass3', '3',1,0),
-		    ('usuario3', 'pass3', '4', 1,0);
+			('admin', 'admin', '1',1,0,'2023'),
+           ('usuario2', 'Iass2', '2',1,0,'2023'),
+           ('usuario3', 'pass3', '3',1,0,'2023'),
+		    ('usuario3', 'pass3', '4', 1,0,'2023');
 ;
 
 	/*Tabla Logs */
@@ -250,4 +247,20 @@ Create table RechazarDemanda(
 	Arbitro varchar(50) ,
 	instancia varchar(50) ,
 	CONSTRAINT idRechazo PRIMARY KEY (idRechazo)
+);
+
+create table RegPartes(
+idPartes char(8) PRIMARY KEY,
+Nombres varchar(50),
+Apellidos varchar(50),
+NombreEmp varchar(50),
+DNI char(10),
+RUC int,
+Correo varchar (80),
+Fecha_Nacimiento char(8),
+Fecha_Creacion char(8),
+Nacionalidad varchar(50),
+OrigenEmp varchar(50),
+Telefono int,
+Direccion varchar(50),
 );

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class DUsuario {
     private static final String SQL_UPDATE_Bloqueo = "UPDATE usuario SET estado=? WHERE nombre_usuario = ?";
     private static final String SQL_VALIDATE = "SELECT nombre_usuario, contrasena  FROM usuario WHERE nombre_usuario=? and contrasena=? and estado=1";
     private static final String SQL_NRO_INTENTOS = "SELECT id_usuario, nombre_usuario, contrasena, id_rol, estado, nro_intentos  FROM usuario WHERE nombre_usuario=?";
+    private static final String SQL_CREAR_USUARIO = "INSERT INTO usuario (nombre_usuario,contrasena,id_rol,estado,nro_intentos,fecha_caducidad) VALUES (?,?,?,?,?,?)";
 
     public boolean validarUsuario(MUsuario user) {
         try {
@@ -217,4 +219,43 @@ public class DUsuario {
 
         return usuarios;
     }
+    
+    
+    
+    public int CrearUsuario(MUsuario usuario) {
+        System.out.println("InserDemanda " + usuario);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        java.util.Date fechaActual = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaDemanda = formato.format(fechaActual);
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_CREAR_USUARIO);
+            stmt.setString(1,usuario.getUsername());
+            stmt.setString(2, usuario.getPassword());
+            stmt.setString(3, "1");
+            stmt.setBoolean(4, usuario.isFlag_estado());
+            stmt.setString(5, "0");
+            stmt.setString(6, usuario.getFechaCaducidad());
+
+            System.out.println("ejecutando query:" + SQL_CREAR_USUARIO);
+            rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("Error SQL " + ex.toString());
+        } finally {
+            //  ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            ConexionJDBC.close(conn);
+        }
+
+        return rows;
+    }
+     
 }

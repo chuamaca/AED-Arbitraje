@@ -12,11 +12,23 @@ import com.dev.aed.arbitraje.Data.DAnular;
  */
 public class AnularDemanda extends javax.swing.JPanel {
 
+    
+     boolean editar = false;
     /**
      * Creates new form AnularDemanda
      */
     public AnularDemanda() {
         initComponents();
+    }
+    
+    
+    public AnularDemanda(String NroExpedienteUp) {
+        initComponents();
+        boolean editar = true;
+        txtExpediente.setText(NroExpedienteUp);
+        
+        
+        
     }
 
     /**
