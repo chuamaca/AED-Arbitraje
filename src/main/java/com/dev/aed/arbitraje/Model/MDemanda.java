@@ -11,8 +11,9 @@ import java.sql.Date;
  * @author Cesar
  */
 public class MDemanda {
-
-    public int NroExpediente;
+    
+    public int Iddemanda;
+    public String NroExpediente;
     public java.sql.Date FechaDemanda;
     public String DemandanteID;
     public String DemandadoID;
@@ -32,7 +33,9 @@ public class MDemanda {
     public int UsuarioAprobador;
     public String usuario;
 
-    public MDemanda(int NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String DecisionFinal, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
+    public MDemanda(int Iddemanda, String NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String DecisionFinal, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
+        
+        this.Iddemanda=Iddemanda;
         this.NroExpediente = NroExpediente;
         this.FechaDemanda = FechaDemanda;
         this.DemandanteID = DemandanteID;
@@ -58,12 +61,19 @@ public class MDemanda {
     }
     
     
+        public int getIddemanda() {
+        return Iddemanda;
+    }
 
-    public int getNroExpediente() {
+    public void setIddemanda(int Iddemanda) {
+        this.Iddemanda = Iddemanda;
+    }
+
+    public String getNroExpediente() {
         return NroExpediente;
     }
 
-    public void setNroExpediente(int NroExpediente) {
+    public void setNroExpediente(String NroExpediente) {
         this.NroExpediente = NroExpediente;
     }
 

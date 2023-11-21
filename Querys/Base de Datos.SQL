@@ -38,7 +38,8 @@ CREATE TABLE AEDArbitraje.dbo.Arbitros (
 -- DROP TABLE AEDArbitraje.dbo.Demanda;
 
 CREATE TABLE AEDArbitraje.dbo.Demanda (
-	NroExpediente int IDENTITY(1,1) NOT NULL,
+	iddemanda int IDENTITY(1,1) NOT NULL,
+	NroExpediente varchar(50),
 	FechaDemanda date NULL,
 	DemandanteID int NULL,
 	DemandadoID int NULL,
@@ -213,3 +214,30 @@ CREATE TABLE Logs (
     detalle TEXT
 )
 ;
+
+create table USR_UBIGEO
+(
+  ubigeo       VARCHAR(10) not null,
+  ctry_name    VARCHAR(60) not null,
+  adrstc       VARCHAR(40) not null,
+  adrcty       VARCHAR(70) not null,
+  adrpsz       VARCHAR(20) not null,
+  adr_district VARCHAR(30) not null
+);
+
+
+INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
+(ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
+VALUES('040513', 'PER', 'AREQUIPA', 'CAYLLOMA', '040513', 'MADRIGAL');
+INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
+(ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
+VALUES('040514', 'PER', 'AREQUIPA', 'CAYLLOMA', '040514', 'SAN ANTONIO DE CHUCA');
+INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
+(ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
+VALUES('040515', 'PER', 'AREQUIPA', 'CAYLLOMA', '040515', 'SIBAYO');
+INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
+(ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
+VALUES('040516', 'PER', 'AREQUIPA', 'CAYLLOMA', '040516', 'TAPAY');
+INSERT INTO AEDArbitraje.dbo.USR_UBIGEO
+(ubigeo, ctry_name, adrstc, adrcty, adrpsz, adr_district)
+VALUES('040517', 'PER', 'AREQUIPA', 'CAYLLOMA', '040517', 'TISCO');

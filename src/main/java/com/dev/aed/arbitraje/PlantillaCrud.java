@@ -358,9 +358,9 @@ public class PlantillaCrud extends javax.swing.JPanel {
 //        }
 
         //double calcularSaldo = 0;
-        int NroExpediente = demandaEditar.getNroExpediente();
+       
       //  String numdoc = cuentaEditar.getDocumento();
-        System.out.println("Documento aActualizar Dettale: " + NroExpediente);
+      
         
         
        // MDemanda objCd = new MDemanda();

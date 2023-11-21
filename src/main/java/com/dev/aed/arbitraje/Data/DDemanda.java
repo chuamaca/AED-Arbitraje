@@ -24,8 +24,8 @@ public class DDemanda {
     private static final String SQL_SELECT = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario\n"
             + "FROM Demanda";
     private static final String SQL_INSERT = "INSERT INTO Demanda\n"
-            + "( FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario)\n"
-            + "VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "( NroExpediente,FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario)\n"
+            + "VALUES( ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     private static final String SQL_GENERATE_NRO_EXPEDIENTE = "SELECT NEXT VALUE FOR sec_expediente";
     
@@ -44,7 +44,7 @@ public class DDemanda {
             rs = stmt.executeQuery();
             while (rs.next()) {
 
-                int NroExpediente = rs.getInt("NroExpediente");
+                String NroExpediente = rs.getString("NroExpediente");
                 java.sql.Date FechaDemanda = rs.getDate("FechaDemanda");
                 String DemandanteID = rs.getString("DemandanteID");
                 String DemandadoID = rs.getString("DemandadoID");
@@ -172,27 +172,25 @@ public class DDemanda {
         try {
             conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, fechaDemanda);
-//            stmt.setInt(2, demanda.getDemandanteID());
-//            stmt.setInt(3, demanda.getDemandadoID());
-
-            stmt.setString(2, demanda.getDemandanteID());
-            stmt.setString(3, demanda.getDemandadoID());
-            stmt.setString(4, demanda.getUbigeo());
-            stmt.setString(5, demanda.getEspecialidad());
-            stmt.setDouble(6, demanda.getCuantia());
-            stmt.setInt(7, demanda.getIdAnexo());
-            stmt.setString(8, demanda.getResumenControversia());
-            stmt.setString(9, demanda.getResumenPeticiones());
-            stmt.setString(10, demanda.getDesignacionArbitro());
-            stmt.setString(11, demanda.getDeclaracionesCompromiso());
-            stmt.setString(12, demanda.getEstado());
-            stmt.setString(13, demanda.getDecisionFinal());
-            stmt.setString(14, demanda.getMotivoAnulacion());
-            stmt.setString(15, demanda.getSustentoAnulacion());
-            stmt.setString(16, fechaDemanda);
-            stmt.setInt(17, demanda.getUsuarioAprobador());
-            stmt.setString(18, demanda.getUsuario());
+            stmt.setString(1,demanda.getNroExpediente());
+            stmt.setString(2, fechaDemanda);
+            stmt.setString(3, demanda.getDemandanteID());
+            stmt.setString(4, demanda.getDemandadoID());
+            stmt.setString(5, demanda.getUbigeo());
+            stmt.setString(6, demanda.getEspecialidad());
+            stmt.setDouble(7, demanda.getCuantia());
+            stmt.setInt(8, demanda.getIdAnexo());
+            stmt.setString(9, demanda.getResumenControversia());
+            stmt.setString(10, demanda.getResumenPeticiones());
+            stmt.setString(11, demanda.getDesignacionArbitro());
+            stmt.setString(12, demanda.getDeclaracionesCompromiso());
+            stmt.setString(13, demanda.getEstado());
+            stmt.setString(14, demanda.getDecisionFinal());
+            stmt.setString(15, demanda.getMotivoAnulacion());
+            stmt.setString(16, demanda.getSustentoAnulacion());
+            stmt.setString(17, fechaDemanda);
+            stmt.setInt(18, demanda.getUsuarioAprobador());
+            stmt.setString(19, demanda.getUsuario());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -245,7 +243,7 @@ public class DDemanda {
 //   
     
     
-     public int GenerarNroExpediente() {
+     public String GenerarNroExpediente() {
         System.out.println("Ingresa a SelectById");
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -260,7 +258,7 @@ public class DDemanda {
             rs = stmt.executeQuery();
             while (rs.next()) {
 
-                int valor_query = rs.getInt(1);
+                String valor_query = rs.getString(1);
                 mDemanda = new MDemanda();
                 mDemanda.setNroExpediente(valor_query);
             }

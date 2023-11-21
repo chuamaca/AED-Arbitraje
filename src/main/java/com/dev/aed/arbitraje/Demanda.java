@@ -38,7 +38,7 @@ public class Demanda extends javax.swing.JPanel {
         
         MDemanda objDemanda= new MDemanda();
         DDemanda dDemanda= new DDemanda();
-        int nro_expediente=dDemanda.GenerarNroExpediente();
+        String nro_expediente=dDemanda.GenerarNroExpediente();
         txtNroExpediente.setText(""+nro_expediente);
     }
     
@@ -509,6 +509,7 @@ public class Demanda extends javax.swing.JPanel {
         System.out.println("Documento Guardar Demanda: " + cmbDemandante.getSelectedItem() );
 
         MDemanda objDemanda= new MDemanda();
+        objDemanda.setNroExpediente(txtNroExpediente.getText());
         objDemanda.setDemandanteID((String) cmbDemandante.getSelectedItem());
         objDemanda.setDemandadoID( (String) cmbDemandado.getSelectedItem());
         objDemanda.setUbigeo((String) cmbUbigeo.getSelectedItem());
@@ -530,16 +531,7 @@ public class Demanda extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
             }
         }
-//        } else {
-//            obj.setIdlc(lineaCreditoEditar.getIdlc());
-//
-//            int rta = lineaCreditoJDBC.updateLineaCredito(obj);
-//
-//            if (rta == 1) {
-//                Dashboard.ShowJPanel(new LineaCreditoLista());
-//                JOptionPane.showMessageDialog(null, "Se Modifico correctamente");
-//            }
-//        }
+
 
 
     }//GEN-LAST:event_btnGuardarDemandaActionPerformed
