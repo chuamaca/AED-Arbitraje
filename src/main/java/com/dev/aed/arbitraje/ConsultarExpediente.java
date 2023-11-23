@@ -211,7 +211,7 @@ public class ConsultarExpediente extends javax.swing.JPanel {
 
         jLabel5.setText("Fecha");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("01/01/22");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);

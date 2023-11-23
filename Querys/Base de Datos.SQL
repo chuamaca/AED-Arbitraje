@@ -159,8 +159,26 @@ CREATE TABLE AEDArbitraje.dbo.Audiencia (
     Arbitro VARCHAR(70),
     EstadoExpediente VARCHAR(20),
     Fechadeprogramacion VARCHAR(20),
-    InformacionAdicional VARCHAR(255)
+    InformacionAdicional VARCHAR(255),
+	EstadoAudiencia VARCHAR(20),
+	ResultadoAudiencia VARCHAR(20),
+	FechaAudiencia VARCHAR(10)
 );
+
+
+
+CREATE TABLE [dbo].[Caceptacion](
+	[id_cuestionario] [int] IDENTITY(1,1) NOT NULL,
+	[pregunta] [varchar](150) NOT NULL,
+	[descripcion] [varchar](250) NOT NULL,
+	[respuesta] [varchar](5) NOT NULL,
+	[criterio] [varchar](5) NOT NULL,
+	[estado] [varchar](10) NOT NULL
+)
+;
+
+
+
 
 CREATE TABLE AEDArbitraje.dbo.Anular (
   NroExpediente VARCHAR(20),

@@ -63,66 +63,66 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="label8" min="-2" pref="26" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane5" pref="727" max="32767" attributes="0"/>
+                  <Component id="header1" pref="727" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="407" max="-2" attributes="0"/>
+                              <Component id="label5" min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtEstadoExpe" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="label6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtFecha1" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                              <Component id="label3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtLugar" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="label8" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="label1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtExpediente" min="-2" pref="141" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="label7" min="-2" pref="122" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" min="-2" pref="479" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnGuardar1" min="-2" pref="142" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="label4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="label2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                                          <Component id="label3" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                          <Component id="label4" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                                          <Component id="label5" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                                          <Component id="label6" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtLugar" min="-2" pref="173" max="-2" attributes="0"/>
-                                          <Component id="txtFecha" min="-2" pref="131" max="-2" attributes="0"/>
-                                          <Component id="txtArbitro" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
-                                          <Component id="txtEstadoExpe" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="txtFecha1" min="-2" pref="131" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                              <Component id="btnGuardar1" min="-2" pref="142" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="label1" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                      <Component id="txtExpediente" min="-2" pref="111" max="-2" attributes="0"/>
+                                  <Component id="txtIdAudiencia" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtArbitro" min="-2" pref="305" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="label2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtFecha" min="-2" pref="133" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="txtIdAudiencia" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane5" max="32767" attributes="0"/>
-                          <Component id="header1" pref="862" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-              <Component id="label7" min="-2" pref="134" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,54 +130,46 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="header1" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" min="-2" pref="46" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtIdAudiencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="txtExpediente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="label1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="header1" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane5" min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtIdAudiencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="label1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtExpediente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtLugar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="label4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="txtArbitro" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="label5" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="txtEstadoExpe" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label6" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtFecha1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label6" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtFecha1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtLugar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="label7" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="26" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnGuardar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
-              <Component id="label7" min="-2" pref="28" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="143" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -197,7 +189,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="338" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="160" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -206,9 +198,9 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -254,7 +246,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="label1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Numero de expediente:"/>
+        <Property name="text" type="java.lang.String" value="Nro expediente:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtExpediente">
@@ -264,7 +256,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="label2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha de registro de audiencia:"/>
+        <Property name="text" type="java.lang.String" value="Fecha de registro:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label3">
@@ -290,7 +282,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="label6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha de programacion:"/>
+        <Property name="text" type="java.lang.String" value="Fecha programada:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label7">
@@ -344,6 +336,23 @@
     <Component class="javax.swing.JTextField" name="txtFecha">
     </Component>
     <Component class="javax.swing.JTextField" name="txtFecha1">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ad" green="5a" red="12" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Gestionar Audiencia"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
