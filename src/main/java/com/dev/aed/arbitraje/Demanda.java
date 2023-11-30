@@ -2,52 +2,51 @@ package com.dev.aed.arbitraje;
 
 import com.dev.aed.arbitraje.Data.DAnexo;
 import com.dev.aed.arbitraje.Data.DDemanda;
+import com.dev.aed.arbitraje.Data.DNotificacion;
 import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
 import com.dev.aed.arbitraje.Model.MAnexo;
 import com.dev.aed.arbitraje.Model.MDemanda;
+import com.dev.aed.arbitraje.Model.MNotificacion;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class Demanda extends javax.swing.JPanel {
 
     boolean editar = false;
     MDemanda demandaEditar;
-    
-     String ruta_archivo = "";
-     Tabla_PdfVO tpdf = new Tabla_PdfVO();
-     int id = -1;
+
+    String ruta_archivo = "";
+    Tabla_PdfVO tpdf = new Tabla_PdfVO();
+    int id = -1;
 
     public Demanda() {
         initComponents();
         InitStyles();
         CargarCombos();
         generarCorrelativoExpediente();
+        btnGuardarAdjunto.setEnabled(false);
     }
-    
-    
-    private void generarCorrelativoExpediente(){
-        
-        MDemanda objDemanda= new MDemanda();
-        DDemanda dDemanda= new DDemanda();
-        String nro_expediente=dDemanda.GenerarNroExpediente();
-        txtNroExpediente.setText(""+nro_expediente);
+
+    private void generarCorrelativoExpediente() {
+
+        MDemanda objDemanda = new MDemanda();
+        DDemanda dDemanda = new DDemanda();
+        String nro_expediente = dDemanda.GenerarNroExpediente();
+        txtNroExpediente.setText("" + nro_expediente);
     }
-    
-    
-    
-    
-    public void CargarCombos(){
-        
-        
+
+    public void CargarCombos() {
+
         //JComboBox<String> comboBox = new JComboBox<>();
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
 
@@ -59,8 +58,7 @@ public class Demanda extends javax.swing.JPanel {
 
         // Establecer el modelo en el ComboBox
         cmbDemandante.setModel(comboBoxModel);
-        
-        
+
         DefaultComboBoxModel<String> comboBoxModelDemandado = new DefaultComboBoxModel<>();
 
         // Agregar elementos al modelo del ComboBox
@@ -68,34 +66,31 @@ public class Demanda extends javax.swing.JPanel {
         comboBoxModelDemandado.addElement("23567689");
         comboBoxModelDemandado.addElement("11122343");
         comboBoxModelDemandado.addElement("15122314");
-        
+
         cmbDemandado.setModel(comboBoxModelDemandado);
-        
-        
-         DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
+
+        DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
 
         // Agregar elementos al modelo del ComboBox
         comboBoxModelUbigeo.addElement("157689");
         comboBoxModelUbigeo.addElement("156543");
         comboBoxModelUbigeo.addElement("143556");
         comboBoxModelUbigeo.addElement("123454");
-        
+
         cmbUbigeo.setModel(comboBoxModelUbigeo);
-        
-         DefaultComboBoxModel<String> comboBoxModelEspecialidad = new DefaultComboBoxModel<>();
+
+        DefaultComboBoxModel<String> comboBoxModelEspecialidad = new DefaultComboBoxModel<>();
 
         // Agregar elementos al modelo del ComboBox
         comboBoxModelEspecialidad.addElement("Comercial");
         comboBoxModelEspecialidad.addElement("Negocios");
         comboBoxModelEspecialidad.addElement("Otros");
-        
-        cmbEspecialidad.setModel(comboBoxModelEspecialidad);
-         
-    }
-    
-    
-    //Sobreescritura
 
+        cmbEspecialidad.setModel(comboBoxModelEspecialidad);
+
+    }
+
+    //Sobreescritura
     public Demanda(MDemanda mDemandaEdit) {
         System.out.println("Inicializando Cuenta CRUD" + mDemandaEdit);
         initComponents();
@@ -202,8 +197,6 @@ public class Demanda extends javax.swing.JPanel {
 //        jTableCuentaDetalle.setModel(modelo);
 //
 //    }
-    
-
     private void InitStyles() {
 
         if (demandaEditar != null) {
@@ -347,7 +340,7 @@ public class Demanda extends javax.swing.JPanel {
             }
         });
 
-        phoneLbl6.setText("Demandado");
+        phoneLbl6.setText("Demandante");
 
         javax.swing.GroupLayout bgGroundLayout = new javax.swing.GroupLayout(bgGround);
         bgGround.setLayout(bgGroundLayout);
@@ -484,7 +477,7 @@ public class Demanda extends javax.swing.JPanel {
     private void LimpiarTexto() {
         //  txtIngresoDet.setText(null);
         //txtCuentaBanco.setText(null);
-      //  txtPeticion.setText(null);
+        //  txtPeticion.setText(null);
 
     }
 
@@ -492,49 +485,118 @@ public class Demanda extends javax.swing.JPanel {
         // Verificar si el número no está vacío y contiene solo dígitos
         return numero != null && !numero.isEmpty() && numero.matches("^\\d+$");
     }
-    
-     public static boolean validarNumeroDecimalMayorQueCero(String numero) {
+
+    public static boolean validarNumeroDecimalMayorQueCero(String numero) {
         // Verificar si el número no está vacío, contiene un formato decimal válido y es mayor que 0
         return numero != null && !numero.isEmpty() && numero.matches("^\\d+(\\.\\d+)?$") && Double.parseDouble(numero) > 0;
     }
-          
+
     private void btnGuardarDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDemandaActionPerformed
         // TODO add your handling code here:
+        boolean validdarcampos = false;
+        // int NroExpediente = demandaEditar.getNroExpediente();
+        // System.out.println("validarNumeroDecimalMayorQueCero(txtCuantia.getText()) :" + validarNumeroDecimalMayorQueCero(txtCuantia.getText()));
+        String exp = txtNroExpediente.getText();
+        String res = txtResumenControversia.getText();
+        String peti = txtPeticion.getText();
+        String cuantiaTexto = txtCuantia.getText();
 
-       // int NroExpediente = demandaEditar.getNroExpediente();
-        System.out.println("validarNumeroDecimalMayorQueCero(txtCuantia.getText()) :" + validarNumeroDecimalMayorQueCero(txtCuantia.getText()));
-      validarNumeroDecimalMayorQueCero(txtCuantia.getText());
-      
+        if (exp.isBlank() || exp.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de número de expediente es obligatorio");
+            System.out.println("Valida exp");
+            validdarcampos = true;
+        }
 
-        System.out.println("Documento Guardar Demanda: " + cmbDemandante.getSelectedItem() );
+        if (peti.isBlank() || peti.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de peticiones es obligatorio");
+            validdarcampos = true;
+        }
 
-        MDemanda objDemanda= new MDemanda();
-        objDemanda.setNroExpediente(txtNroExpediente.getText());
-        objDemanda.setDemandanteID((String) cmbDemandante.getSelectedItem());
-        objDemanda.setDemandadoID( (String) cmbDemandado.getSelectedItem());
-        objDemanda.setUbigeo((String) cmbUbigeo.getSelectedItem());
-        objDemanda.setEspecialidad((String) cmbEspecialidad.getSelectedItem());
-        objDemanda.setCuantia(Double.parseDouble(txtCuantia.getText()));
-        objDemanda.setResumenControversia(txtResumenControversia.getText());
-        objDemanda.setResumenPeticiones(txtPeticion.getText());
-        objDemanda.setEstado("Registrado");
+        if (res.isBlank() || res.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de resumen de controversia es obligatorio");
+            validdarcampos = true;
+        }
 
-        DDemanda dDemanda = new DDemanda();
-        
-        System.out.println("Estado Editar " + editar );
-        if (editar == false) {
-            System.out.println("Editar Falso");
-            int rta = dDemanda.insertDemanda(objDemanda);
+        if (cuantiaTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de cuantía es obligatorio");
+            validdarcampos = true;
+        } else {
+            try {
+                Double cuantiad = Double.parseDouble(cuantiaTexto);
 
-            if (rta == 1) {
-               // Dashboard.ShowJPanel(new Demanda());
-                JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
+                if (cuantiad < 1) {
+                    JOptionPane.showMessageDialog(null, "El campo de cuantía debe ser mayor o igual a 1");
+                    validdarcampos = true;
+                } else {
+                    // El valor de cuantia es válido, puedes continuar con tu lógica
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El campo de cuantía debe ser un número válido");
+            }
+        }
+
+        if (validdarcampos != true) {
+            System.out.println("Documento Guardar Demanda: " + cmbDemandante.getSelectedItem());
+
+            MDemanda objDemanda = new MDemanda();
+            objDemanda.setNroExpediente(txtNroExpediente.getText());
+            objDemanda.setDemandanteID((String) cmbDemandante.getSelectedItem());
+            objDemanda.setDemandadoID((String) cmbDemandado.getSelectedItem());
+            objDemanda.setUbigeo((String) cmbUbigeo.getSelectedItem());
+            objDemanda.setEspecialidad((String) cmbEspecialidad.getSelectedItem());
+            objDemanda.setCuantia(Double.parseDouble(txtCuantia.getText()));
+            objDemanda.setResumenControversia(txtResumenControversia.getText());
+            objDemanda.setResumenPeticiones(txtPeticion.getText());
+            objDemanda.setEstado("Registrado");
+
+            DDemanda dDemanda = new DDemanda();
+
+            System.out.println("Estado Editar " + editar);
+            if (editar == false) {
+                System.out.println("Editar Falso");
+                int rta = dDemanda.insertDemanda(objDemanda);
+
+                if (rta == 1) {
+                    // Dashboard.ShowJPanel(new Demanda());
+
+                    java.util.Date fechaActual = new java.util.Date();
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    String fecha = formato.format(fechaActual);
+
+                    DNotificacion notifica = new DNotificacion();
+                    MNotificacion notificacion = new MNotificacion();
+                    notificacion.NroExpediente = objDemanda.getNroExpediente();
+                    notificacion.EstadoNotificacion = "Iniciado";
+                    notificacion.FechaNotificacion=Date.valueOf(fecha);
+                    notificacion.Observaciones="Demanda Registrada";
+                    notificacion.Leida=0;
+                    notificacion.Observaciones="Rojo";
+                    notificacion.idUsuario="chuamanic";
+                    
+                     int valor = notifica.AgregarNotificacion(notificacion);
+
+                    JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
+
+                    btnGuardarDemanda.setEnabled(false);
+
+                }
             }
         }
 
 
-
     }//GEN-LAST:event_btnGuardarDemandaActionPerformed
+
+    private boolean validarCampos() {
+        boolean respuesta = false;
+
+        if (txtNroExpediente.getText().isEmpty() || Double.parseDouble(txtCuantia.getText()) < 1 || txtResumenControversia.getText().isEmpty() || txtPeticion.getText().isEmpty()) {
+            System.out.println("Rtsaa ");
+            return respuesta = true;
+
+        }
+        return respuesta = false;
+
+    }
 
     public void seleccionar_pdf() {
         JFileChooser j = new JFileChooser();
@@ -544,17 +606,17 @@ public class Demanda extends javax.swing.JPanel {
         if (se == 0) {
             this.btnSeleccionarArchivo.setText("" + j.getSelectedFile().getName());
             ruta_archivo = j.getSelectedFile().getAbsolutePath();
-            
-            if (ruta_archivo.length()>0) {
-                this.btnSeleccionarArchivo.enable(true);
+
+            if (ruta_archivo.length() > 0) {
+                btnGuardarAdjunto.setEnabled(true);
                 System.out.println("this.btnSeleccionarArchivo.enable(true): ");
             }
 
         } else {
         }
     }
-    
-    
+
+
     private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
         seleccionar_pdf();
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
@@ -569,7 +631,7 @@ public class Demanda extends javax.swing.JPanel {
             tpdf.visualizar_PdfVO(jTablePDF, nroExpediente);
             ruta_archivo = "";
             this.btnSeleccionarArchivo.setText("");
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
         }
@@ -580,7 +642,7 @@ public class Demanda extends javax.swing.JPanel {
         // TODO add your handling code here:
         int column = jTablePDF.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / jTablePDF.getRowHeight();
-       
+
         if (row < jTablePDF.getRowCount() && row >= 0 && column < jTablePDF.getColumnCount() && column >= 0) {
             id = (int) jTablePDF.getValueAt(row, 0);
             Object value = jTablePDF.getValueAt(row, column);
@@ -607,10 +669,10 @@ public class Demanda extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTablePDFMouseClicked
 
-     public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
-          
+    public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
+
         MAnexo po = new MAnexo();
-           DAnexo danexo= new DAnexo();
+        DAnexo danexo = new DAnexo();
         po.setNroExpediente(NroExpediente);
         po.setNombreDocumento(nombredocumento);
         try {
@@ -624,9 +686,7 @@ public class Demanda extends javax.swing.JPanel {
         }
         danexo.insertAnexo(po);
     }
-    
-     
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgGround;

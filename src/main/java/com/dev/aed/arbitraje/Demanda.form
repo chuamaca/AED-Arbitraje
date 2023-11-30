@@ -386,7 +386,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="phoneLbl6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Demandado"/>
+            <Property name="text" type="java.lang.String" value="Demandante"/>
           </Properties>
         </Component>
       </SubComponents>

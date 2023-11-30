@@ -21,10 +21,10 @@ public class DAudiencia {
 
     public  void insertarAudiencia(JTextField txtIdAudiencia, JTextField txtExpediente, JTextField txtFecha, JTextField txtLugar, JTextField txtArbitro, JTextField txtEstadoExpe, JTextField txtFecha1, JTextArea atInformacion) {
         // Configurar la conexión a la base de datos
-       String conexionServer = "jdbc:sqlserver://LAPTOP-8LNNUON2;"
+       String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
-                +"password=12345678;"
+                +"password=sa;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";

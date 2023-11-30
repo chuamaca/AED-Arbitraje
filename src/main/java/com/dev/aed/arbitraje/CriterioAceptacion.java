@@ -3,6 +3,7 @@ package com.dev.aed.arbitraje;
 import com.dev.aed.arbitraje.Data.DCriterioAceptacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class CriterioAceptacion extends javax.swing.JPanel {
 
@@ -45,7 +46,7 @@ public class CriterioAceptacion extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(299, 299, 299)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,10 +183,11 @@ public class CriterioAceptacion extends javax.swing.JPanel {
 
                 if (exito) {
                     // El registro se realizó con éxito, puedes mostrar un mensaje de confirmación.
-                    System.out.println("Formulario registrado con éxito");
+                    JOptionPane.showInputDialog("El registro se realizó con éxito");
                 } else {
                     // Ocurrió un error, muestra un mensaje de error o realiza la acción apropiada.
                     System.out.println("Error al registrar el formulario");
+                     JOptionPane.showInputDialog("Error al registrar el formulario");
                 }
             }
         });

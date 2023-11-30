@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jdk.jshell.execution.Util;
@@ -57,6 +58,10 @@ public class DNotificacion {
     private static final String SQL_UPDATE_Notificacion = "UPDATE usuario SET nro_intentos=? WHERE nombre_usuario = ?";
     private static final String SQL_VALIDATE = "SELECT nombre_usuario, contrasena  FROM usuario WHERE nombre_usuario=? and contrasena=? and estado=1";
     private static final String SQL_NRO_INTENTOS = "SELECT id_usuario, nombre_usuario, contrasena, id_rol, estado, nro_intentos  FROM usuario WHERE nombre_usuario=?";
+
+    private static final String SQL_INSERT = "INSERT INTO AEDArbitraje.dbo.Notificacion\n"
+            + "( NroExpediente, EstadoNotificacion, FechaNotificacion, FechaVisualizacion, ColorEstado, Observaciones, Leida, idUsuario)\n"
+            + "VALUES( ?, ?, ?, ?, ?, ?,?, ?);";
 
     public List<MNotificacion> Select() {
         Connection conn = null;
@@ -167,4 +172,43 @@ public class DNotificacion {
         }
         return lisNotificacion;
     }
+
+    public int AgregarNotificacion(MNotificacion notificacion) {
+        System.out.println("I Notif " + notificacion);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        java.util.Date fechaActual = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = formato.format(fechaActual);
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setString(1, notificacion.getNroExpediente());
+            stmt.setString(2, notificacion.getEstadoNotificacion());
+            stmt.setDate(3, notificacion.getFechaNotificacion());
+            stmt.setDate(4, notificacion.getFechaVisualizacion());
+            stmt.setString(5, notificacion.getColorEstado());
+            stmt.setString(6, notificacion.getObservaciones());
+            stmt.setInt(7, notificacion.getLeida());
+            stmt.setString(8, notificacion.getIdUsuario());
+
+            System.out.println("ejecutando query:" + SQL_INSERT);
+            rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("Error SQL " + ex.toString());
+        } finally {
+            //  ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            ConexionJDBC.close(conn);
+        }
+
+        return rows;
+    }
+
 }
