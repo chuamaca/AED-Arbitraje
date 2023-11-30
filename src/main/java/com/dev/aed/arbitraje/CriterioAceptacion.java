@@ -1,16 +1,55 @@
 package com.dev.aed.arbitraje;
 
 import com.dev.aed.arbitraje.Data.DCriterioAceptacion;
+import com.dev.aed.arbitraje.Data.DDemanda;
+import com.dev.aed.arbitraje.Model.MCriterioAceptacion;
+import com.dev.aed.arbitraje.Model.MDemanda;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+
 
 public class CriterioAceptacion extends javax.swing.JPanel {
 
     public CriterioAceptacion() {
         initComponents();
+        MostrarCriterios();
     }
-    @SuppressWarnings("unchecked")
+  
+     public void MostrarCriterios() {
+            
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("id_cuestionario");
+        modelo.addColumn("pregunta");
+        modelo.addColumn("descripcion");
+        modelo.addColumn("respuesta");
+        modelo.addColumn("criterio");
+        modelo.addColumn("estado");
+        
+
+        jTableVerDemandas.setModel(modelo);
+
+        DCriterioAceptacion dCriterio = new DCriterioAceptacion();
+        List<MCriterioAceptacion> mCriteriosList = dCriterio.Select();
+
+        // double total = 0;
+        //   jLabelDeudaTotal.setText("");
+        String cuentasForTable[] = new String[19];
+        for (MCriterioAceptacion item : mCriteriosList) {
+            cuentasForTable[0] = "" + item.getId_cuestionario();
+            cuentasForTable[1] = "" + item.getPregunta();
+            cuentasForTable[2] = item.getDescripcion();
+            cuentasForTable[3] = item.getRespuesta();
+            cuentasForTable[4] = "" + item.getObligatorio();
+            cuentasForTable[5] = "" + item.getEstado();
+
+            modelo.addRow(cuentasForTable);
+        }
+        jTableVerDemandas.setModel(modelo);
+
+    }
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -28,6 +67,8 @@ public class CriterioAceptacion extends javax.swing.JPanel {
         estado = new javax.swing.JComboBox<>();
         rdeseable = new javax.swing.JComboBox<>();
         creterio = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableVerDemandas = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -64,6 +105,8 @@ public class CriterioAceptacion extends javax.swing.JPanel {
             }
         });
 
+        Grabar.setBackground(new java.awt.Color(18, 90, 173));
+        Grabar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Grabar.setText("Grabar");
         Grabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,27 +137,43 @@ public class CriterioAceptacion extends javax.swing.JPanel {
             }
         });
 
+        jTableVerDemandas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableVerDemandas.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableVerDemandas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVerDemandasMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableVerDemandas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
                         .addComponent(jLabel2))
-                    .addComponent(jLabel3))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(247, 247, 247)
-                                .addComponent(Grabar))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(pregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
@@ -123,10 +182,12 @@ public class CriterioAceptacion extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rdeseable, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(creterio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(creterio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,10 +199,13 @@ public class CriterioAceptacion extends javax.swing.JPanel {
                     .addComponent(pregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(rdeseable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,13 +216,12 @@ public class CriterioAceptacion extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
-                                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(9, 9, 9)
-                        .addComponent(Grabar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel3)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(18, 18, 18)
+                .addComponent(Grabar)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -191,6 +254,8 @@ public class CriterioAceptacion extends javax.swing.JPanel {
                 }
             }
         });
+        
+        MostrarCriterios();
     }//GEN-LAST:event_GrabarActionPerformed
 
     private void creterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creterioActionPerformed
@@ -200,6 +265,21 @@ public class CriterioAceptacion extends javax.swing.JPanel {
     private void preguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preguntaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_preguntaActionPerformed
+
+    private void jTableVerDemandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerDemandasMouseClicked
+
+//        if (jTableVerDemandas.getSelectedRow() > -1) {
+//
+//            String valor_NroExpediente = (String) jTableVerDemandas
+//            .getValueAt(jTableVerDemandas.getSelectedRow(), 0);
+//
+//            System.out.println("String IdDocumento >>< " + valor_NroExpediente);
+//
+//            txtBuscar.setText(valor_NroExpediente);
+//  
+//        }
+
+    }//GEN-LAST:event_jTableVerDemandasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,6 +295,8 @@ public class CriterioAceptacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableVerDemandas;
     private javax.swing.JTextField pregunta;
     private javax.swing.JComboBox<String> rdeseable;
     // End of variables declaration//GEN-END:variables

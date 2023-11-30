@@ -173,7 +173,7 @@ public class VerDemanda extends javax.swing.JPanel {
             }
         });
 
-        btnDemandar.setBackground(new java.awt.Color(255, 51, 0));
+        btnDemandar.setBackground(new java.awt.Color(18, 90, 173));
         btnDemandar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDemandar.setForeground(new java.awt.Color(255, 255, 255));
         btnDemandar.setText("Demandar");
@@ -217,6 +217,9 @@ public class VerDemanda extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btnRechazar.setBackground(new java.awt.Color(18, 90, 173));
+        btnRechazar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRechazar.setForeground(new java.awt.Color(255, 255, 255));
         btnRechazar.setText("Rechazar");
         btnRechazar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +239,7 @@ public class VerDemanda extends javax.swing.JPanel {
             }
         });
 
-        btnAnularDemanda.setBackground(new java.awt.Color(255, 51, 51));
+        btnAnularDemanda.setBackground(new java.awt.Color(18, 90, 173));
         btnAnularDemanda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAnularDemanda.setForeground(new java.awt.Color(255, 255, 255));
         btnAnularDemanda.setText("Anular Demanda");
@@ -256,23 +259,22 @@ public class VerDemanda extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegistrarAudiencia)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnAnularDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDemandar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64))
+                        .addComponent(btnDemandar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAnularDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrarAudiencia)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(107, 107, 107)
                                 .addComponent(txtBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(154, 154, 154)
                                 .addComponent(jRadioButtonComprobante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonRuc))
@@ -291,15 +293,14 @@ public class VerDemanda extends javax.swing.JPanel {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonComprobante)
                     .addComponent(jRadioButtonRuc))
-                .addGap(12, 12, 12)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarPorDocumento)
-                    .addComponent(btnAnularDemanda)
-                    .addComponent(btnRechazar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDemandar)
-                    .addComponent(btnRegistrarAudiencia))
+                .addGap(44, 44, 44)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRechazar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDemandar)
+                        .addComponent(btnRegistrarAudiencia)
+                        .addComponent(btnAnularDemanda)
+                        .addComponent(btnBuscarPorDocumento)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addContainerGap())
