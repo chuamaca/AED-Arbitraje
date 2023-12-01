@@ -3,10 +3,13 @@ package com.dev.aed.arbitraje;
 import com.dev.aed.arbitraje.Data.DAnexo;
 import com.dev.aed.arbitraje.Data.DDemanda;
 import com.dev.aed.arbitraje.Data.DNotificacion;
+import com.dev.aed.arbitraje.Data.DRegPartes;
 import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
 import com.dev.aed.arbitraje.Model.MAnexo;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MNotificacion;
+import com.dev.aed.arbitraje.Model.MRegPartes;
+import com.dev.aed.arbitraje.Model.MRol;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -59,15 +63,41 @@ public class Demanda extends javax.swing.JPanel {
         // Establecer el modelo en el ComboBox
         cmbDemandante.setModel(comboBoxModel);
 
-        DefaultComboBoxModel<String> comboBoxModelDemandado = new DefaultComboBoxModel<>();
-
-        // Agregar elementos al modelo del ComboBox
-        comboBoxModelDemandado.addElement("12967395");
-        comboBoxModelDemandado.addElement("23567689");
-        comboBoxModelDemandado.addElement("11122343");
-        comboBoxModelDemandado.addElement("15122314");
-
-        cmbDemandado.setModel(comboBoxModelDemandado);
+//        DefaultComboBoxModel<String> comboBoxModelDemandado = new DefaultComboBoxModel<>();
+//
+//        // Agregar elementos al modelo del ComboBox
+//        comboBoxModelDemandado.addElement("12967395");
+//        comboBoxModelDemandado.addElement("23567689");
+//        comboBoxModelDemandado.addElement("11122343");
+//        comboBoxModelDemandado.addElement("15122314");
+//
+//        cmbDemandado.setModel(comboBoxModelDemandado);
+//        
+//        
+        
+        DRegPartes dregpartes= new DRegPartes();
+        
+        List<MRegPartes> partes= dregpartes.SelectPartes();
+        
+        for (MRegPartes parte : partes) {
+            
+            cmbDemandado.addItem(parte.getDNI());
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
 
@@ -416,10 +446,10 @@ public class Demanda extends javax.swing.JPanel {
                     .addComponent(phoneLbl6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(phoneLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
-                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbDemandante)
+                    .addComponent(cmbDemandado)
+                    .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -470,7 +500,7 @@ public class Demanda extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
