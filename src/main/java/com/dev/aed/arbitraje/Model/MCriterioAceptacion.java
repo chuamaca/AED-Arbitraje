@@ -2,9 +2,9 @@ package com.dev.aed.arbitraje.Model;
 
 public class MCriterioAceptacion {
 
-private int id_cuestionario;
+    private int id_cuestionario;
     private String pregunta;
-    private String Descripcion;
+    private String descripcion;
     private String respuesta;
     private String obligatorio;
     private String estado;
@@ -12,10 +12,10 @@ private int id_cuestionario;
     public MCriterioAceptacion() {
     }
 
-    public MCriterioAceptacion(int id_cuestionario, String pregunta, String Descripcion, String respuesta, String obligatorio, String estado) {
+    public MCriterioAceptacion(int id_cuestionario, String pregunta, String descripcion, String respuesta, String obligatorio, String estado) {
         this.id_cuestionario = id_cuestionario;
         this.pregunta = pregunta;
-        this.Descripcion = Descripcion;
+        this.descripcion = descripcion;
         this.respuesta = respuesta;
         this.obligatorio = obligatorio;
         this.estado = estado;
@@ -24,7 +24,7 @@ private int id_cuestionario;
     public int getId_cuestionario() {
         return id_cuestionario;
     }
-    
+
     public void setId_cuestionario(int id_cuestionario) {
         this.id_cuestionario = id_cuestionario;
     }
@@ -37,12 +37,12 @@ private int id_cuestionario;
         this.pregunta = pregunta;
     }
 
-    public String getDescripcion() {
-        return Descripcion;
+    public String getdescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+    public void setdescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getRespuesta() {
@@ -69,5 +69,4 @@ private int id_cuestionario;
         this.estado = estado;
     }
 
-    
 }

@@ -273,7 +273,7 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
     }//GEN-LAST:event_txtExpedienteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- ShowJPanel(new GestionarAudiencia());    
+ ShowJPanel(new GestionarAudiencia(txtExpediente.getText()));    
  // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

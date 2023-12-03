@@ -173,6 +173,12 @@ public class VerDemanda extends javax.swing.JPanel {
             }
         });
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
         btnDemandar.setBackground(new java.awt.Color(18, 90, 173));
         btnDemandar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDemandar.setForeground(new java.awt.Color(255, 255, 255));
@@ -336,62 +342,48 @@ public class VerDemanda extends javax.swing.JPanel {
 
     private void jTableVerDemandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerDemandasMouseClicked
 
-        
-         if (jTableVerDemandas.getSelectedRow() > -1) {
+        if (jTableVerDemandas.getSelectedRow() > -1) {
 
             String valor_NroExpediente = (String) jTableVerDemandas
                     .getValueAt(jTableVerDemandas.getSelectedRow(), 0);
-            
+
             System.out.println("String IdDocumento >>< " + valor_NroExpediente);
-            
+
             txtBuscar.setText(valor_NroExpediente);
 //            CuentaJDBC cuentaJdbc = new CuentaJDBC();
 //            Cuenta cuenta = new Cuenta();
 //            cuenta.setDocumento(idDocumento);
 
-
-
-           // Dashboard.ShowJPanel(new AnularDemanda(valor_NroExpediente));
-
+            // Dashboard.ShowJPanel(new AnularDemanda(valor_NroExpediente));
             //JOptionPane.showMessageDialog(null, "Documento A Cobrar: " + cuenta.getDocumento());
         }
-        
-        
+
 
     }//GEN-LAST:event_jTableVerDemandasMouseClicked
 
     private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
-        // Obtiene el modelo de la tabla
 
-        //        DefaultTableModel modelo = (DefaultTableModel) jTableVerDemandas.getModel();
-        //        // Obtiene la fila seleccionada
-        //        int filaSeleccionada = jTableVerDemandas.getSelectedRow();
-        //        // Verifica si se ha seleccionado alguna fila
-        //        if (filaSeleccionada != -1) {
-            //            // Obtiene el valor del número de expediente en la columna 0 (ajusta según la posición de la columna)
-            //            String numeroExpedienteSeleccionado = modelo.getValueAt(filaSeleccionada, 0).toString();
-            //            // Muestra el número de expediente en un JTextField (ajusta el nombre de tu JTextField)
-            //            txtNroExpediente.setText(numeroExpedienteSeleccionado);
-            //            // Abre la ventana RechazarDemanda y pasa el número de expediente
-            //            RechazarDemanda rechazarDemanda = new RechazarDemanda(numeroExpedienteSeleccionado);
-            //            ShowJPanel(rechazarDemanda);
-
-            ShowJPanel(new RechazarDemanda());
-
+       
+        if (txtBuscar.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un expediente");
+        }else{
+         ShowJPanel(new RechazarDemanda(txtBuscar.getText()));}
     }//GEN-LAST:event_btnRechazarActionPerformed
 
     private void btnRegistrarAudienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAudienciaActionPerformed
         // TODO add your handling code here:
-           ShowJPanel(new RegistrarAudiencia());
+        ShowJPanel(new RegistrarAudiencia());
     }//GEN-LAST:event_btnRegistrarAudienciaActionPerformed
 
     private void btnAnularDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularDemandaActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+
         ShowJPanel(new AnularDemanda(txtBuscar.getText()));
     }//GEN-LAST:event_btnAnularDemandaActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

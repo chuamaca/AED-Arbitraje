@@ -11,13 +11,18 @@ import com.dev.aed.arbitraje.Data.DVerExpediente;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MExpediente;
 import com.dev.aed.arbitraje.Model.MVerExpediente;
+import com.dev.aed.arbitraje.Model.Persona_VerExpediente;
+import com.microsoft.sqlserver.jdbc.StringUtils;
+import java.awt.Component;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.api.tree.CaseTree;
-
 
 public class ConsultarExpediente extends javax.swing.JPanel {
 
@@ -26,19 +31,32 @@ public class ConsultarExpediente extends javax.swing.JPanel {
         InitStyles();
         llenarComboDemandante();
         CargarEstado();
+
     }
 
-    public void CargarEstado() {
+    public void CargarEstado2() {
         DefaultComboBoxModel<String> comboBoxModelEstado = new DefaultComboBoxModel<>();
-
         // Agregar elementos al modelo del ComboBox
-        comboBoxModelEstado.addElement("activo");
+        comboBoxModelEstado.addElement("Registrado");
+        comboBoxModelEstado.addElement("Aprobado");
         comboBoxModelEstado.addElement("inactivo");
 
         ddlEstado.setModel(comboBoxModelEstado);
 
     }
+    
+    private void CargarEstado() {
+        DVerExpediente dVerExpediente = new DVerExpediente();
+        List<String> estado = dVerExpediente.obtenerestado();
 
+        for (String cod : estado) {
+            ddlEstado.addItem(cod);
+  
+        }
+    }
+
+//        Persona_VerExpediente personaSeleccionada = (Persona_VerExpediente) cmbDemandante.getSelectedItem();
+//        String dniSeleccionado = personaSeleccionada.getDemandanteID();
     private void llenarComboDemandante() {
         DVerExpediente dVerExpediente = new DVerExpediente();
         List<String> nrodoc = dVerExpediente.obtenerDNI();
@@ -52,53 +70,60 @@ public class ConsultarExpediente extends javax.swing.JPanel {
 
         String numeroExpedienteStr = txt_NroExp.getText();
         String demandanteSeleccionado = (String) cmbDemandante.getSelectedItem();
-         String estadoSeleccionado = (String) ddlEstado.getSelectedItem();
+        String estadoSeleccionado = (String) ddlEstado.getSelectedItem();
+        String fechaSeleccionado = (String) txtfecha.getText();
 
-        // Validar si el campo no está vacío
-        if (numeroExpedienteStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un número de expediente válido");
-            return;
+        if (StringUtils.isNumeric(numeroExpedienteStr) && numeroExpedienteStr.length() <=10 ) {
+            if (fechaSeleccionado.isEmpty() || fechaSeleccionado.length() >10) {
+                JOptionPane.showMessageDialog(null, "Ingrese una fecha válida");
+            } else {
+               
+
+            int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Expediente");
+            modelo.addColumn("Fecha_Registro");
+            modelo.addColumn("Demandante");
+            modelo.addColumn("Demandado");
+            modelo.addColumn("Especialidad");
+            modelo.addColumn("Cuantia");
+            modelo.addColumn("Resumen");
+            modelo.addColumn("Peticion");
+            modelo.addColumn("Arbitro");
+            modelo.addColumn("Compromiso");
+            modelo.addColumn("Estado");
+            modelo.addColumn("Desicion Final");
+
+            jTableVerDemandas.setModel(modelo);
+            DVerExpediente vexpediente = new DVerExpediente();
+            List<MExpediente> mExpedienteList = vexpediente.ListaExpediente(numeroExpediente, demandanteSeleccionado, estadoSeleccionado, fechaSeleccionado);
+
+            String cuentasForTable[] = new String[19];
+            for (MExpediente item : mExpedienteList) {
+                cuentasForTable[0] = "" + item.getNroExpediente();
+                cuentasForTable[1] = "" + item.getFechaDemanda();
+                cuentasForTable[2] = item.getDemandanteID();
+                cuentasForTable[3] = item.getDemandadoID();
+                cuentasForTable[4] = "" + item.getEspecialidad();
+                cuentasForTable[5] = "" + item.getCuantia();
+                cuentasForTable[6] = "" + item.getResumenControversia();
+                cuentasForTable[7] = "" + item.getResumenPeticiones();
+                cuentasForTable[8] = "" + item.getDesignacionArbitro();
+                cuentasForTable[9] = "" + item.getDeclaracionesCompromiso();
+                cuentasForTable[10] = "" + item.getEstado();
+                cuentasForTable[11] = "" + item.getDecisionFinal();
+
+                modelo.addRow(cuentasForTable);
+            }
+            jTableVerDemandas.setModel(modelo);
+            
+            if (mExpedienteList.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No existe resultado para la búsqueda");
+            }}
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un número de expediente válido");
         }
-        int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
-
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Expediente");
-        modelo.addColumn("Fecha_Registro");
-        modelo.addColumn("Demandante");
-        modelo.addColumn("Demandado");
-        modelo.addColumn("Especialidad");
-        modelo.addColumn("Cuantia");
-        modelo.addColumn("Resumen");
-        modelo.addColumn("Peticion");
-        modelo.addColumn("Arbitro");
-        modelo.addColumn("Compromiso");
-        modelo.addColumn("Estado");
-        modelo.addColumn("Desicion Final");
-
-        jTableVerDemandas.setModel(modelo);
-        DVerExpediente vexpediente = new DVerExpediente();
-        List<MExpediente> mExpedienteList = vexpediente.ListaExpediente(numeroExpediente, demandanteSeleccionado, estadoSeleccionado);
-
-        String cuentasForTable[] = new String[19];
-        for (MExpediente item : mExpedienteList) {
-            cuentasForTable[0] = "" + item.getNroExpediente();
-            cuentasForTable[1] = "" + item.getFechaDemanda();
-            cuentasForTable[2] = item.getDemandanteID();
-            cuentasForTable[3] = item.getDemandadoID();
-            cuentasForTable[5] = "" + item.getEspecialidad();
-            cuentasForTable[6] = "" + item.getCuantia();
-            cuentasForTable[8] = "" + item.getResumenControversia();
-            cuentasForTable[9] = "" + item.getResumenPeticiones();
-            cuentasForTable[10] = "" + item.getDesignacionArbitro();
-            cuentasForTable[11] = "" + item.getDeclaracionesCompromiso();
-            cuentasForTable[12] = "" + item.getEstado();
-            cuentasForTable[13] = "" + item.getDecisionFinal();
-
-            modelo.addRow(cuentasForTable);
-
-        }
-        jTableVerDemandas.setModel(modelo);
-
     }
 
     private void InitStyles() {
@@ -130,7 +155,7 @@ public class ConsultarExpediente extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         cmbDemandante = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtfecha = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -194,7 +219,6 @@ public class ConsultarExpediente extends javax.swing.JPanel {
 
         jLabel3.setText("Estado");
 
-        ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ddlEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddlEstadoActionPerformed(evt);
@@ -211,7 +235,7 @@ public class ConsultarExpediente extends javax.swing.JPanel {
 
         jLabel5.setText("Fecha");
 
-        jTextField1.setText("01/01/22");
+        txtfecha.setText("2023-12-05");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -242,8 +266,8 @@ public class ConsultarExpediente extends javax.swing.JPanel {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
@@ -268,7 +292,7 @@ public class ConsultarExpediente extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(btnBuscarPorDocumento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -325,7 +349,7 @@ public class ConsultarExpediente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableVerDemandas;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txt_NroExp;
+    private javax.swing.JTextField txtfecha;
     // End of variables declaration//GEN-END:variables
 }

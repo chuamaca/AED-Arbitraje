@@ -11,6 +11,7 @@ import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MUsuario;
 import com.dev.aed.arbitraje.Model.MVerExpediente;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import com.microsoft.sqlserver.jdbc.StringUtils;
 import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,41 +29,55 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        tabla();
     }
 
+    public void tabla(){
+    DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("NroExpediente");
+            modelo.addColumn("Demandante");
+            modelo.addColumn("Demandado");
+            modelo.addColumn("Arbitro");
+            modelo.addColumn("Estado");
+            jTableVerDemandas.setModel(modelo);
+    }
+    
+    
     public void VerDemanda() {
         String numeroExpedienteStr = txtexp1.getText();
-        if (numeroExpedienteStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un número de expediente válido");
-            return;
+        
+        if (StringUtils.isNumeric(numeroExpedienteStr)) {
+            
+            int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("NroExpediente");
+            modelo.addColumn("Demandante");
+            modelo.addColumn("Demandado");
+            modelo.addColumn("Arbitro");
+            modelo.addColumn("Estado");
+            
+            jTableVerDemandas.setModel(modelo);
+            
+            DVerExpediente dDemanda = new DVerExpediente();
+            List<MVerExpediente> mDemandaList = dDemanda.Select(numeroExpediente);
+
+            String cuentasForTable[] = new String[19];
+            for (MVerExpediente item : mDemandaList) {
+                cuentasForTable[0] = "" + item.getNroExpediente();
+                cuentasForTable[1] = item.getDemandanteID();
+                cuentasForTable[2] = item.getDemandadoID();
+                cuentasForTable[3] = "" + item.getDesignacionArbitro();
+                cuentasForTable[4] = "" + item.getEstado();
+                modelo.addRow(cuentasForTable);
+            }
+            jTableVerDemandas.setModel(modelo);
+
+            if (mDemandaList.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No existe resultado para la búsqueda");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un número de expediente válido");
         }
-        int numeroExpediente = Integer.parseInt(numeroExpedienteStr);
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("NroExpediente");
-        modelo.addColumn("Demandante");
-        modelo.addColumn("Demandado");
-        modelo.addColumn("Arbitro");
-        modelo.addColumn("Estado");
-
-        jTableVerDemandas.setModel(modelo);
-
-        DVerExpediente dDemanda = new DVerExpediente();
-        List<MVerExpediente> mDemandaList = dDemanda.Select(numeroExpediente);
-
-        // double total = 0;
-        //   jLabelDeudaTotal.setText("");
-        String cuentasForTable[] = new String[19];
-        for (MVerExpediente item : mDemandaList) {
-            cuentasForTable[0] = "" + item.getNroExpediente();
-            cuentasForTable[1] = item.getDemandanteID();
-            cuentasForTable[2] = item.getDemandadoID();
-            cuentasForTable[3] = "" + item.getDesignacionArbitro();
-            cuentasForTable[4] = "" + item.getEstado();
-            modelo.addRow(cuentasForTable);
-
-        }
-        jTableVerDemandas.setModel(modelo);
-
     }
 
     /**
@@ -327,7 +342,7 @@ public class Login extends javax.swing.JFrame {
                 //Actualizar nro de intentos
                 int actualizarintento = obj.LoginInvalido(usern);
                 System.out.println("Nro_inte: " + actualizarintento);
-                JOptionPane.showMessageDialog(null, "Usuario/password Incorecto");
+                JOptionPane.showMessageDialog(null, "Usuario/password Incorrecto");
             }
 
         }

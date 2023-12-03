@@ -59,7 +59,7 @@ public class DNotificacion {
     private static final String SQL_VALIDATE = "SELECT nombre_usuario, contrasena  FROM usuario WHERE nombre_usuario=? and contrasena=? and estado=1";
     private static final String SQL_NRO_INTENTOS = "SELECT id_usuario, nombre_usuario, contrasena, id_rol, estado, nro_intentos  FROM usuario WHERE nombre_usuario=?";
 
-    private static final String SQL_INSERT = "INSERT INTO AEDArbitraje.dbo.Notificacion\n"
+    private static final String SQL_INSERT = "INSERT INTO Notificacion\n"
             + "( NroExpediente, EstadoNotificacion, FechaNotificacion, FechaVisualizacion, ColorEstado, Observaciones, Leida, idUsuario)\n"
             + "VALUES( ?, ?, ?, ?, ?, ?,?, ?);";
 

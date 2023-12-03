@@ -14,26 +14,35 @@ public class DCriterioAceptacion {
     private static final String SQL_INSERT_FORMULARIO = "INSERT INTO Caceptacion (pregunta, descripcion, respuesta, criterio, estado) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_SELECT = "select id_cuestionario, pregunta,descripcion,respuesta, criterio,estado from Caceptacion";
 
-    public boolean registrarFormulario(String preguntaText, String descripcionText, String respuestaText, String obligatorioText, String EstadoText) {
+    public int registrarFormulario(MCriterioAceptacion objCaceptacion){
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        
         try {
-            Connection conn = ConexionJDBC.getConexion();
-            PreparedStatement stmt = conn.prepareStatement(SQL_INSERT_FORMULARIO);
-            stmt.setString(1, preguntaText);
-            stmt.setString(2, descripcionText);
-            stmt.setString(3, respuestaText);
-            stmt.setString(4, obligatorioText);
-            stmt.setString(5, EstadoText);
-            int rowsAffected = stmt.executeUpdate();
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_INSERT_FORMULARIO);
+            stmt.setString(1, objCaceptacion.getPregunta());
+            stmt.setString(2, objCaceptacion.getdescripcion());
+            System.out.println("criterio descripcion  "+objCaceptacion.getdescripcion());
+            stmt.setString(3, objCaceptacion.getRespuesta());
+            stmt.setString(4, objCaceptacion.getObligatorio());
+            stmt.setString(5, objCaceptacion.getEstado());
 
-            stmt.close();
-            conn.close();
-
-            return rowsAffected > 0; // Retorna true si se registró con éxito.
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false; // En caso de error en la base de datos.
-        }
+           System.out.println("ejecutando query:" + SQL_INSERT_FORMULARIO);
+        rows = stmt.executeUpdate();
+        System.out.println("Registros afectados:" + rows);
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        ConexionJDBC.close(stmt);
+        ConexionJDBC.close(conn);
     }
+
+    return rows;
+    }
+    
 
     public List<MCriterioAceptacion> Select() {
         Connection conn = null;
@@ -58,7 +67,7 @@ public class DCriterioAceptacion {
                 mCriterio = new MCriterioAceptacion();
                 mCriterio.setId_cuestionario(id_cuestionario);
                 mCriterio.setPregunta(pregunta);
-                mCriterio.setDescripcion(descripcion);
+                mCriterio.setdescripcion(descripcion);
                 mCriterio.setRespuesta(respuesta);
                 mCriterio.setObligatorio(criterio);
                 mCriterio.setEstado(estado);
