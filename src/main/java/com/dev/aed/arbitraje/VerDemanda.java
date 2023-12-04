@@ -382,14 +382,11 @@ public class VerDemanda extends javax.swing.JPanel {
 
     private void btnRegistrarAudienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAudienciaActionPerformed
         // TODO add your handling code here:
-           ShowJPanel(new RegistrarAudiencia());
+           ShowJPanel(new RegistrarAudiencia(txtBuscar.getText()));
     }//GEN-LAST:event_btnRegistrarAudienciaActionPerformed
 
     private void btnAnularDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularDemandaActionPerformed
         // TODO add your handling code here:
-        
-        
-        
         ShowJPanel(new AnularDemanda(txtBuscar.getText()));
     }//GEN-LAST:event_btnAnularDemandaActionPerformed
 

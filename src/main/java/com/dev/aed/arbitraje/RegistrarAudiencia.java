@@ -13,12 +13,18 @@ import com.dev.aed.arbitraje.Data.DAudiencia;
  */
 public class RegistrarAudiencia extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistrarAudiencia
-     */
+    boolean editar = false;
+    
     public RegistrarAudiencia() {
         initComponents();
     }
+    
+    public RegistrarAudiencia(String NumeroExpedienteUp){
+        initComponents();
+        boolean editar = true;
+        txtExpediente.setText(NumeroExpedienteUp);
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,8 +37,6 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
 
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableCuentaCabecera1 = new javax.swing.JTable();
-        btnGuardar = new javax.swing.JButton();
-        txtLugar1 = new javax.swing.JTextField();
         header1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -67,18 +71,6 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
         ));
         jTableCuentaCabecera1.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane4.setViewportView(jTableCuentaCabecera1);
-
-        btnGuardar.setBackground(new java.awt.Color(18, 90, 173));
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("Guardar");
-        btnGuardar.setBorderPainted(false);
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         header1.setBackground(new java.awt.Color(25, 118, 210));
         header1.setPreferredSize(new java.awt.Dimension(744, 150));
@@ -117,12 +109,6 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
         jScrollPane5.setViewportView(jTableCuentaCabecera2);
 
         label1.setText("Nro expediente:");
-
-        txtExpediente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExpedienteActionPerformed(evt);
-            }
-        });
 
         label2.setText("Fecha de registro:");
 
@@ -258,29 +244,18 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        DAudiencia objetoAudiencia = new DAudiencia();
-        objetoAudiencia.insertarAudiencia(txtIdAudiencia, txtExpediente, txtFecha, txtLugar, txtArbitro, txtEstadoExpe, txtFecha1, atInformacion);
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        DAudiencia objetoAudiencia = new DAudiencia();
-        objetoAudiencia.insertarAudiencia(txtIdAudiencia, txtExpediente, txtFecha, txtLugar, txtArbitro, txtEstadoExpe, txtFecha1, atInformacion);
+     DAudiencia objetoAudiencia = new DAudiencia();
+     objetoAudiencia.insertarAudiencia(txtIdAudiencia, txtExpediente, txtFecha, txtLugar, txtArbitro, txtEstadoExpe, txtFecha1, atInformacion); 
     }//GEN-LAST:event_btnGuardar1ActionPerformed
 
-    private void txtExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExpedienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExpedienteActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- ShowJPanel(new GestionarAudiencia());    
- // TODO add your handling code here:
+        ShowJPanel(new GestionarAudiencia()); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea atInformacion;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JPanel header1;
     private javax.swing.JButton jButton1;
@@ -305,6 +280,5 @@ public class RegistrarAudiencia extends javax.swing.JPanel {
     private javax.swing.JTextField txtFecha1;
     private javax.swing.JTextField txtIdAudiencia;
     private javax.swing.JTextField txtLugar;
-    private javax.swing.JTextField txtLugar1;
     // End of variables declaration//GEN-END:variables
 }

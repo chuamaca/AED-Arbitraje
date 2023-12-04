@@ -19,10 +19,10 @@ import javax.swing.JTextField;
 public class DAnular {
     public  void insertarAnular(JTextField txtExpediente, JTextField txt_fecha, JTextField txtMotivo, JTextField txtJustificacion) {
         // Configurar la conexión a la base de datos
-       String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
+       String conexionServer = "jdbc:sqlserver://LAPTOP-8LNNUON2;"
                 + "database=AEDArbitraje;"
                 +"user=sa;"
-                +"password=sa;"
+                +"password=12345678;"
                 +"loginTimeout=30;"
                  +"encrypt=true;"+
                 "trustServerCertificate=True;";

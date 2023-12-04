@@ -26,9 +26,6 @@ public class AnularDemanda extends javax.swing.JPanel {
         initComponents();
         boolean editar = true;
         txtExpediente.setText(NroExpedienteUp);
-        
-        
-        
     }
 
     /**
@@ -188,7 +185,7 @@ public class AnularDemanda extends javax.swing.JPanel {
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         DAnular objetoAnular = new DAnular();
-        objetoAnular.insertarAnular(txtExpediente, txtMotivo, txtMotivo, txtJustificacion);
+        objetoAnular.insertarAnular(txtExpediente, txt_fecha, txtMotivo, txtJustificacion);
     }//GEN-LAST:event_btnAnularActionPerformed
 
 
