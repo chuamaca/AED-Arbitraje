@@ -23,18 +23,17 @@ public class DDemanda {
 
     private static final String SQL_SELECT = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario\n"
             + "FROM Demanda";
-    
+
     private static final String SQL_SELECT_BY_DEMANDA = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario\n"
             + "FROM Demanda where NroExpediente=?";
-    
-    
+
     private static final String SQL_INSERT = "INSERT INTO Demanda\n"
             + "( NroExpediente,FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario, refNroexpediente, refMotivo)\n"
             + "VALUES( ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
-    
+
     private static final String SQL_GENERATE_NRO_EXPEDIENTE = "SELECT NEXT VALUE FOR sec_expediente";
-    
-    private static final String SQL_UPDATE = "UPDATE lineacreditomst SET nombre_cliente = ?, ruc_cliente = ?, fecha_registro = ?, dias_credito = ?,  monto_maximo= ?, moneda= ?, usuario_registro= ?, riesgo_crediticio= ? WHERE idlc = ?";
+
+    private static final String SQL_UPDATE = "update Demanda set DesignacionArbitro=?, DeclaracionesCompromiso=?, Estado=? where NroExpediente=?";
 
     public List<MDemanda> Select() {
         Connection conn = null;
@@ -104,7 +103,7 @@ public class DDemanda {
         return listDemanda;
     }
 
-     public List<MDemanda> SelectByNroExpediente(MDemanda Objdemanda) {
+    public List<MDemanda> SelectByNroExpediente(MDemanda Objdemanda) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -114,7 +113,7 @@ public class DDemanda {
         try {
             conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_SELECT_BY_DEMANDA);
-             stmt.setString(1, Objdemanda.getNroExpediente());
+            stmt.setString(1, Objdemanda.getNroExpediente());
             rs = stmt.executeQuery();
             while (rs.next()) {
 
@@ -173,8 +172,6 @@ public class DDemanda {
         return listDemanda;
     }
 
-    
-    
 //    public LineaCredito SelectById(LineaCredito lineacredito) {
 //        System.out.println("Ingresa a SelectById");
 //        Connection conn = null;
@@ -248,7 +245,7 @@ public class DDemanda {
         try {
             conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1,demanda.getNroExpediente());
+            stmt.setString(1, demanda.getNroExpediente());
             stmt.setString(2, fechaDemanda);
             stmt.setString(3, demanda.getDemandanteID());
             stmt.setString(4, demanda.getDemandadoID());
@@ -267,8 +264,8 @@ public class DDemanda {
             stmt.setString(17, fechaDemanda);
             stmt.setInt(18, demanda.getUsuarioAprobador());
             stmt.setString(19, demanda.getUsuario());
-             stmt.setString(20, demanda.getRefNroexpediente());
-              stmt.setString(21, demanda.getRefMotivo());
+            stmt.setString(20, demanda.getRefNroexpediente());
+            stmt.setString(21, demanda.getRefMotivo());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -279,6 +276,38 @@ public class DDemanda {
             //  ConexionJDBC.close(rs);
             ConexionJDBC.close(stmt);
             ConexionJDBC.close(conn);
+        }
+
+        return rows;
+    }
+
+    public int AsignarArbitro(MDemanda mdemanda) {
+        java.util.Date fechaActual = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada = formato.format(fechaActual);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConexionJDBC.getConexion();
+            System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, mdemanda.getDesignacionArbitro());
+            stmt.setString(2, mdemanda.getDeclaracionesCompromiso());
+            stmt.setString(3, mdemanda.getEstado());
+            stmt.setString(4, mdemanda.getNroExpediente());
+           
+
+            rows = stmt.executeUpdate();
+            System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+             
+            ConexionJDBC.close(stmt);
+           
         }
 
         return rows;
@@ -319,16 +348,12 @@ public class DDemanda {
 //        return rows;
 //    }
 //   
-    
-    
-     public String GenerarNroExpediente() {
+    public String GenerarNroExpediente() {
         System.out.println("Ingresa a SelectById");
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         MDemanda mDemanda = null;
-        
-        
 
         try {
             conn = ConexionJDBC.getConexion();

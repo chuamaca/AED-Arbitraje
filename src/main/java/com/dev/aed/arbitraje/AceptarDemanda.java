@@ -1,8 +1,9 @@
-
 package com.dev.aed.arbitraje;
 
 import com.dev.aed.arbitraje.Data.DDemanda;
 import com.dev.aed.arbitraje.Data.DAceptarDemanda;
+import com.dev.aed.arbitraje.Data.DNotificacion;
+import com.dev.aed.arbitraje.Data.DRegPartes;
 import com.dev.aed.arbitraje.Data.DUsuario;
 import com.dev.aed.arbitraje.Data.DVerExpediente;
 import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
@@ -12,87 +13,91 @@ import com.dev.aed.arbitraje.Model.MAceptarDemanda;
 import com.dev.aed.arbitraje.Model.MExpediente;
 import com.dev.aed.arbitraje.Model.MUsuario;
 import com.dev.aed.arbitraje.Data.DRegistros;
+import com.dev.aed.arbitraje.Model.MNotificacion;
+import com.dev.aed.arbitraje.Model.MRegPartes;
+import com.dev.aed.arbitraje.Utils.SesionManager;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
- 
+
 public class AceptarDemanda extends javax.swing.JPanel {
 
     boolean editar = false;
-    MAceptarDemanda demandaEditar;
-    
+    MDemanda demandaEditar;
+
     public AceptarDemanda() {
         initComponents();
         InitStyles();
-        CargarAsignacionDeArbitro();
     }
 
-    public AceptarDemanda(MAceptarDemanda mDemandaEdit) {
+    public AceptarDemanda(MDemanda mDemandaEdit) {
         System.out.println("Inicializando Cuenta CRUD" + mDemandaEdit);
         initComponents();
         editar = true;
         this.demandaEditar = mDemandaEdit;
         InitStyles();
-        //  Mostrar(mDemandaEdit);
-
+        cargarComboArbitro();
+        CargarAsignacionDeArbitro();
+        CargarComboEstadoDemanda();
+        mostrarCamposDemanda(mDemandaEdit);
     }
-    
-    private void llenarComboArbitro() {
-        DAceptarDemanda dAceptarArbitro = new DAceptarDemanda();
-        List<String> arbitro = dAceptarArbitro.obtenerArbitro();
 
-        for (String listArbitro : arbitro) {
-            cmbArbitro1.addItem(listArbitro);
-        }
-    }
-    
     public void CargarAsignacionDeArbitro() {
         DefaultComboBoxModel<String> comboBoxAsignacionArbitro = new DefaultComboBoxModel<>();
-
         // Agregar elementos al modelo del ComboBox
         comboBoxAsignacionArbitro.addElement("Arbitro Unico");
         comboBoxAsignacionArbitro.addElement("Tribunal Arbitral");
-
         cmbAsignacionArbitro.setModel(comboBoxAsignacionArbitro);
-
     }
-    
-    public void MostrarInformacion(){
+
+    public void CargarComboEstadoDemanda() {
+        DefaultComboBoxModel<String> comboBoxEstado = new DefaultComboBoxModel<>();
+        // Agregar elementos al modelo del ComboBox
+        comboBoxEstado.addElement("En Proceso");
+        comboBoxEstado.addElement("Finalizado");
+        cmdEstadoDemanda.setModel(comboBoxEstado);
+    }
+
+    private void cargarComboArbitro() {
+        DRegPartes dregpartes = new DRegPartes();
+        List<MRegPartes> partesDemandante = dregpartes.SelectArbitros();
+        for (MRegPartes parte : partesDemandante) {
+            cmbArbitro1.addItem(parte.getNumDoc());
+        }
+    }
+
+    private void mostrarCamposDemanda(MDemanda obj) {
+
+        txtNroExpediente.setText(obj.getNroExpediente());
+    }
+
+    public void MostrarInformacion() {
         String ArbitroSeleccionado = (String) cmbArbitro1.getSelectedItem();
-        
+
         if (ArbitroSeleccionado.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Elegir los Arbitros o el Arbitro");
             return;
         }
-        
+
         String Arbitro = (String) cmbArbitro1.getSelectedItem();
 
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nombres");    
+        modelo.addColumn("Nombres");
         modelo.addColumn("Telefono");
         modelo.addColumn("Correo");
-        
+
         jTableInformacionDeArbitro.setModel(modelo);
-        
-
-        
-    }
-    
-    public AceptarDemanda(MDemanda mDemandaEdit) {
-        System.out.println("Inicializando Cuenta CRUD" + mDemandaEdit);
-        initComponents();
-        //editar = true;
-        //this.demandaEditar = mDemandaEdit;
-        InitStyles();
-        //  Mostrar(mDemandaEdit);
 
     }
-    
+
     private void InitStyles() {
-        
+
     }
- 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -106,7 +111,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtNroExpediente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        ddlEstado = new javax.swing.JComboBox<>();
+        cmdEstadoDemanda = new javax.swing.JComboBox<>();
         phoneLbl4 = new javax.swing.JLabel();
         txtCuantia = new javax.swing.JTextField();
         phoneLbl1 = new javax.swing.JLabel();
@@ -148,17 +153,16 @@ public class AceptarDemanda extends javax.swing.JPanel {
         header1Layout.setVerticalGroup(
             header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, header1Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
 
         jLabel3.setText("Estado");
 
-        ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ddlEstado.addActionListener(new java.awt.event.ActionListener() {
+        cmdEstadoDemanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ddlEstadoActionPerformed(evt);
+                cmdEstadoDemandaActionPerformed(evt);
             }
         });
 
@@ -170,6 +174,12 @@ public class AceptarDemanda extends javax.swing.JPanel {
 
         domLbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         domLbl1.setText("Arbitro");
+
+        cmbArbitro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbArbitro1ActionPerformed(evt);
+            }
+        });
 
         domLbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         domLbl2.setText("Informacion de Arbitro");
@@ -235,7 +245,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
             .addGroup(header2Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(lblEstado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(116, 116, 116)
                 .addComponent(jLabel5)
@@ -244,7 +254,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
         header2Layout.setVerticalGroup(
             header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, header2Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
@@ -276,7 +286,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
                             .addComponent(phoneLbl1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ddlEstado, 0, 157, Short.MAX_VALUE)
+                            .addComponent(cmdEstadoDemanda, 0, 157, Short.MAX_VALUE)
                             .addComponent(cmbAsignacionArbitro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(bgGroundLayout.createSequentialGroup()
@@ -310,7 +320,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
                             .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         bgGroundLayout.setVerticalGroup(
             bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +331,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
                     .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3)
-                    .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdEstadoDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -365,13 +375,13 @@ public class AceptarDemanda extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ddlEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlEstadoActionPerformed
+    private void cmdEstadoDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEstadoDemandaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ddlEstadoActionPerformed
+    }//GEN-LAST:event_cmdEstadoDemandaActionPerformed
 
     private void jTableInformacionDeArbitroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInformacionDeArbitroMouseClicked
 
-        
+
     }//GEN-LAST:event_jTableInformacionDeArbitroMouseClicked
 
     private void txtInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInstanciaActionPerformed
@@ -379,29 +389,85 @@ public class AceptarDemanda extends javax.swing.JPanel {
     }//GEN-LAST:event_txtInstanciaActionPerformed
 
     private void btnAceptarDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDemandaActionPerformed
-    
-        MAceptarDemanda objDemandaAceptara= new MAceptarDemanda();
-        objDemandaAceptara.setNroExpediente(Integer.parseInt(txtNroExpediente.getText()));
-        objDemandaAceptara.setEstado((String) ddlEstado.getSelectedItem());
-        objDemandaAceptara.setCuantia(Double.parseDouble(txtCuantia.getText()));
-        objDemandaAceptara.setAsignacionArbitro((String) cmbAsignacionArbitro.getSelectedItem());
-        objDemandaAceptara.setInstancia(txtInstancia.getText());
-        
-        DAceptarDemanda dRDemanda = new DAceptarDemanda();
 
-      System.out.println("Estado Editar " + editar );
-        if (editar == false) {
+        MDemanda objDemandaAceptara = new MDemanda();
+        objDemandaAceptara.setNroExpediente(txtNroExpediente.getText());
+        objDemandaAceptara.setEstado((String) cmdEstadoDemanda.getSelectedItem());
+        objDemandaAceptara.setDesignacionArbitro((String) cmbArbitro1.getSelectedItem());
+        objDemandaAceptara.setDeclaracionesCompromiso(txtInstancia.getText());
+
+        DDemanda dRDemanda = new DDemanda();
+
+        System.out.println("Estado Editar " + editar);
+        if (editar != false) {
             System.out.println("Editar Falso");
-            int rta = dRDemanda.insertAceptar(objDemandaAceptara);
-            
+            int rta = dRDemanda.AsignarArbitro(objDemandaAceptara);
 
             if (rta == 1) {
-               // Dashboard.ShowJPanel(new Demanda());
-                JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
+                
+                 java.util.Date fechaActual = new java.util.Date();
+                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        String fecha = formato.format(fechaActual);
+                        String sesion = SesionManager.cargarSesion("usuariosesion");
+
+                        DNotificacion notifica = new DNotificacion();
+                        MNotificacion notificacion = new MNotificacion();
+                        notificacion.NroExpediente = objDemandaAceptara.getNroExpediente();
+                        notificacion.EstadoNotificacion = (String) cmdEstadoDemanda.getSelectedItem();
+                        notificacion.FechaNotificacion = Date.valueOf(fecha);
+                        notificacion.Observaciones = txtInstancia.getText();
+                        notificacion.Leida = 0;
+                        notificacion.idUsuario = sesion;
+
+                        int valor = notifica.AgregarNotificacion(notificacion);
+                
+                // Dashboard.ShowJPanel(new Demanda());
+                JOptionPane.showMessageDialog(null, "Se Acepto Correctamente la Demanda");
             }
         }
 
     }//GEN-LAST:event_btnAceptarDemandaActionPerformed
+
+    private void cmbArbitro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbArbitro1ActionPerformed
+        // TODO add your handling code here:
+        String ArbitroSeleccionado = (String) cmbArbitro1.getSelectedItem();
+        System.out.println("Arbitro seleccionado " + ArbitroSeleccionado);
+
+        DRegPartes dregpartes = new DRegPartes();
+        MRegPartes mireg = new MRegPartes();
+        mireg.setNumDoc(ArbitroSeleccionado);
+
+        List<MRegPartes> listRegpartes = new ArrayList<>();
+
+        listRegpartes = dregpartes.SelectArbitrosBY_Document(mireg);
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+
+        jTableInformacionDeArbitro.setModel(modelo);
+
+        String LArbritroForTable[] = new String[6];
+        for (MRegPartes item : listRegpartes) {
+
+            /*
+             objPartes.setNumDoc(documento);
+                objPartes.setApellidos(Apellidos);
+                objPartes.setNombres(Nombres);
+             */
+            LArbritroForTable[0] = "" + item.getNumDoc();
+            LArbritroForTable[1] = item.getApellidos();
+            LArbritroForTable[2] = item.getNombres();
+
+            //String valor = item.getEstadoNotificacion();
+            modelo.addRow(LArbritroForTable);
+        }
+
+        jTableInformacionDeArbitro.setModel(modelo);
+
+
+    }//GEN-LAST:event_cmbArbitro1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -410,7 +476,7 @@ public class AceptarDemanda extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbArbitro;
     private javax.swing.JComboBox<String> cmbArbitro1;
     private javax.swing.JComboBox<String> cmbAsignacionArbitro;
-    private javax.swing.JComboBox<String> ddlEstado;
+    private javax.swing.JComboBox<String> cmdEstadoDemanda;
     private javax.swing.JLabel domLbl1;
     private javax.swing.JLabel domLbl2;
     private javax.swing.JPanel header1;

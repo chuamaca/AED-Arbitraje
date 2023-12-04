@@ -139,6 +139,7 @@ public class VerDemanda extends javax.swing.JPanel {
         btnRechazar = new javax.swing.JButton();
         btnRegistrarAudiencia = new javax.swing.JButton();
         btnAnularDemanda = new javax.swing.JButton();
+        btnDemandar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -220,7 +221,7 @@ public class VerDemanda extends javax.swing.JPanel {
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         btnRechazar.setBackground(new java.awt.Color(18, 90, 173));
@@ -257,6 +258,18 @@ public class VerDemanda extends javax.swing.JPanel {
             }
         });
 
+        btnDemandar1.setBackground(new java.awt.Color(18, 90, 173));
+        btnDemandar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDemandar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDemandar1.setText("Aceptar Demanda");
+        btnDemandar1.setBorderPainted(false);
+        btnDemandar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDemandar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDemandar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -264,23 +277,11 @@ public class VerDemanda extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addComponent(btnDemandar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAnularDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegistrarAudiencia)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(107, 107, 107)
                                 .addComponent(txtBuscar)
-                                .addGap(154, 154, 154)
+                                .addGap(261, 261, 261)
                                 .addComponent(jRadioButtonComprobante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButtonRuc))
@@ -288,7 +289,23 @@ public class VerDemanda extends javax.swing.JPanel {
                         .addGap(20, 20, 20))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(jScrollPane2)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgLayout.createSequentialGroup()
+                                .addComponent(btnDemandar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDemandar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(146, 146, 146)
+                                .addComponent(btnAnularDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrarAudiencia)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarPorDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,11 +316,14 @@ public class VerDemanda extends javax.swing.JPanel {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonComprobante)
                     .addComponent(jRadioButtonRuc))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDemandar)
+                    .addComponent(btnDemandar1))
+                .addGap(2, 2, 2)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRechazar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDemandar)
                         .addComponent(btnRegistrarAudiencia)
                         .addComponent(btnAnularDemanda)
                         .addComponent(btnBuscarPorDocumento)))
@@ -385,12 +405,23 @@ public class VerDemanda extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
+    private void btnDemandar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDemandar1ActionPerformed
+        // TODO add your handling code here:
+        
+        MDemanda objDemanda= new MDemanda();
+        objDemanda.setNroExpediente(txtBuscar.getText());
+        
+        
+       ShowJPanel(new AceptarDemanda(objDemanda));
+    }//GEN-LAST:event_btnDemandar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAnularDemanda;
     private javax.swing.JButton btnBuscarPorDocumento;
     private javax.swing.JButton btnDemandar;
+    private javax.swing.JButton btnDemandar1;
     private javax.swing.JButton btnRechazar;
     private javax.swing.JButton btnRegistrarAudiencia;
     private javax.swing.ButtonGroup buttonGroup1;
