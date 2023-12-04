@@ -99,8 +99,9 @@ CREATE TABLE AEDArbitraje.dbo.Logs (
 
 -- DROP TABLE AEDArbitraje.dbo.Notificacion;
 
+
 CREATE TABLE AEDArbitraje.dbo.Notificacion (
-	IdNotificacion int NOT NULL,
+	IdNotificacion int Identity,
 	NroExpediente int NULL,
 	EstadoNotificacion varchar(20) COLLATE Modern_Spanish_CI_AS NULL,
 	FechaNotificacion date NULL,
@@ -109,8 +110,9 @@ CREATE TABLE AEDArbitraje.dbo.Notificacion (
 	Observaciones text COLLATE Modern_Spanish_CI_AS NULL,
 	Leida int NULL,
 	idUsuario varchar(11) COLLATE Modern_Spanish_CI_AS NULL,
-	CONSTRAINT PK__Notifica__F6CA0A8593D0A05D PRIMARY KEY (IdNotificacion)
+	CONSTRAINT PK__Notifica__F6CA0A8593D0NN PRIMARY KEY (IdNotificacion)
 );
+
 
 
 -- AEDArbitraje.dbo.Rol definition

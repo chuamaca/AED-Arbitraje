@@ -10,6 +10,7 @@ import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MNotificacion;
 import com.dev.aed.arbitraje.Model.MRegPartes;
 import com.dev.aed.arbitraje.Model.MRol;
+import com.dev.aed.arbitraje.Utils.SesionManager;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -627,7 +628,8 @@ public class Demanda extends javax.swing.JPanel {
     public int Leida;
     public String idUsuario;
                     */
-                    
+                    String sesion = SesionManager.cargarSesion("usuariosesion");
+
                     DNotificacion notifica = new DNotificacion();
                     MNotificacion notificacion = new MNotificacion();
                     notificacion.NroExpediente = objDemanda.getNroExpediente();
@@ -635,7 +637,7 @@ public class Demanda extends javax.swing.JPanel {
                     notificacion.FechaNotificacion = Date.valueOf(fecha);
                     notificacion.Observaciones = "Demanda Registrada";
                     notificacion.Leida = 0;
-                    notificacion.idUsuario = "CHUAMANIC";
+                    notificacion.idUsuario = sesion;
 
                     int valor = notifica.AgregarNotificacion(notificacion);
 

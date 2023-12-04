@@ -22,7 +22,7 @@ import jdk.jshell.execution.Util;
  */
 public class DNotificacion {
 
-    private static final String SQL_SELECT = "WITH NotificacionesEnumeradas AS (\n"
+    private static final String SQL_SELECT_BK = "WITH NotificacionesEnumeradas AS (\n"
             + "    SELECT\n"
             + "        IdNotificacion,\n"
             + "        NroExpediente,\n"
@@ -50,6 +50,37 @@ public class DNotificacion {
             + "WHERE RowNum = 1\n"
             + "order by FechaNotificacion desc";
 
+    
+    private static final String SQL_SELECT = "WITH NotificacionesEnumeradas AS (\n" +
+"    SELECT\n" +
+"        Notificacion.IdNotificacion,\n" +
+"        Notificacion.NroExpediente,\n" +
+"        Notificacion.EstadoNotificacion,\n" +
+"        Notificacion.FechaNotificacion,\n" +
+"        Notificacion.FechaVisualizacion,\n" +
+"        Notificacion.ColorEstado,\n" +
+"        Notificacion.Observaciones,\n" +
+"        Notificacion.Leida,\n" +
+"        ISNULL(Demanda.DemandadoID,Demanda.DemandanteID) as idUsuario,\n" +
+"        ROW_NUMBER() OVER (PARTITION BY Notificacion.NroExpediente ORDER BY Notificacion.IdNotificacion DESC) AS RowNum\n" +
+"    FROM Notificacion INNER JOIN Demanda ON Notificacion.NroExpediente= Demanda.NroExpediente \n" +
+"	where Demanda.DemandadoID =? or Demanda.DemandanteID=? \n" +
+")\n" +
+"SELECT\n" +
+"    IdNotificacion,\n" +
+"    NroExpediente,\n" +
+"    EstadoNotificacion,\n" +
+"    FechaNotificacion,\n" +
+"    FechaVisualizacion,\n" +
+"    ColorEstado,\n" +
+"    Observaciones,\n" +
+"    Leida,\n" +
+"    idUsuario\n" +
+"FROM NotificacionesEnumeradas\n" +
+"WHERE RowNum = 1\n" +
+"order by FechaNotificacion desc";
+    
+    
     private static final String SQL_SELECT_DETALLE = "SELECT d.NroExpediente, n.EstadoNotificacion,d.SustentoAnulacion, n.Observaciones  FROM Demanda d  left join Notificacion n\n"
             + "on n.NroExpediente = d.NroExpediente\n"
             + "where d.NroExpediente = ?\n"
@@ -63,7 +94,7 @@ public class DNotificacion {
             + "( NroExpediente, EstadoNotificacion, FechaNotificacion, FechaVisualizacion, ColorEstado, Observaciones, Leida, idUsuario)\n"
             + "VALUES( ?, ?, ?, ?, ?, ?,?, ?);";
 
-    public List<MNotificacion> Select() {
+    public List<MNotificacion> Select( MNotificacion mnotificacion) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -73,32 +104,16 @@ public class DNotificacion {
         try {
             conn = ConexionJDBC.getConexion();
             stmt = conn.prepareStatement(SQL_SELECT);
+            stmt.setString(1, mnotificacion.getIdUsuario());
+            stmt.setString(2, mnotificacion.getIdUsuario());
+            System.out.println("get usu " +  mnotificacion.getIdUsuario());
             rs = stmt.executeQuery();
+            System.out.println("rs Not: " +  rs);
+            
+            System.out.println("SQL: "+ SQL_SELECT);
             while (rs.next()) {
 
-                /*
-                 public int NroExpediente;
-    public java.sql.Date FechaDemanda;
-    public int DemandanteID;
-    public int DemandadoID;
-    public String Ubigeo;
-    public String Especialidad;
-    public Double Cuantia;
-    public int IdAnexo;
-    public String ResumenControversia;
-    public String ResumenPeticiones;
-    public String DesignacionArbitro;
-    public String DeclaracionesCompromiso;
-    public String Estado;
-    public String Decision_Final;
-    public String MotivoAnulacion;
-    public String SustentoAnulacion;
-    public java.sql.Date FechaAprobacion;
-    public int UsuarioAprobador;
-    public String usuario;
-                
-                
-                 */
+              
                 int idNotificacion = rs.getInt("IdNotificacion");
                 String NroExpediente = rs.getString("NroExpediente");
                 String estadoNotificacion = rs.getString("EstadoNotificacion");

@@ -10,6 +10,7 @@ import com.dev.aed.arbitraje.Data.DVerExpediente;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MUsuario;
 import com.dev.aed.arbitraje.Model.MVerExpediente;
+import com.dev.aed.arbitraje.Utils.SesionManager;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import com.microsoft.sqlserver.jdbc.StringUtils;
 import java.sql.Statement;
@@ -43,7 +44,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     
-    public void VerDemanda() {
+    public void VerDemanda() { 
         String numeroExpedienteStr = txtexp1.getText();
         
         if (StringUtils.isNumeric(numeroExpedienteStr)) {
@@ -111,7 +112,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setName(""); // NOI18N
 
         txtusuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtusuario.setText("admin");
+        txtusuario.setText("74967395");
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -132,7 +133,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtpassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtpassword.setText("admin");
+        txtpassword.setText("74967395");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,7 +307,9 @@ public class Login extends javax.swing.JFrame {
         boolean estado = obj.validarUsuario(user);
         System.out.println("Validar usuario: " + estado);
         if (estado != false) {
-
+            
+            SesionManager.guardarSesion("usuariosesion", usuario);
+            
             Dashboard dashWin = new Dashboard();
             dashWin.setVisible(true);
             this.dispose();

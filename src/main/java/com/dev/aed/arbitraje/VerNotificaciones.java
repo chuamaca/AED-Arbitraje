@@ -8,6 +8,7 @@ package com.dev.aed.arbitraje;
 import com.dev.aed.arbitraje.Data.DNotificacion;
 import com.dev.aed.arbitraje.Model.MNotificacion;
 import com.dev.aed.arbitraje.Utils.EstadoNotificacionRenderer;
+import com.dev.aed.arbitraje.Utils.SesionManager;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -63,7 +64,11 @@ public class VerNotificaciones extends javax.swing.JPanel {
 
         // AccesoJDBC accesoJDBC= new AccesoJDBC();
         DNotificacion notificacion = new DNotificacion();
-        List<MNotificacion> listNotificacion = notificacion.Select();
+        MNotificacion objMnotificacion= new MNotificacion();
+        
+         String sesion = SesionManager.cargarSesion("usuariosesion");
+        objMnotificacion.setIdUsuario(sesion);
+        List<MNotificacion> listNotificacion = notificacion.Select(objMnotificacion);
 
         String LNotificacionForTable[] = new String[6];
         for (MNotificacion item : listNotificacion) {
@@ -377,8 +382,8 @@ public class VerNotificaciones extends javax.swing.JPanel {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("NroExpediente");
         modelo.addColumn("Estado");
-        modelo.addColumn("Sustento");
         modelo.addColumn("Observaciones");
+         modelo.addColumn("Lectura");
         //  modelo.addColumn("Fecha Visualizacion");
         // modelo.addColumn("Estado");
         jTableDetalleNotificacion.setModel(modelo);
@@ -394,9 +399,8 @@ public class VerNotificaciones extends javax.swing.JPanel {
         for (MNotificacion item : listNotificacion) {
             LNotificacionForTable[0] = "" + item.getNroExpediente();
             LNotificacionForTable[1] = item.getEstadoNotificacion();
-            LNotificacionForTable[2] = item.getSustentoAnulacion_DTO();
-            LNotificacionForTable[3] = item.getObservaciones();
-
+            LNotificacionForTable[2] = item.getObservaciones();
+            LNotificacionForTable[3] = ""+item.getLeida();
             String valor = item.getEstadoNotificacion();
           
             modelo.addRow(LNotificacionForTable);
