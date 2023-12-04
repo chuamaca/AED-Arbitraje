@@ -149,7 +149,6 @@ public class DNotificacion {
 
                 String NroExpediente = rs.getString("NroExpediente");
                 String estadoNotificacion = rs.getString("EstadoNotificacion");
-
                 String sustentoAnulacion = rs.getString("SustentoAnulacion");
                 String observaciones = rs.getString("Observaciones");
 

@@ -3,6 +3,7 @@ package com.dev.aed.arbitraje.Data;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MExpediente;
 import com.dev.aed.arbitraje.Model.MVerExpediente;
+import com.dev.aed.arbitraje.Model.Persona_VerExpediente;
 import com.dev.aed.arbitraje.Utils.ConexionJDBC;
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,8 +22,10 @@ public class DVerExpediente {
 
     private static final String SQL_SELECT = "SELECT NroExpediente, DemandanteID, DemandadoID,DesignacionArbitro, Estado\n"
             + "FROM Demanda WHERE NroExpediente = ?";
-    private static final String SQL_SELECT1 = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Especialidad, Cuantia, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final\n"
-            + "FROM Demanda WHERE NroExpediente = ? and DemandanteID=? and Estado=?";
+    private static final String SQL_SELECT1 = "SELECT NroExpediente, FechaDemanda, (demandante.Nombres + ' ' + demandante.Apellidos) AS DemandanteID ,(demandado.Nombres + ' ' + demandado.Apellidos) AS DemandadoID, Especialidad, Cuantia, ResumenControversia, ResumenPeticiones,DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final FROM Demanda d JOIN     RegPartes demandante ON d.DemandanteID = demandante.NumDoc JOIN     RegPartes demandado ON d.DemandadoID = demandado.NumDoc WHERE NroExpediente =? and DemandanteID=? and Estado=? and  FechaDemanda=?";
+            
+//            "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Especialidad, Cuantia, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final\n"
+//            + "FROM Demanda WHERE NroExpediente = ? and DemandanteID=? and Estado=? and  FechaDemanda=?";
 
     public List<MVerExpediente> Select(int numeroExpediente) {
         Connection conn = null;
@@ -45,6 +48,7 @@ public class DVerExpediente {
                 String Estado = rs.getString("Estado");
 
                 vDemanda = new MVerExpediente();
+                
                 vDemanda.setNroExpediente(NroExpediente);
                 vDemanda.setDemandanteID(DemandanteID);
                 vDemanda.setDemandadoID(DemandadoID);
@@ -65,7 +69,7 @@ public class DVerExpediente {
         return listexpediente;
     }
 
-    public List<MExpediente> ListaExpediente(int numeroExpediente, String demandanteID, String estado) {
+    public List<MExpediente> ListaExpediente(int numeroExpediente, String demandanteID, String estado, String fecha) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -78,6 +82,7 @@ public class DVerExpediente {
             stmt.setInt(1, numeroExpediente); // Establecer el valor del parámetro
             stmt.setString(2, demandanteID);
             stmt.setString(3, estado);
+            stmt.setString(4, fecha);
             rs = stmt.executeQuery();
             while (rs.next()) {
 
@@ -122,6 +127,34 @@ public class DVerExpediente {
         return listExpe;
     }
 
+    public List<String> obtenerestado() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<String> docu = new ArrayList<>();
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            String sql = "SELECT DISTINCT Estado FROM Demanda ";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String doc = rs.getString("Estado");
+                docu.add(doc);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            ConexionJDBC.close(conn);
+        }
+
+        return docu;
+    }
+    
     public List<String> obtenerDNI() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -131,12 +164,13 @@ public class DVerExpediente {
         try {
             conn = ConexionJDBC.getConexion();
             // Asumiendo que la tabla se llama Persona y el campo con los nombres es "Nombre"
-            String sql = "select DNI from [dbo].[RegPartes]";
+            String sql = "SELECT DISTINCT p.Nombres, p.Apellidos, d.DemandanteID FROM Demanda d JOIN RegPartes p ON d.DemandanteID = p.NumDoc";
+                    //"select DNI from [dbo].[RegPartes]";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String doc = rs.getString("DNI");
+                String doc = rs.getString("DemandanteID");
                 docu.add(doc);
             }
 

@@ -134,6 +134,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reportes = new javax.swing.JButton();
         btn_reports = new javax.swing.JButton();
         mensaje = new javax.swing.JLabel();
+        tbn_reporteDuracion = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -248,6 +249,24 @@ public class Dashboard extends javax.swing.JFrame {
 
         mensaje.setText("Bienvenido [USER]");
 
+        tbn_reporteDuracion.setBackground(new java.awt.Color(21, 101, 192));
+        tbn_reporteDuracion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tbn_reporteDuracion.setForeground(new java.awt.Color(255, 255, 255));
+        tbn_reporteDuracion.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_reporteDuracion.setBorderPainted(false);
+        tbn_reporteDuracion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tbn_reporteDuracion.setIconTextGap(13);
+        tbn_reporteDuracion.setInheritsPopupMenu(true);
+        tbn_reporteDuracion.setLabel("     Reporte");
+        tbn_reporteDuracion.setMaximumSize(new java.awt.Dimension(152, 22));
+        tbn_reporteDuracion.setMinimumSize(new java.awt.Dimension(152, 22));
+        tbn_reporteDuracion.setPreferredSize(new java.awt.Dimension(152, 22));
+        tbn_reporteDuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbn_reporteDuracionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -258,19 +277,17 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(btn_Demanda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(164, 164, 164))
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(tbn_reporteDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,8 +315,13 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(btn_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGap(250, 250, 250)
-                        .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tbn_reporteDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGap(133, 133, 133))
         );
+
+        tbn_reporteDuracion.getAccessibleContext().setAccessibleName("    Reporte");
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new java.awt.BorderLayout());
@@ -316,7 +338,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -355,9 +377,6 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DemandaActionPerformed
 
     private void btnCriteriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriteriosActionPerformed
-        //ShowJPanel(new Users());
-//        ShowJPanel(new MovimientoBancoList());
-
         ShowJPanel(new CriterioAceptacion());
     }//GEN-LAST:event_btnCriteriosActionPerformed
 
@@ -369,6 +388,11 @@ public class Dashboard extends javax.swing.JFrame {
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
         ShowJPanel(new ConsultarExpediente());
     }//GEN-LAST:event_btn_reportesActionPerformed
+
+    private void tbn_reporteDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_reporteDuracionActionPerformed
+        // TODO add your handling code here:
+        ShowJPanel(new Reportes());
+    }//GEN-LAST:event_tbn_reporteDuracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,5 +424,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel mensaje;
     private javax.swing.JPanel menu;
+    private javax.swing.JButton tbn_reporteDuracion;
     // End of variables declaration//GEN-END:variables
 }

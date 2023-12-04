@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class DRegPartes {
     
-     private static final String SQL_SELECT_Partes = "SELECT RP.DNI , RP.Nombres + ' ' + rp.Apellidos  FROM RegPartes rp";
+     private static final String SQL_SELECT_Partes = "SELECT RP.NumDoc , RP.Nombres ,rp.Apellidos  FROM RegPartes rp\n" +
+"where rp.NumDoc is not null or rp.NumDoc=''";
      
      public List<MRegPartes> SelectPartes() {
         Connection conn = null;
@@ -35,17 +36,18 @@ public class DRegPartes {
 
             while (rs.next()) {
 
-                String documento = rs.getString("DNI");
+                String documento = rs.getString("NumDoc");
                 String Nombres = rs.getString("Nombres");
                 String Apellidos = rs.getString("Apellidos");
-                String NombreCompleto = rs.getString("NombreCompleto");
+                
+             //   String NombreCompleto = rs.getString("NombreCompleto");
               
-                System.out.println("print  " + documento + " " + NombreCompleto );
+             //   System.out.println("print  " + documento + " " + NombreCompleto );
 
                 objPartes = new MRegPartes();
 
-                objPartes.setNombreCompleto(Nombres,Apellidos);
-                objPartes.setDNI(documento);
+              //  objPartes.setNombreCompleto(Nombres,Apellidos);
+                objPartes.setNumDoc(documento);
                 objPartes.setApellidos(Apellidos);
                 objPartes.setNombres(Nombres);
 

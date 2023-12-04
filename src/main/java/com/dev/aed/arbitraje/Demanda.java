@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -39,6 +40,8 @@ public class Demanda extends javax.swing.JPanel {
         CargarCombos();
         generarCorrelativoExpediente();
         btnGuardarAdjunto.setEnabled(false);
+        txtRefMotivo.setEnabled(false);
+        
     }
 
     private void generarCorrelativoExpediente() {
@@ -51,53 +54,16 @@ public class Demanda extends javax.swing.JPanel {
 
     public void CargarCombos() {
 
-        //JComboBox<String> comboBox = new JComboBox<>();
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-
-        // Agregar elementos al modelo del ComboBox
-        comboBoxModel.addElement("74967395");
-        comboBoxModel.addElement("24567689");
-        comboBoxModel.addElement("12122343");
-        comboBoxModel.addElement("12122314");
-
-        // Establecer el modelo en el ComboBox
-        cmbDemandante.setModel(comboBoxModel);
-
-//        DefaultComboBoxModel<String> comboBoxModelDemandado = new DefaultComboBoxModel<>();
-//
-//        // Agregar elementos al modelo del ComboBox
-//        comboBoxModelDemandado.addElement("12967395");
-//        comboBoxModelDemandado.addElement("23567689");
-//        comboBoxModelDemandado.addElement("11122343");
-//        comboBoxModelDemandado.addElement("15122314");
-//
-//        cmbDemandado.setModel(comboBoxModelDemandado);
-//        
-//        
-        
-        DRegPartes dregpartes= new DRegPartes();
-        
-        List<MRegPartes> partes= dregpartes.SelectPartes();
-        
-        for (MRegPartes parte : partes) {
-            
-            cmbDemandado.addItem(parte.getDNI());
-            
+        DRegPartes dregpartes = new DRegPartes();
+        List<MRegPartes> partesDemandante = dregpartes.SelectPartes();
+        for (MRegPartes parte : partesDemandante) {
+            cmbDemandante.addItem(parte.getNumDoc());
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        List<MRegPartes> partes = dregpartes.SelectPartes();
+        for (MRegPartes parte : partes) {
+            cmbDemandado.addItem(parte.getNumDoc());
+        }
 
         DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
 
@@ -253,7 +219,6 @@ public class Demanda extends javax.swing.JPanel {
     private void initComponents() {
 
         bgGround = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
         txtCuantia = new javax.swing.JTextField();
         phoneLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -273,10 +238,16 @@ public class Demanda extends javax.swing.JPanel {
         txtResumenControversia = new javax.swing.JTextField();
         domLbl1 = new javax.swing.JLabel();
         btnSeleccionarArchivo = new javax.swing.JButton();
-        btnGuardarAdjunto = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
         btnGuardarDemanda = new javax.swing.JButton();
         txtNroExpediente = new javax.swing.JTextField();
         phoneLbl6 = new javax.swing.JLabel();
+        txtRefMotivo = new javax.swing.JTextField();
+        domLbl2 = new javax.swing.JLabel();
+        txtRefExpediente1 = new javax.swing.JTextField();
+        domLbl3 = new javax.swing.JLabel();
+        btnGuardarAdjunto = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -346,15 +317,15 @@ public class Demanda extends javax.swing.JPanel {
             }
         });
 
-        btnGuardarAdjunto.setBackground(new java.awt.Color(0, 51, 255));
-        btnGuardarAdjunto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnGuardarAdjunto.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarAdjunto.setText("Adjuntar");
-        btnGuardarAdjunto.setBorderPainted(false);
-        btnGuardarAdjunto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGuardarAdjunto.addActionListener(new java.awt.event.ActionListener() {
+        BtnBuscar.setBackground(new java.awt.Color(0, 204, 0));
+        BtnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BtnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.setBorderPainted(false);
+        BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarAdjuntoActionPerformed(evt);
+                BtnBuscarActionPerformed(evt);
             }
         });
 
@@ -371,6 +342,34 @@ public class Demanda extends javax.swing.JPanel {
         });
 
         phoneLbl6.setText("Demandante");
+
+        domLbl2.setText("Referencia");
+
+        domLbl3.setText("Motivo Referencia");
+
+        btnGuardarAdjunto.setBackground(new java.awt.Color(0, 51, 255));
+        btnGuardarAdjunto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnGuardarAdjunto.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarAdjunto.setText("Adjuntar");
+        btnGuardarAdjunto.setBorderPainted(false);
+        btnGuardarAdjunto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGuardarAdjunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAdjuntoActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bgGroundLayout = new javax.swing.GroupLayout(bgGround);
         bgGround.setLayout(bgGroundLayout);
@@ -398,43 +397,59 @@ public class Demanda extends javax.swing.JPanel {
                                 .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(202, 202, 202))))
                     .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(domLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPeticion, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgGroundLayout.createSequentialGroup()
+                                    .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtResumenControversia))
+                                .addComponent(domLbl1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgGroundLayout.createSequentialGroup()
+                                    .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(bgGroundLayout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addComponent(phoneLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(133, 133, 133))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgGroundLayout.createSequentialGroup()
+                                            .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(phoneLbl6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(30, 30, 30)
+                                    .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(phoneLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtResumenControversia, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(bgGroundLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(phoneLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(133, 133, 133))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgGroundLayout.createSequentialGroup()
-                                        .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbDemandante, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(phoneLbl6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phoneLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbDemandado, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(domLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(317, 317, 317)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(bgGroundLayout.createSequentialGroup()
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
                             .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(domLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bgGroundLayout.createSequentialGroup()
+                                        .addComponent(txtRefExpediente1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRefMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bgGroundLayout.createSequentialGroup()
+                                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgGroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
         );
         bgGroundLayout.setVerticalGroup(
             bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -456,35 +471,38 @@ public class Demanda extends javax.swing.JPanel {
                     .addComponent(phoneLbl5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(phoneLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(phoneLbl3)
-                .addGap(18, 18, 18)
-                .addComponent(txtResumenControversia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(domLbl1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(23, 23, 23)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(cmbUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneLbl3)
+                    .addComponent(txtResumenControversia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(domLbl1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(domLbl2)
+                    .addComponent(domLbl3))
+                .addGap(12, 12, 12)
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRefMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRefExpediente1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -493,14 +511,14 @@ public class Demanda extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -530,6 +548,7 @@ public class Demanda extends javax.swing.JPanel {
         String res = txtResumenControversia.getText();
         String peti = txtPeticion.getText();
         String cuantiaTexto = txtCuantia.getText();
+         String refMotivoTexto = txtRefMotivo.getText();
 
         if (exp.isBlank() || exp.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de número de expediente es obligatorio");
@@ -550,7 +569,8 @@ public class Demanda extends javax.swing.JPanel {
         if (cuantiaTexto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de cuantía es obligatorio");
             validdarcampos = true;
-        } else {
+        }
+        else {
             try {
                 Double cuantiad = Double.parseDouble(cuantiaTexto);
 
@@ -577,6 +597,9 @@ public class Demanda extends javax.swing.JPanel {
             objDemanda.setCuantia(Double.parseDouble(txtCuantia.getText()));
             objDemanda.setResumenControversia(txtResumenControversia.getText());
             objDemanda.setResumenPeticiones(txtPeticion.getText());
+            objDemanda.setRefNroexpediente(txtRefExpediente1.getText());
+            objDemanda.setRefMotivo(txtRefMotivo.getText());
+
             objDemanda.setEstado("Registrado");
 
             DDemanda dDemanda = new DDemanda();
@@ -592,18 +615,29 @@ public class Demanda extends javax.swing.JPanel {
                     java.util.Date fechaActual = new java.util.Date();
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                     String fecha = formato.format(fechaActual);
-
+/*
+                    
+    public int IdNotificacion;
+    public String NroExpediente;
+    public String EstadoNotificacion;
+    public java.sql.Date FechaNotificacion;
+    public java.sql.Date FechaVisualizacion;
+    public String ColorEstado;
+    public String Observaciones;
+    public int Leida;
+    public String idUsuario;
+                    */
+                    
                     DNotificacion notifica = new DNotificacion();
                     MNotificacion notificacion = new MNotificacion();
                     notificacion.NroExpediente = objDemanda.getNroExpediente();
                     notificacion.EstadoNotificacion = "Iniciado";
-                    notificacion.FechaNotificacion=Date.valueOf(fecha);
-                    notificacion.Observaciones="Demanda Registrada";
-                    notificacion.Leida=0;
-                    notificacion.Observaciones="Rojo";
-                    notificacion.idUsuario="chuamanic";
-                    
-                     int valor = notifica.AgregarNotificacion(notificacion);
+                    notificacion.FechaNotificacion = Date.valueOf(fecha);
+                    notificacion.Observaciones = "Demanda Registrada";
+                    notificacion.Leida = 0;
+                    notificacion.idUsuario = "CHUAMANIC";
+
+                    int valor = notifica.AgregarNotificacion(notificacion);
 
                     JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
 
@@ -651,22 +685,30 @@ public class Demanda extends javax.swing.JPanel {
         seleccionar_pdf();
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
 
-    private void btnGuardarAdjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAdjuntoActionPerformed
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
 
-        String nroExpediente = txtNroExpediente.getText();
+        DDemanda ddemanda = new DDemanda();
+        List<MDemanda> buscaDemanda = new ArrayList<>();
+        MDemanda objDemanda = new MDemanda();
 
-        File ruta = new File(ruta_archivo);
-        if (nroExpediente.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
-            guardar_pdf(nroExpediente, ruta_archivo.trim(), ruta);
-            tpdf.visualizar_PdfVO(jTablePDF, nroExpediente);
-            ruta_archivo = "";
-            this.btnSeleccionarArchivo.setText("");
+        String numeroExp = txtRefExpediente1.getText();
+        objDemanda.setNroExpediente(numeroExp);
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
+        if (!numeroExp.isBlank() || !numeroExp.isEmpty()) {
+
+            buscaDemanda = ddemanda.SelectByNroExpediente(objDemanda);
+            buscaDemanda.size();
+
+            if (buscaDemanda.size() > 0) {
+                JOptionPane.showMessageDialog(null, "Se hizo la Referencia al Expediente N° "+ numeroExp+" de manera correcta");
+                txtRefMotivo.setEnabled(true);
+                //txtRefMotivo.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "No Existe Numero Expediente");
+            }
         }
 
-    }//GEN-LAST:event_btnGuardarAdjuntoActionPerformed
+    }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void jTablePDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePDFMouseClicked
         // TODO add your handling code here:
@@ -699,6 +741,41 @@ public class Demanda extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTablePDFMouseClicked
 
+    private void btnGuardarAdjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAdjuntoActionPerformed
+        // TODO add your handling code here:
+        String nroExpediente = txtNroExpediente.getText();
+
+        File ruta = new File(ruta_archivo);
+        if (nroExpediente.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
+            guardar_pdf(nroExpediente, ruta_archivo.trim(), ruta);
+            tpdf.visualizar_PdfVO(jTablePDF, nroExpediente);
+            ruta_archivo = "";
+            this.btnSeleccionarArchivo.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
+        }
+    }//GEN-LAST:event_btnGuardarAdjuntoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+
+        
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+//    
+//    public void eliminar_pdf(int codigo) {
+//        PdfDAO pa = new PdfDAO();
+//        PdfVO po = new PdfVO();
+//        po.setCodigopdf(codigo);
+//        pa.Eliminar_PdfVO(po);
+//    }
+    
+    
+    
     public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
 
         MAnexo po = new MAnexo();
@@ -719,7 +796,9 @@ public class Demanda extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBuscar;
     private javax.swing.JPanel bgGround;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarAdjunto;
     private javax.swing.JButton btnGuardarDemanda;
     private javax.swing.JButton btnSeleccionarArchivo;
@@ -728,10 +807,11 @@ public class Demanda extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbEspecialidad;
     private javax.swing.JComboBox<String> cmbUbigeo;
     private javax.swing.JLabel domLbl1;
+    private javax.swing.JLabel domLbl2;
+    private javax.swing.JLabel domLbl3;
     private javax.swing.JPanel header1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTablePDF;
     private javax.swing.JLabel phoneLbl;
     private javax.swing.JLabel phoneLbl1;
@@ -743,6 +823,8 @@ public class Demanda extends javax.swing.JPanel {
     private javax.swing.JTextField txtCuantia;
     private javax.swing.JTextField txtNroExpediente;
     private javax.swing.JTextField txtPeticion;
+    private javax.swing.JTextField txtRefExpediente1;
+    private javax.swing.JTextField txtRefMotivo;
     private javax.swing.JTextField txtResumenControversia;
     // End of variables declaration//GEN-END:variables
 }

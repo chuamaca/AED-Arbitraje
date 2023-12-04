@@ -21,6 +21,7 @@ import java.util.List;
 public class DRechazarDemanda {
 
     private static final String SQL_INSERT = "INSERT INTO RechazarDemanda( NroExpediente, Motivo, Fecha, Arbitro, instancia)VALUES( ?, ?, ?, ?, ?)";
+  private static final String SQL_UPDATE = "Update Demanda set Estado=? where NroExpediente=?";
   
   public int insertRechazo(MRechazarDemanda demandaRechaza) {
             Connection conn = null;
@@ -51,6 +52,31 @@ public class DRechazarDemanda {
 
         return rows;
     }
+  
+   public int ActualizarRechazoDemanda( MRechazarDemanda demandaRechaza1) {
+            Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, demandaRechaza1.getEstado());
+            stmt.setInt(2, demandaRechaza1.getNroExpediente());
+            
+            System.out.println("ejecutando query:" + SQL_UPDATE);
+            rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            //  ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            ConexionJDBC.close(conn);
+        }
+
+        return rows;
+    }
 public List<String> obtenerArbitro() {
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -59,7 +85,7 @@ public List<String> obtenerArbitro() {
 
     try {
         conn = ConexionJDBC.getConexion();
-        String sql = "select DesignacionArbitro from [dbo].[Demanda] ";
+        String sql = "select DISTINCT DesignacionArbitro from [dbo].[Demanda] ";
         stmt = conn.prepareStatement(sql);
         rs = stmt.executeQuery();
 
