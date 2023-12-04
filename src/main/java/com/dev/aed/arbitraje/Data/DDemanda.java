@@ -23,9 +23,14 @@ public class DDemanda {
 
     private static final String SQL_SELECT = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario\n"
             + "FROM Demanda";
+    
+    private static final String SQL_SELECT_BY_DEMANDA = "SELECT NroExpediente, FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario\n"
+            + "FROM Demanda where NroExpediente=?";
+    
+    
     private static final String SQL_INSERT = "INSERT INTO Demanda\n"
-            + "( NroExpediente,FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario)\n"
-            + "VALUES( ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "( NroExpediente,FechaDemanda, DemandanteID, DemandadoID, Ubigeo, Especialidad, Cuantia, IdAnexo, ResumenControversia, ResumenPeticiones, DesignacionArbitro, DeclaracionesCompromiso, Estado, Decision_Final, MotivoAnulacion, SustentoAnulacion, FechaAprobacion, UsuarioAprobador, usuario, refNroexpediente, refMotivo)\n"
+            + "VALUES( ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
     
     private static final String SQL_GENERATE_NRO_EXPEDIENTE = "SELECT NEXT VALUE FOR sec_expediente";
     
@@ -99,6 +104,77 @@ public class DDemanda {
         return listDemanda;
     }
 
+     public List<MDemanda> SelectByNroExpediente(MDemanda Objdemanda) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MDemanda mDemanda = null;
+        List<MDemanda> listDemanda = new ArrayList<>();
+
+        try {
+            conn = ConexionJDBC.getConexion();
+            stmt = conn.prepareStatement(SQL_SELECT_BY_DEMANDA);
+             stmt.setString(1, Objdemanda.getNroExpediente());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                String NroExpediente = rs.getString("NroExpediente");
+                java.sql.Date FechaDemanda = rs.getDate("FechaDemanda");
+                String DemandanteID = rs.getString("DemandanteID");
+                String DemandadoID = rs.getString("DemandadoID");
+                String Ubigeo = rs.getString("Ubigeo");
+                String Especialidad = rs.getString("Especialidad");
+                Double Cuantia = rs.getDouble("Cuantia");
+                int IdAnexo = rs.getInt("IdAnexo");
+                String ResumenControversia = rs.getString("ResumenControversia");
+                String ResumenPeticiones = rs.getString("ResumenPeticiones");
+                String DesignacionArbitro = rs.getString("DesignacionArbitro");
+                String DeclaracionesCompromiso = rs.getString("DeclaracionesCompromiso");
+                String Estado = rs.getString("Estado");
+                String DecisionFinal = rs.getString("Decision_Final");
+                String MotivoAnulacion = rs.getString("MotivoAnulacion");
+                String SustentoAnulacion = rs.getString("SustentoAnulacion");
+                java.sql.Date FechaAprobacion = rs.getDate("FechaAprobacion");
+                int UsuarioAprobador = rs.getInt("UsuarioAprobador");
+                String usuario = rs.getString("usuario");
+
+                mDemanda = new MDemanda();
+                mDemanda.setNroExpediente(NroExpediente);
+                mDemanda.setFechaDemanda(FechaDemanda);
+                mDemanda.setDemandanteID(DemandanteID);
+                mDemanda.setDemandadoID(DemandadoID);
+                mDemanda.setUbigeo(Ubigeo);
+                mDemanda.setEspecialidad(Especialidad);
+                mDemanda.setCuantia(Cuantia);
+                mDemanda.setIdAnexo(IdAnexo);
+                mDemanda.setResumenControversia(ResumenControversia);
+                mDemanda.setResumenPeticiones(ResumenPeticiones);
+                mDemanda.setDesignacionArbitro(DesignacionArbitro);
+                mDemanda.setDeclaracionesCompromiso(DeclaracionesCompromiso);
+                mDemanda.setEstado(Estado);
+                mDemanda.setDecisionFinal(DecisionFinal);
+                mDemanda.setMotivoAnulacion(MotivoAnulacion);
+                mDemanda.setSustentoAnulacion(SustentoAnulacion);
+                mDemanda.setFechaAprobacion(FechaAprobacion);
+                mDemanda.setUsuarioAprobador(UsuarioAprobador);
+                mDemanda.setUsuario(usuario);
+
+                listDemanda.add(mDemanda);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionJDBC.close(rs);
+            ConexionJDBC.close(stmt);
+            ConexionJDBC.close(conn);
+        }
+
+        return listDemanda;
+    }
+
+    
+    
 //    public LineaCredito SelectById(LineaCredito lineacredito) {
 //        System.out.println("Ingresa a SelectById");
 //        Connection conn = null;
@@ -191,6 +267,8 @@ public class DDemanda {
             stmt.setString(17, fechaDemanda);
             stmt.setInt(18, demanda.getUsuarioAprobador());
             stmt.setString(19, demanda.getUsuario());
+             stmt.setString(20, demanda.getRefNroexpediente());
+              stmt.setString(21, demanda.getRefMotivo());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();

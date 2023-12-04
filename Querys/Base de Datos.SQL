@@ -39,7 +39,7 @@ CREATE TABLE AEDArbitraje.dbo.Arbitros (
 
 CREATE TABLE AEDArbitraje.dbo.Demanda (
 	iddemanda int IDENTITY(1,1) NOT NULL,
-	NroExpediente varchar(50),
+	NroExpediente varchar(50) COLLATE Modern_Spanish_CI_AS NOT NULL,
 	FechaDemanda date NULL,
 	DemandanteID int NULL,
 	DemandadoID int NULL,
@@ -58,6 +58,8 @@ CREATE TABLE AEDArbitraje.dbo.Demanda (
 	FechaAprobacion date NULL,
 	UsuarioAprobador int NULL,
 	usuario varchar(20) COLLATE Modern_Spanish_CI_AS NULL,
+	refNroexpediente varchar(20) COLLATE Modern_Spanish_CI_AS NULL,
+	refMotivo varchar(20) COLLATE Modern_Spanish_CI_AS NULL,
 	CONSTRAINT PK__Demanda__4343075D12F73B21 PRIMARY KEY (NroExpediente)
 );
 
@@ -188,11 +190,7 @@ CREATE TABLE AEDArbitraje.dbo.Anular (
 );
 
 
-USE [AEDArbitraje]
-;
 
-USE [AEDArbitraje]
-;
 
 /****** Object:  Sequence [dbo].[SEC_EXPEDIENTE]    Script Date: 16/11/2023 03:18:38 ******/
 CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE] 

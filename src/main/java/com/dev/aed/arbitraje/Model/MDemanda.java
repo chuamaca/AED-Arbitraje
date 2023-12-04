@@ -32,6 +32,9 @@ public class MDemanda {
     public java.sql.Date FechaAprobacion;
     public int UsuarioAprobador;
     public String usuario;
+    
+    public String refNroexpediente;
+    public String refMotivo;
 
     public MDemanda(int Iddemanda, String NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String DecisionFinal, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario) {
         
@@ -57,6 +60,53 @@ public class MDemanda {
         this.usuario = usuario;
     }
 
+    public MDemanda(int Iddemanda, String NroExpediente, Date FechaDemanda, String DemandanteID, String DemandadoID, String Ubigeo, String Especialidad, Double Cuantia, int IdAnexo, String ResumenControversia, String ResumenPeticiones, String DesignacionArbitro, String DeclaracionesCompromiso, String Estado, String DecisionFinal, String MotivoAnulacion, String SustentoAnulacion, Date FechaAprobacion, int UsuarioAprobador, String usuario, String refNroexpediente, String refMotivo) {
+        this.Iddemanda = Iddemanda;
+        this.NroExpediente = NroExpediente;
+        this.FechaDemanda = FechaDemanda;
+        this.DemandanteID = DemandanteID;
+        this.DemandadoID = DemandadoID;
+        this.Ubigeo = Ubigeo;
+        this.Especialidad = Especialidad;
+        this.Cuantia = Cuantia;
+        this.IdAnexo = IdAnexo;
+        this.ResumenControversia = ResumenControversia;
+        this.ResumenPeticiones = ResumenPeticiones;
+        this.DesignacionArbitro = DesignacionArbitro;
+        this.DeclaracionesCompromiso = DeclaracionesCompromiso;
+        this.Estado = Estado;
+        this.DecisionFinal = DecisionFinal;
+        this.MotivoAnulacion = MotivoAnulacion;
+        this.SustentoAnulacion = SustentoAnulacion;
+        this.FechaAprobacion = FechaAprobacion;
+        this.UsuarioAprobador = UsuarioAprobador;
+        this.usuario = usuario;
+        this.refNroexpediente = refNroexpediente;
+        this.refMotivo = refMotivo;
+    }
+    
+    
+
+ 
+
+    public String getRefMotivo() {
+        return refMotivo;
+    }
+
+    public void setRefMotivo(String refMotivo) {
+        this.refMotivo = refMotivo;
+    }
+
+    public String getRefNroexpediente() {
+        return refNroexpediente;
+    }
+
+    public void setRefNroexpediente(String refNroexpediente) {
+        this.refNroexpediente = refNroexpediente;
+    }
+
+   
+    
     public MDemanda() {
     }
     
