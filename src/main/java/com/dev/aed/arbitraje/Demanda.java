@@ -50,55 +50,18 @@ public class Demanda extends javax.swing.JPanel {
     }
 
     public void CargarCombos() {
-
-        //JComboBox<String> comboBox = new JComboBox<>();
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-
-        // Agregar elementos al modelo del ComboBox
-        comboBoxModel.addElement("74967395");
-        comboBoxModel.addElement("24567689");
-        comboBoxModel.addElement("12122343");
-        comboBoxModel.addElement("12122314");
-
-        // Establecer el modelo en el ComboBox
-        cmbDemandante.setModel(comboBoxModel);
-
-//        DefaultComboBoxModel<String> comboBoxModelDemandado = new DefaultComboBoxModel<>();
-//
-//        // Agregar elementos al modelo del ComboBox
-//        comboBoxModelDemandado.addElement("12967395");
-//        comboBoxModelDemandado.addElement("23567689");
-//        comboBoxModelDemandado.addElement("11122343");
-//        comboBoxModelDemandado.addElement("15122314");
-//
-//        cmbDemandado.setModel(comboBoxModelDemandado);
-//        
-//        
         
         DRegPartes dregpartes= new DRegPartes();
-        
-        List<MRegPartes> partes= dregpartes.SelectPartes();
-        
-        for (MRegPartes parte : partes) {
-            
-            cmbDemandado.addItem(parte.getDNI());
-            
+        List<MRegPartes> partesDemandante= dregpartes.SelectPartes();
+        for (MRegPartes parte : partesDemandante) {
+            cmbDemandante.addItem(parte.getDNI());
         }
         
+        List<MRegPartes> partes= dregpartes.SelectPartes();
+        for (MRegPartes parte : partes) {
+            cmbDemandado.addItem(parte.getDNI());
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
         DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
 
         // Agregar elementos al modelo del ComboBox
