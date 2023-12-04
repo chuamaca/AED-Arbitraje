@@ -57,12 +57,12 @@ public class Demanda extends javax.swing.JPanel {
         DRegPartes dregpartes = new DRegPartes();
         List<MRegPartes> partesDemandante = dregpartes.SelectPartes();
         for (MRegPartes parte : partesDemandante) {
-            cmbDemandante.addItem(parte.getDNI());
+            cmbDemandante.addItem(parte.getNumDoc());
         }
 
         List<MRegPartes> partes = dregpartes.SelectPartes();
         for (MRegPartes parte : partes) {
-            cmbDemandado.addItem(parte.getDNI());
+            cmbDemandado.addItem(parte.getNumDoc());
         }
 
         DefaultComboBoxModel<String> comboBoxModelUbigeo = new DefaultComboBoxModel<>();
@@ -247,6 +247,7 @@ public class Demanda extends javax.swing.JPanel {
         txtRefExpediente1 = new javax.swing.JTextField();
         domLbl3 = new javax.swing.JLabel();
         btnGuardarAdjunto = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -358,6 +359,18 @@ public class Demanda extends javax.swing.JPanel {
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgGroundLayout = new javax.swing.GroupLayout(bgGround);
         bgGround.setLayout(bgGroundLayout);
         bgGroundLayout.setHorizontalGroup(
@@ -383,21 +396,6 @@ public class Demanda extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCuantia, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(202, 202, 202))))
-                    .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
-                            .addGroup(bgGroundLayout.createSequentialGroup()
-                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(domLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(bgGroundLayout.createSequentialGroup()
-                                        .addComponent(txtRefExpediente1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtRefMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
                     .addGroup(bgGroundLayout.createSequentialGroup()
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -428,11 +426,26 @@ public class Demanda extends javax.swing.JPanel {
                                 .addGap(317, 317, 317)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                            .addGroup(bgGroundLayout.createSequentialGroup()
+                                .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(domLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bgGroundLayout.createSequentialGroup()
+                                        .addComponent(txtRefExpediente1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRefMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bgGroundLayout.createSequentialGroup()
+                                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgGroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,7 +496,8 @@ public class Demanda extends javax.swing.JPanel {
                 .addGap(13, 13, 13)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGuardarAdjunto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -498,13 +512,13 @@ public class Demanda extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -601,7 +615,19 @@ public class Demanda extends javax.swing.JPanel {
                     java.util.Date fechaActual = new java.util.Date();
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                     String fecha = formato.format(fechaActual);
-
+/*
+                    
+    public int IdNotificacion;
+    public String NroExpediente;
+    public String EstadoNotificacion;
+    public java.sql.Date FechaNotificacion;
+    public java.sql.Date FechaVisualizacion;
+    public String ColorEstado;
+    public String Observaciones;
+    public int Leida;
+    public String idUsuario;
+                    */
+                    
                     DNotificacion notifica = new DNotificacion();
                     MNotificacion notificacion = new MNotificacion();
                     notificacion.NroExpediente = objDemanda.getNroExpediente();
@@ -609,8 +635,7 @@ public class Demanda extends javax.swing.JPanel {
                     notificacion.FechaNotificacion = Date.valueOf(fecha);
                     notificacion.Observaciones = "Demanda Registrada";
                     notificacion.Leida = 0;
-                    notificacion.Observaciones = "Rojo";
-                    notificacion.idUsuario = "chuamanic";
+                    notificacion.idUsuario = "CHUAMANIC";
 
                     int valor = notifica.AgregarNotificacion(notificacion);
 
@@ -732,6 +757,25 @@ public class Demanda extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnGuardarAdjuntoActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+
+        
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+//    
+//    public void eliminar_pdf(int codigo) {
+//        PdfDAO pa = new PdfDAO();
+//        PdfVO po = new PdfVO();
+//        po.setCodigopdf(codigo);
+//        pa.Eliminar_PdfVO(po);
+//    }
+    
+    
+    
     public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
 
         MAnexo po = new MAnexo();
@@ -754,6 +798,7 @@ public class Demanda extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JPanel bgGround;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarAdjunto;
     private javax.swing.JButton btnGuardarDemanda;
     private javax.swing.JButton btnSeleccionarArchivo;

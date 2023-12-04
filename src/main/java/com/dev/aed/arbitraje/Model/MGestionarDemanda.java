@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class MGestionarDemanda {
 
-
     public String EstadoAudiencia;
     public String ResultadoAudiencia;
     public String FechaAudiencia;
@@ -18,6 +17,7 @@ public class MGestionarDemanda {
         this.FechaAudiencia = FechaAudiencia;
     }
 
+  
     public String getEstadoAudiencia() {
         return EstadoAudiencia;
     }
@@ -41,7 +41,5 @@ public class MGestionarDemanda {
     public void setFechaAudiencia(String FechaAudiencia) {
         this.FechaAudiencia = FechaAudiencia;
     }
-    
-    
     
 }

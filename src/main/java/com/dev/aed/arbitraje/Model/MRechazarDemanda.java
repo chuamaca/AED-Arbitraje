@@ -18,8 +18,21 @@ public class MRechazarDemanda {
     public String Fecha;
     public String Arbitro;
     public String instancia;
+    public String Estado;
 
     public MRechazarDemanda() {
+    }
+
+    public MRechazarDemanda(String Estado) {
+        this.Estado = Estado;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     public MRechazarDemanda(int idRechazo, int NroExpediente, String Motivo, String Fecha, String Arbitro, String instancia) {

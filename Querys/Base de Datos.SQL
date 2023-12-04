@@ -64,6 +64,17 @@ CREATE TABLE AEDArbitraje.dbo.Demanda (
 );
 
 
+
+Create table RechazarDemanda(
+	idRechazo int IDENTITY(1,1) NOT NULL,
+	NroExpediente varchar(10),
+	Motivo varchar(50),
+	Fecha varchar(16),
+	Arbitro varchar(50) ,
+	instancia varchar(50) ,
+	CONSTRAINT idRechazo PRIMARY KEY (idRechazo)
+);
+
 -- AEDArbitraje.dbo.Logs definition
 
 -- Drop table
@@ -169,13 +180,15 @@ CREATE TABLE AEDArbitraje.dbo.Audiencia (
 
 
 
+
 CREATE TABLE [dbo].[Caceptacion](
-	[id_cuestionario] [int] IDENTITY(1,1) NOT NULL,
-	[pregunta] [varchar](150) NOT NULL,
-	[descripcion] [varchar](250) NOT NULL,
-	[respuesta] [varchar](5) NOT NULL,
-	[criterio] [varchar](5) NOT NULL,
-	[estado] [varchar](10) NOT NULL
+	[id_cuestionario] int IDENTITY(1,1) NOT NULL,
+	[pregunta] VARCHAR(150) NOT NULL,
+	[descripcion] VARCHAR(255) NOT NULL,
+	[respuesta] VARCHAR(10) NOT NULL,
+	[criterio] VARCHAR(10) NOT NULL,
+	[estado] VARCHAR(10) NOT NULL
+	CONSTRAINT id_cuestionario PRIMARY KEY (id_cuestionario)
 )
 ;
 
@@ -265,18 +278,21 @@ Create table RechazarDemanda(
 	CONSTRAINT idRechazo PRIMARY KEY (idRechazo)
 );
 
+
 create table RegPartes(
-idPartes char(8) PRIMARY KEY,
-Nombres varchar(50),
-Apellidos varchar(50),
-NombreEmp varchar(50),
-DNI char(10),
-RUC int,
-Correo varchar (80),
+idPartes int identity PRIMARY KEY ,
+RegistroA varchar(20),
+TipoP varchar(20),
+Nombres varchar(40),
+Apellidos varchar(40),
+TipoD varchar(20),
+NumDoc int,
+NombreEmp varchar(40),
+OrigenE varchar(30),
+Direccion varchar(50),
 Fecha_Nacimiento char(8),
 Fecha_Creacion char(8),
-Nacionalidad varchar(50),
-OrigenEmp varchar(50),
+Nacionalidad varchar(30),
+Correo varchar (50),
 Telefono int,
-Direccion varchar(50),
 );

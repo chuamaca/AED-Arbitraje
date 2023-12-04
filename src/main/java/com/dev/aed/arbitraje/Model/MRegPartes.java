@@ -13,11 +13,17 @@ import com.dev.aed.arbitraje.Data.*;
 public class MRegPartes {
     
      private String partes, Nombres, Apellidos, NombreE, OrigenE, Direccion, FechaNa, FechaCre, Nacionalidad, Correo;
-    private String DNI, Ruc, Telefono;
+    private String NumDoc, Ruc, Telefono;
     
     private String NombreCompleto;
 
-    public MRegPartes(String partes, String Nombres, String Apellidos, String NombreE, String OrigenE, String Direccion, String FechaNa, String FechaCre, String Nacionalidad, String Correo, String DNI, String Ruc, String Telefono) {
+    public MRegPartes() {
+    }
+    
+    
+    
+
+    public MRegPartes(String partes, String Nombres, String Apellidos, String NombreE, String OrigenE, String Direccion, String FechaNa, String FechaCre, String Nacionalidad, String Correo, String NumDoc, String Ruc, String Telefono, String NombreCompleto) {
         this.partes = partes;
         this.Nombres = Nombres;
         this.Apellidos = Apellidos;
@@ -28,21 +34,10 @@ public class MRegPartes {
         this.FechaCre = FechaCre;
         this.Nacionalidad = Nacionalidad;
         this.Correo = Correo;
-        this.DNI = DNI;
+        this.NumDoc = NumDoc;
         this.Ruc = Ruc;
         this.Telefono = Telefono;
-    }
-
-    public String getNombreCompleto() {
-        return Nombres +' ' + Apellidos;
-    }
-
-    public void setNombreCompleto(String nombre, String apellido) {
-        this.NombreCompleto = nombre + ' ' + apellido;
-    }
-    
-    
-    public MRegPartes() {
+        this.NombreCompleto = NombreCompleto;
     }
 
     public String getPartes() {
@@ -125,12 +120,12 @@ public class MRegPartes {
         this.Correo = Correo;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getNumDoc() {
+        return NumDoc;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setNumDoc(String NumDoc) {
+        this.NumDoc = NumDoc;
     }
 
     public String getRuc() {
@@ -148,10 +143,16 @@ public class MRegPartes {
     public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
-    
-    
-    
-    
+
+    public String getNombreCompleto() {
+        return NombreCompleto;
+    }
+
+    public void setNombreCompleto(String NombreCompleto) {
+        this.NombreCompleto = NombreCompleto;
+    }
+
+  
     
     
 }

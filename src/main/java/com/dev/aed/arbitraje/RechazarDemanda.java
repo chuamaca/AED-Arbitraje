@@ -1,35 +1,33 @@
 package com.dev.aed.arbitraje;
 
-
-import com.dev.aed.arbitraje.Data.DDemanda;
+import static com.dev.aed.arbitraje.Dashboard.ShowJPanel;
+import com.dev.aed.arbitraje.Data.DNotificacion;
 import com.dev.aed.arbitraje.Data.DRechazarDemanda;
-import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
-import static com.dev.aed.arbitraje.Demanda.validarNumeroDecimalMayorQueCero;
 import com.dev.aed.arbitraje.Model.MDemanda;
+import com.dev.aed.arbitraje.Model.MNotificacion;
 import com.dev.aed.arbitraje.Model.MRechazarDemanda;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-
-
 public class RechazarDemanda extends javax.swing.JPanel {
-  
+
 //private String numeroExpedienteSeleccionado;
- boolean editar = false;
+    boolean editar = false;
     MRechazarDemanda demandaEditar;
-    
-     
-     
-    public RechazarDemanda() {
+
+    public RechazarDemanda(String NroExpedienteUp) {
         initComponents();
         InitStyles();
         llenarComboArbitro();
         CargarMotivo();
-      //  this.numeroExpedienteSeleccionado = numeroExpedienteSeleccionado;
+        txtNroExpediente.setText(NroExpedienteUp);
+        //  this.numeroExpedienteSeleccionado = numeroExpedienteSeleccionado;
     }
-    
-  public RechazarDemanda(MRechazarDemanda mDemandaEdit) {
+
+    public RechazarDemanda(MRechazarDemanda mDemandaEdit) {
         System.out.println("Inicializando Cuenta CRUD" + mDemandaEdit);
         initComponents();
         editar = true;
@@ -38,8 +36,8 @@ public class RechazarDemanda extends javax.swing.JPanel {
         //  Mostrar(mDemandaEdit);
 
     }
- 
-  private void llenarComboArbitro() {
+
+    private void llenarComboArbitro() {
         DRechazarDemanda dRechazarArbitro = new DRechazarDemanda();
         List<String> arbitro = dRechazarArbitro.obtenerArbitro();
 
@@ -47,7 +45,30 @@ public class RechazarDemanda extends javax.swing.JPanel {
             cmbArbitro.addItem(listArbitro);
         }
     }
-   public void CargarMotivo() {
+
+    private void actualizarDemandaRechazado() {
+
+        MRechazarDemanda objDemandaRechazad1 = new MRechazarDemanda();
+        objDemandaRechazad1.setNroExpediente(Integer.parseInt(txtNroExpediente.getText()));
+        objDemandaRechazad1.setEstado("Rechazado");
+
+        DRechazarDemanda dRDemanda1 = new DRechazarDemanda();
+
+        System.out.println("Estado Editar " + editar);
+        if (editar == false) {
+            System.out.println("Editar Falso");
+            int rta = dRDemanda1.ActualizarRechazoDemanda(objDemandaRechazad1);
+
+            if (rta == 1) {
+                // Dashboard.ShowJPanel(new Demanda());
+                JOptionPane.showMessageDialog(null, "Se actualizo la demanda correctamente");
+
+            }
+        }
+
+    }
+
+    public void CargarMotivo() {
         DefaultComboBoxModel<String> comboBoxModelMotivo = new DefaultComboBoxModel<>();
 
         // Agregar elementos al modelo del ComboBox
@@ -58,9 +79,7 @@ public class RechazarDemanda extends javax.swing.JPanel {
         ddlMotivo.setModel(comboBoxModelMotivo);
 
     }
-  
-  
-  
+
     public RechazarDemanda(MDemanda mDemandaEdit) {
         System.out.println("Inicializando Cuenta CRUD" + mDemandaEdit);
         initComponents();
@@ -71,9 +90,7 @@ public class RechazarDemanda extends javax.swing.JPanel {
 
     }
 
-
     private void InitStyles() {
-
 
     }
 
@@ -114,7 +131,7 @@ public class RechazarDemanda extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Registrar Demanda");
+        jLabel2.setText("Registrar Rechazo de la demanda");
 
         javax.swing.GroupLayout header1Layout = new javax.swing.GroupLayout(header1);
         header1.setLayout(header1Layout);
@@ -151,13 +168,13 @@ public class RechazarDemanda extends javax.swing.JPanel {
             }
         });
 
+        txtNroExpediente.setEditable(false);
         txtNroExpediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNroExpedienteActionPerformed(evt);
             }
         });
 
-        ddlMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ddlMotivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddlMotivoActionPerformed(evt);
@@ -169,6 +186,12 @@ public class RechazarDemanda extends javax.swing.JPanel {
 
         txtfecha.setText("00/00/2023");
 
+        cmbArbitro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbArbitroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgGroundLayout = new javax.swing.GroupLayout(bgGround);
         bgGround.setLayout(bgGroundLayout);
         bgGroundLayout.setHorizontalGroup(
@@ -177,19 +200,20 @@ public class RechazarDemanda extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgGroundLayout.createSequentialGroup()
+                        .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(bgGroundLayout.createSequentialGroup()
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(bgGroundLayout.createSequentialGroup()
-                        .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(bgGroundLayout.createSequentialGroup()
+                        .addGap(112, 112, 112)
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(bgGroundLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(phoneLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                    .addComponent(phoneLbl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(phoneLbl3, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                                    .addComponent(phoneLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(phoneLbl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -199,8 +223,8 @@ public class RechazarDemanda extends javax.swing.JPanel {
                                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(bgGroundLayout.createSequentialGroup()
-                                        .addComponent(ddlMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addComponent(ddlMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -208,13 +232,13 @@ public class RechazarDemanda extends javax.swing.JPanel {
                                 .addComponent(domLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbArbitro, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(521, 521, 521))))
+                        .addContainerGap(208, Short.MAX_VALUE))))
         );
         bgGroundLayout.setVerticalGroup(
             bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(bgGroundLayout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(bgGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -232,7 +256,7 @@ public class RechazarDemanda extends javax.swing.JPanel {
                     .addComponent(phoneLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(btnGuardarDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(97, 97, 97)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -242,14 +266,15 @@ public class RechazarDemanda extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(bgGround, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(269, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,37 +283,58 @@ public class RechazarDemanda extends javax.swing.JPanel {
     }//GEN-LAST:event_ddlMotivoActionPerformed
 
     private void btnGuardarDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDemandaActionPerformed
-     
-        MRechazarDemanda objDemandaRechazad= new MRechazarDemanda();
+
+        MRechazarDemanda objDemandaRechazad = new MRechazarDemanda();
         objDemandaRechazad.setNroExpediente(Integer.parseInt(txtNroExpediente.getText()));
         objDemandaRechazad.setMotivo((String) ddlMotivo.getSelectedItem());
         objDemandaRechazad.setFecha((String) txtfecha.getText());
         objDemandaRechazad.setArbitro((String) cmbArbitro.getSelectedItem());
         objDemandaRechazad.setInstancia(txtInstancia.getText());
-        //objDemanda.setEstado("Rechazado");
- DRechazarDemanda dRDemanda = new DRechazarDemanda();
-
-      System.out.println("Estado Editar " + editar );
+        objDemandaRechazad.setEstado("Rechazado");
+        DRechazarDemanda dRDemanda = new DRechazarDemanda();
+        actualizarDemandaRechazado();
+        
         if (editar == false) {
             System.out.println("Editar Falso");
             int rta = dRDemanda.insertRechazo(objDemandaRechazad);
 
             if (rta == 1) {
-               // Dashboard.ShowJPanel(new Demanda());
-                JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
+                // Dashboard.ShowJPanel(new Demanda());
+
+                //
+                java.util.Date fechaActual = new java.util.Date();
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                String fecha = formato.format(fechaActual);
+
+                DNotificacion notifica = new DNotificacion();
+                MNotificacion notificacion = new MNotificacion();
+                notificacion.NroExpediente = String.valueOf(objDemandaRechazad.getNroExpediente());
+                notificacion.EstadoNotificacion = "Rechazado";
+                notificacion.FechaNotificacion = Date.valueOf(fecha);
+                notificacion.Observaciones = "Demanda Rechazada";
+                notificacion.Leida = 0;
+                notificacion.Observaciones = "Rojo";
+                notificacion.idUsuario = "Svilcas";
+
+                int valor = notifica.AgregarNotificacion(notificacion);
+                
+                JOptionPane.showMessageDialog(null, "Se Registro la información de Rechazo");
             }
+            ShowJPanel(new VerDemanda());
         }
-        
-   
+
 
     }//GEN-LAST:event_btnGuardarDemandaActionPerformed
 
     private void txtNroExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNroExpedienteActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtNroExpedienteActionPerformed
 
- 
+    private void cmbArbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbArbitroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbArbitroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgGround;
