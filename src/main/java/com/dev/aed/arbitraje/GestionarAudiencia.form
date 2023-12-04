@@ -124,14 +124,16 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="288" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCodaudiencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="label1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtExpediente" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="label5" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="ddlEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCodaudiencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="label1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtExpediente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
