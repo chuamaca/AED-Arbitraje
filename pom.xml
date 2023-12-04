@@ -35,6 +35,13 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE170</version>
         </dependency>
+        
+     <dependency>
+        <groupId>com.toedter</groupId>
+        <artifactId>jcalendar</artifactId>
+        <version>1.4</version> <!-- Reemplaza con la versión más reciente -->
+    </dependency>
+        
     </dependencies>
   
     
