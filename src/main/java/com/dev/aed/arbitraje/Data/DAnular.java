@@ -4,11 +4,14 @@
  */
 package com.dev.aed.arbitraje.Data;
 
-
+import com.dev.aed.arbitraje.Model.MNotificacion;
+import com.dev.aed.arbitraje.Utils.SesionManager;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -17,16 +20,17 @@ import javax.swing.JTextField;
  * @author andre
  */
 public class DAnular {
-    public  void insertarAnular(JTextField txtExpediente, JTextField txt_fecha, JTextField txtMotivo, JTextField txtJustificacion) {
+
+    public void insertarAnular(JTextField txtExpediente, JTextField txt_fecha, JTextField txtMotivo, JTextField txtJustificacion) {
         // Configurar la conexión a la base de datos
-       String conexionServer = "jdbc:sqlserver://DCODE\\SQLEXPRESS01;"
+        String conexionServer = "jdbc:sqlserver://HRNBK00963\\SQLEXPRESS;"
                 + "database=AEDArbitraje;"
-                +"user=sa;"
-                +"password=sa;"
-                +"loginTimeout=30;"
-                 +"encrypt=true;"+
-                "trustServerCertificate=True;";
-       try {
+                + "user=sa;"
+                + "password=BANKpower9719;"
+                + "loginTimeout=30;"
+                + "encrypt=true;"
+                + "trustServerCertificate=True;";
+        try {
             // Establecer la conexión
             Connection conexion = DriverManager.getConnection(conexionServer);
 
@@ -41,13 +45,30 @@ public class DAnular {
             statement.setString(2, txt_fecha.getText());
             statement.setString(3, txtMotivo.getText());
             statement.setString(4, txtJustificacion.getText());
-            
+
             // Ejecutar la sentencia
             int filasInsertadas = statement.executeUpdate();
 
             // Verificar si los datos fueron insertados correctamente
             if (filasInsertadas > 0) {
                 JOptionPane.showMessageDialog(null, "La anulacion fue insertada correctamente.");
+
+                java.util.Date fechaActual = new java.util.Date();
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                String fecha = formato.format(fechaActual);
+                String sesion = SesionManager.cargarSesion("usuariosesion");
+               
+                DNotificacion notifica = new DNotificacion();
+                MNotificacion notificacion = new MNotificacion();
+                notificacion.NroExpediente = txtExpediente.getText();
+                notificacion.EstadoNotificacion = "Anulado";
+                notificacion.FechaNotificacion = Date.valueOf(fecha);
+                notificacion.Observaciones = txtJustificacion.getText();
+                notificacion.Leida = 0;
+                notificacion.idUsuario = sesion;
+
+                int valor = notifica.AgregarNotificacion(notificacion);
+
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo insertar la anulacion.");
             }
@@ -61,5 +82,3 @@ public class DAnular {
         }
     }
 }
-
-

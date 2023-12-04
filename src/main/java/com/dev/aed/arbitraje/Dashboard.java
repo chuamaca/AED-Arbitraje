@@ -5,6 +5,7 @@
  */
 package com.dev.aed.arbitraje;
 
+import com.dev.aed.arbitraje.Utils.SesionManager;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -55,6 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
         JLabel label = new JLabel("¡Esta es una ventana sin botón de cerrar!");
         add(label);
 
+
         setSize(400, 300);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -66,6 +68,9 @@ public class Dashboard extends javax.swing.JFrame {
         InitStyles();
         SetDate();
         InitContent();
+        
+        
+        
 
     }
 
@@ -82,14 +87,18 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     private void InitStyles() {
-        mensaje.putClientProperty("FlatLaf.style", "font: 14 $light.font");
-        mensaje.setForeground(Color.black);
+//    lblInicio.putClientProperty("FlatLaf.style", "font: 14 $light.font");
+//    lblInicio.setForeground(Color.black);
 //        navText.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
 //        navText.setForeground(Color.white);
 //        dateText.putClientProperty("FlatLaf.style", "font: 24 $light.font");
 //        dateText.setForeground(Color.white);
-        appName.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
-        appName.setForeground(Color.white);
+        appName2.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
+        appName2.setForeground(Color.white);
+        
+                      String sesion = SesionManager.cargarSesion("usuariosesion");
+              appName2.setText( sesion);
+        
 
     }
 
@@ -125,7 +134,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         background = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        appName = new javax.swing.JLabel();
+        appName2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btn_prin = new javax.swing.JButton();
         btn_Notificaciones = new javax.swing.JButton();
@@ -133,8 +142,8 @@ public class Dashboard extends javax.swing.JFrame {
         btnCriterios = new javax.swing.JButton();
         btn_reportes = new javax.swing.JButton();
         btn_reports = new javax.swing.JButton();
-        mensaje = new javax.swing.JLabel();
         tbn_reporteDuracion = new javax.swing.JButton();
+        appName = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,9 +154,9 @@ public class Dashboard extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(13, 71, 161));
         menu.setPreferredSize(new java.awt.Dimension(270, 640));
 
-        appName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        appName.setText("Sistema de Arbitraje");
+        appName2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        appName2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        appName2.setText("USER");
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
 
@@ -247,8 +256,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        mensaje.setText("Bienvenido [USER]");
-
         tbn_reporteDuracion.setBackground(new java.awt.Color(21, 101, 192));
         tbn_reporteDuracion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tbn_reporteDuracion.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,6 +274,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        appName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        appName.setText("Sistema de Arbitraje");
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -277,26 +288,28 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(btn_Demanda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164))
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(tbn_reporteDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(menuLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(menuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(appName2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuLayout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(137, Short.MAX_VALUE)))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(15, 15, 15)
+                .addComponent(appName2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,6 +332,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tbn_reporteDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(133, 133, 133))
+            .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuLayout.createSequentialGroup()
+                    .addGap(62, 62, 62)
+                    .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(509, Short.MAX_VALUE)))
         );
 
         tbn_reporteDuracion.getAccessibleContext().setAccessibleName("    Reporte");
@@ -413,6 +431,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appName;
+    private javax.swing.JLabel appName2;
     private javax.swing.JPanel background;
     private javax.swing.JButton btnCriterios;
     private javax.swing.JButton btn_Demanda;
@@ -422,7 +441,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btn_reports;
     private static javax.swing.JPanel content;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel mensaje;
     private javax.swing.JPanel menu;
     private javax.swing.JButton tbn_reporteDuracion;
     // End of variables declaration//GEN-END:variables

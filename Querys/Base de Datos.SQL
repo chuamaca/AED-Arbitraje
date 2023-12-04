@@ -129,22 +129,6 @@ CREATE TABLE AEDArbitraje.dbo.Rol (
 );
 
 
--- AEDArbitraje.dbo.poldat definition
-
--- Drop table
-
--- DROP TABLE AEDArbitraje.dbo.poldat;
-
-CREATE TABLE AEDArbitraje.dbo.poldat (
-	polcod varchar(50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	polvar varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
-	polval varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
-	rtstr1 varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
-	rtstr2 varchar(50) COLLATE Modern_Spanish_CI_AS NULL,
-	rtrnum int NULL
-);
-
-
 -- AEDArbitraje.dbo.usuario definition
 
 -- Drop table
@@ -218,18 +202,7 @@ CREATE SEQUENCE [dbo].[SEC_EXPEDIENTE]
  CACHE 
 ;
 
-		INSERT INTO usuario
-           ([nombre_usuario]
-           ,[contrasena]
-           ,id_rol,
-		   estado,
-		   nro_intentos)
-     VALUES
-			('admin', 'admin', '1',1,0,'2023'),
-           ('usuario2', 'Iass2', '2',1,0,'2023'),
-           ('usuario3', 'pass3', '3',1,0,'2023'),
-		    ('usuario3', 'pass3', '4', 1,0,'2023');
-;
+
 
 	/*Tabla Logs */
 CREATE TABLE Logs (
@@ -297,4 +270,22 @@ Fecha_Creacion char(8),
 Nacionalidad varchar(30),
 Correo varchar (50),
 Telefono int,
+);
+
+CREATE TABLE poldat
+  (
+     srtseq     INT identity PRIMARY KEY ,
+     polcod     VARCHAR(50) NOT NULL,
+     polvar     VARCHAR(50) NOT NULL,
+     polval     VARCHAR(50) NOT NULL,
+     wh_id_tmpl VARCHAR(32) NOT NULL,
+     rtstr1     VARCHAR(150) DEFAULT NULL,
+     rtstr2     VARCHAR(150) DEFAULT NULL,
+     rtnum1     INT NOT NULL,
+     rtnum2     INT NOT NULL,
+     rtflt1     INT NOT NULL,
+     rtflt2     INT NOT NULL,
+     moddte     DATE DEFAULT NULL,
+     mod_usr_id VARCHAR(40) DEFAULT NULL,
+     grp_nam    VARCHAR(40) DEFAULT NULL
 );

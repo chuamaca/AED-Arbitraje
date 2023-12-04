@@ -3,11 +3,13 @@ package com.dev.aed.arbitraje;
 import com.dev.aed.arbitraje.Data.DAnexo;
 import com.dev.aed.arbitraje.Data.DDemanda;
 import com.dev.aed.arbitraje.Data.DNotificacion;
+import com.dev.aed.arbitraje.Data.DPoldat;
 import com.dev.aed.arbitraje.Data.DRegPartes;
 import com.dev.aed.arbitraje.Data.Tabla_PdfVO;
 import com.dev.aed.arbitraje.Model.MAnexo;
 import com.dev.aed.arbitraje.Model.MDemanda;
 import com.dev.aed.arbitraje.Model.MNotificacion;
+import com.dev.aed.arbitraje.Model.MPoldat;
 import com.dev.aed.arbitraje.Model.MRegPartes;
 import com.dev.aed.arbitraje.Model.MRol;
 import com.dev.aed.arbitraje.Utils.SesionManager;
@@ -42,7 +44,7 @@ public class Demanda extends javax.swing.JPanel {
         generarCorrelativoExpediente();
         btnGuardarAdjunto.setEnabled(false);
         txtRefMotivo.setEnabled(false);
-        
+
     }
 
     private void generarCorrelativoExpediente() {
@@ -540,6 +542,29 @@ public class Demanda extends javax.swing.JPanel {
         return numero != null && !numero.isEmpty() && numero.matches("^\\d+(\\.\\d+)?$") && Double.parseDouble(numero) > 0;
     }
 
+    private boolean validar(MDemanda obj) {
+        boolean rta = true;
+        MPoldat poldatMontoMaximo = new MPoldat();
+        poldatMontoMaximo.setPolcod("USR");
+        poldatMontoMaximo.setPolvar("Configuracion");
+        poldatMontoMaximo.setPolval("Cuantia");
+        poldatMontoMaximo.setRtstr1("MontoMaximo");
+
+        List<MPoldat> poldatList = new ArrayList<>();
+        DPoldat config = new DPoldat();
+        poldatList = config.ListaConfiguracion(poldatMontoMaximo);
+        MPoldat poldatMontoMaximo2 = new MPoldat();
+        poldatMontoMaximo2 = poldatList.get(0);
+
+        if (obj.getCuantia() > Double.parseDouble(poldatMontoMaximo2.getRtstr2())) {
+            JOptionPane.showMessageDialog(null, obj.getCuantia() + " > " + poldatMontoMaximo2.getRtstr2(), "Alerta !", 0);
+            rta = false;
+        }
+
+        return rta;
+    }
+
+
     private void btnGuardarDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDemandaActionPerformed
         // TODO add your handling code here:
         boolean validdarcampos = false;
@@ -549,7 +574,7 @@ public class Demanda extends javax.swing.JPanel {
         String res = txtResumenControversia.getText();
         String peti = txtPeticion.getText();
         String cuantiaTexto = txtCuantia.getText();
-         String refMotivoTexto = txtRefMotivo.getText();
+        String refMotivoTexto = txtRefMotivo.getText();
 
         if (exp.isBlank() || exp.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de número de expediente es obligatorio");
@@ -570,8 +595,7 @@ public class Demanda extends javax.swing.JPanel {
         if (cuantiaTexto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de cuantía es obligatorio");
             validdarcampos = true;
-        }
-        else {
+        } else {
             try {
                 Double cuantiad = Double.parseDouble(cuantiaTexto);
 
@@ -602,54 +626,43 @@ public class Demanda extends javax.swing.JPanel {
             objDemanda.setRefMotivo(txtRefMotivo.getText());
 
             objDemanda.setEstado("Registrado");
-
             DDemanda dDemanda = new DDemanda();
 
-            System.out.println("Estado Editar " + editar);
-            if (editar == false) {
-                System.out.println("Editar Falso");
-                int rta = dDemanda.insertDemanda(objDemanda);
+            boolean validate = validar(objDemanda);
 
-                if (rta == 1) {
-                    // Dashboard.ShowJPanel(new Demanda());
+            if (validate != false) {
+                System.out.println("Estado Editar " + editar);
+                if (editar == false) {
+                    System.out.println("Editar Falso");
+                    int rta = dDemanda.insertDemanda(objDemanda);
 
-                    java.util.Date fechaActual = new java.util.Date();
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                    String fecha = formato.format(fechaActual);
-/*
-                    
-    public int IdNotificacion;
-    public String NroExpediente;
-    public String EstadoNotificacion;
-    public java.sql.Date FechaNotificacion;
-    public java.sql.Date FechaVisualizacion;
-    public String ColorEstado;
-    public String Observaciones;
-    public int Leida;
-    public String idUsuario;
-                    */
-                    String sesion = SesionManager.cargarSesion("usuariosesion");
+                    if (rta == 1) {
+                        // Dashboard.ShowJPanel(new Demanda());
 
-                    DNotificacion notifica = new DNotificacion();
-                    MNotificacion notificacion = new MNotificacion();
-                    notificacion.NroExpediente = objDemanda.getNroExpediente();
-                    notificacion.EstadoNotificacion = "Iniciado";
-                    notificacion.FechaNotificacion = Date.valueOf(fecha);
-                    notificacion.Observaciones = "Demanda Registrada";
-                    notificacion.Leida = 0;
-                    notificacion.idUsuario = sesion;
+                        java.util.Date fechaActual = new java.util.Date();
+                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        String fecha = formato.format(fechaActual);
+                        String sesion = SesionManager.cargarSesion("usuariosesion");
 
-                    int valor = notifica.AgregarNotificacion(notificacion);
+                        DNotificacion notifica = new DNotificacion();
+                        MNotificacion notificacion = new MNotificacion();
+                        notificacion.NroExpediente = objDemanda.getNroExpediente();
+                        notificacion.EstadoNotificacion = "Iniciado";
+                        notificacion.FechaNotificacion = Date.valueOf(fecha);
+                        notificacion.Observaciones = "Demanda Registrada";
+                        notificacion.Leida = 0;
+                        notificacion.idUsuario = sesion;
 
-                    JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
+                        int valor = notifica.AgregarNotificacion(notificacion);
 
-                    btnGuardarDemanda.setEnabled(false);
+                        JOptionPane.showMessageDialog(null, "Se Agrego correctamente");
 
+                        btnGuardarDemanda.setEnabled(false);
+
+                    }
                 }
             }
         }
-
-
     }//GEN-LAST:event_btnGuardarDemandaActionPerformed
 
     private boolean validarCampos() {
@@ -702,7 +715,7 @@ public class Demanda extends javax.swing.JPanel {
             buscaDemanda.size();
 
             if (buscaDemanda.size() > 0) {
-                JOptionPane.showMessageDialog(null, "Se hizo la Referencia al Expediente N° "+ numeroExp+" de manera correcta");
+                JOptionPane.showMessageDialog(null, "Se hizo la Referencia al Expediente N° " + numeroExp + " de manera correcta");
                 txtRefMotivo.setEnabled(true);
                 //txtRefMotivo.setVisible(true);
             } else {
@@ -762,10 +775,7 @@ public class Demanda extends javax.swing.JPanel {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
 
-        
-        
-        
-        
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
 //    
@@ -775,9 +785,6 @@ public class Demanda extends javax.swing.JPanel {
 //        po.setCodigopdf(codigo);
 //        pa.Eliminar_PdfVO(po);
 //    }
-    
-    
-    
     public void guardar_pdf(String NroExpediente, String nombredocumento, File ruta) {
 
         MAnexo po = new MAnexo();

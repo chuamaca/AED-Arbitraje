@@ -23,6 +23,8 @@ public class EstadoNotificacionRenderer extends DefaultTableCellRenderer {
 
         // Cambiar el color según el estado
         if ("Iniciado".equals(estado)) {
+            c.setBackground(Color.MAGENTA);
+        }else if ("Anulado".equals(estado)) {
             c.setBackground(Color.RED);
         } else if ("En Proceso".equals(estado)) {
             c.setBackground(Color.ORANGE);
